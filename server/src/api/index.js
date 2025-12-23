@@ -29,6 +29,7 @@ const OfferRoute = require("./routes/offer.route.js");
 const OutletsRoute = require("./routes/outlets.route.js");
 const SubscribeRoute = require("./routes/subscribe.route.js");
 const DoctorRouter = require("./routes/doctor.route.js");
+const ServiceRouter = require("./routes/service.route.js");
 
 const { Router } = require("express");
 const CampaignRoute = require("./routes/campaign.route.js");
@@ -68,5 +69,6 @@ rootRouter.use("/campaign", CampaignRoute);
 rootRouter.use("/outlet", OutletsRoute);
 rootRouter.use("/subscribe", SubscribeRoute);
 rootRouter.use("/doctor", DoctorRouter);
+rootRouter.use("/service", ServiceRouter);
 
 module.exports = rootRouter;

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const controller = require("../../modules/doctor/doctor.controller.js");
-const jwtAuth = require("../../middleware/auth/jwtAuth.js");
+// const jwtAuth = require("../../middleware/auth/jwtAuth.js");
 const { upload } = require("../../middleware/upload/upload.js");
 
 const DoctorRoute = Router();
