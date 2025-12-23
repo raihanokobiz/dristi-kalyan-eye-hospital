@@ -21,13 +21,6 @@ interface InventoryItem {
   name?: string;
   quantity?: number;
 }
-interface InventoryItem {
-  _id?: string;
-  level?: string;
-  size?: string;
-  name?: string;
-  quantity?: number;
-}
 
 interface TProduct {
   _id: string;
