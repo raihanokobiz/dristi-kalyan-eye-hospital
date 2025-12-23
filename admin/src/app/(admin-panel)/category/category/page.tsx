@@ -15,7 +15,7 @@ interface Props {
   };
 }
 
-export default async function CouponsPage({ searchParams }: Props) {
+export default async function CategoryPage({ searchParams }: Props) {
   const page = Array.isArray(searchParams.page)
     ? searchParams.page[0]
     : searchParams.page || "1";

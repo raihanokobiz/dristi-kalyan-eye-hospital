@@ -1,7 +1,8 @@
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import React from "react";
-import { BulkOrderTable } from "./table";
-import { getBulkOrderWithPagination } from "@/services/bulk_order";
+import { CustomTable } from "./table";
+import { getCategoryWithPagination } from "@/services/category";
+import { CreateForm } from "./form";
 
 export const revalidate = 0;
 
@@ -11,7 +12,7 @@ interface Props {
   };
 }
 
-export default async function BulkOrdersPage({ searchParams }: Props) {
+export default async function DoctorPage({ searchParams }: Props) {
   const page = Array.isArray(searchParams.page)
     ? searchParams.page[0]
     : searchParams.page || "1";
@@ -19,12 +20,15 @@ export default async function BulkOrdersPage({ searchParams }: Props) {
     ? searchParams.limit[0]
     : searchParams.limit || "10";
 
-  const { data } = await getBulkOrderWithPagination(page, limit);
+  const { data } = await getCategoryWithPagination(page, limit);
 
   return (
-    <ContentLayout title="Bulk Order">
-      <BulkOrderTable
-        data={data.result.map((item) => item)}
+    <ContentLayout title="Category">
+      <CreateForm />
+      <CustomTable
+        data={data.result.map((item) => ({
+          ...item,
+        }))}
         pagination={{
           page: parseInt(page),
           limit: parseInt(limit),

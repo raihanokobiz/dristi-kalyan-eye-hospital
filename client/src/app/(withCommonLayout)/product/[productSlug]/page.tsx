@@ -14,8 +14,10 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Anfmeat | Single Product",
-  description: "Best E-commerce platform in BD",
+  title: "dristi-kalyan-eye-hospital",
+  description:
+    "Dristi Kalyan Eye Hospital is a trusted eye care center providing advanced diagnosis, modern treatment, and compassionate vision care services for patients of all ages."
+
 };
 
 interface PageProps {

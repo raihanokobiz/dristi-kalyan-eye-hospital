@@ -534,7 +534,7 @@ const CheckOutForm: React.FC<Props> = ({
               >
                 Privacy Policy
               </Link>
-              of Anfmeat.
+              of dristi kalyan eye hospital.
             </label>
           </div>
           {errors.terms && (

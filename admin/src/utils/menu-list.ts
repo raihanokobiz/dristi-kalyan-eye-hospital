@@ -23,6 +23,7 @@ import {
   ShoppingBasket,
   Star,
   Store,
+  Stethoscope,
 } from "lucide-react";
 
 export function getMenuList(pathname: string): Group[] {
@@ -49,13 +50,13 @@ export function getMenuList(pathname: string): Group[] {
           icon: ShoppingCart,
           submenus: [],
         },
-        // {
-        //   href: "/bulk-order-list",
-        //   label: "Bulk Orders",
-        //   active: pathname.includes("/bulk-order-list"),
-        //   icon: ShoppingBasket,
-        //   submenus: [],
-        // },
+        {
+          href: "/doctor",
+          label: "Doctor",
+          active: pathname.includes("/doctor"),
+          icon: Stethoscope,
+          submenus: [],
+        },
         {
           href: "/category",
           label: "Category",
@@ -91,13 +92,6 @@ export function getMenuList(pathname: string): Group[] {
           label: "Products",
           active: pathname.includes("/products"),
           icon: Package2,
-          submenus: [],
-        },
-        {
-          href: "/outlet",
-          label: "Outlet",
-          active: pathname.includes("/outlet"),
-          icon: Store,
           submenus: [],
         },
         {

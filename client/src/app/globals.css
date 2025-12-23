@@ -5,14 +5,14 @@
 
   :root {
     /* custom color  */
-    --primary-color: #16a34a;
+    --primary-color: #03c0b4;
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 23 100% 52%;
+    --primary: 177 97% 38%;
     --primary-foreground: 210 20% 98%;
     --secondary: 226, 66.7%, 90%;
     --secondary-foreground: 220.9 39.3% 11%;
@@ -30,30 +30,6 @@
 
   .Container {
     @apply px-4 md:px-0 py-6 md:py-10 lg:py-12;
-  }
-
-  .text-primary {
-    @apply text-[#1C3E92]
-  }
-
-  .bg-primary {
-    @apply bg-[#16a34a]
-  }
-
-  .text-secondary {
-    @apply text-[#5772B3]
-  }
-
-  .bg-secondary {
-    @apply bg-[#5772B3]
-  }
-
-  .button-primary {
-    @apply bg-[#1D4092] text-white font-bold py-1.5 rounded-md cursor-pointer;
-  }
-
-  .button-primary:hover {
-    @apply bg-blue-800;
   }
 
   .policy-page-text {
@@ -100,16 +76,7 @@
   width: 5px;
 }
 
-.custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #FF6C0C;
-  border-radius: 4px;
-  max-height: 50px;
-}
 
-.custom-scroll::-webkit-scrollbar-track {
-  background: hsl(23, 96%, 67%);
-  border-radius: 4px;
-}
 
 .image-container {
   max-width: 500px;

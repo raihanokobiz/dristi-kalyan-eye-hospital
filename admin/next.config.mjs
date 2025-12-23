@@ -16,7 +16,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.anfmeat.com"
+        hostname: "api.dristi-kalyan-eye-hospital.com"
       }
     ],
   },

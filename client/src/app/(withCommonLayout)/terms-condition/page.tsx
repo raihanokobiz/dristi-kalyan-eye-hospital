@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "anfmeat | Terms-condition",
+  title: "dristi kalyan eye hospital | Terms-condition",
   description: "Best E-commerce platform in BD",
 };
 
@@ -24,15 +24,15 @@ const TermCondition = async () => {
           </div>
 
           <div className="policy-page-text ">
-            Welcome to anfmeat.com also hereby known as “we”, “us” or
-            “ANFMEAT. Please read these Terms & conditions carefully before
+            Welcome to dristi kalyan eye hospital.com also hereby known as “we”, “us” or
+            “dristi kalyan eye hospital. Please read these Terms & conditions carefully before
             using this Site. By using the Site, you hereby accept these terms
             and conditions and represent that you agree to comply with these
             terms and conditions (the “User Agreement”). This User Agreement is
             deemed effective upon your use of the Site which signifies your
             acceptance of these terms. If you do not agree to be bound by this
             User Agreement please do not access, register with or use this Site.
-            This Site is owned and operated by anfmeat.
+            This Site is owned and operated by dristi kalyan eye hospital.
           </div>
 
           <div className="policy-page-text ">
@@ -50,8 +50,8 @@ const TermCondition = async () => {
               Introduction
             </div>
             <div className="text-red-600">
-              The domain name www.anfmeat.com (referred to as "Website") is
-              owned by "anfmeat" a company incorporated under the Companies
+              The domain name www.dristi kalyan eye hospital.com (referred to as "Website") is
+              owned by "dristi kalyan eye hospital" a company incorporated under the Companies
               Act, 1994(Act XVIII of 1994).
             </div>
             <div>
@@ -76,10 +76,10 @@ const TermCondition = async () => {
               responsible for maintaining the confidentiality of your account &
               its password as well as all the transactions/requests
               done/received under your password or account. You agree to (a)
-              immediately notify anfmeat.com of any unauthorized use of your
+              immediately notify dristi kalyan eye hospital.com of any unauthorized use of your
               password or account or any other breach of security, and (b)
               ensure that you exit from your account at the end of each session.
-              anfmeat.com shall not be liable for any loss or damage arising
+              dristi kalyan eye hospital.com shall not be liable for any loss or damage arising
               from your failure to comply with the T&C.
             </div>
           </div>
@@ -89,13 +89,13 @@ const TermCondition = async () => {
               Services
             </div>
             <div>
-              anfmeat.com provides a number of Internet-based services
+              dristi kalyan eye hospital.com provides a number of Internet-based services
               through the Web Site (all such services, collectively, the
               "Service"). One such service enables users to purchase custom
-              merchandise from anfmeat and various sellers.(Collectively,
+              merchandise from dristi kalyan eye hospital and various sellers.(Collectively,
               "Products"). The Products can be purchased through the Website
               through various methods of payments offered. Upon placing an
-              order, anfmeat.com shall ship the product to you and you shall
+              order, dristi kalyan eye hospital.com shall ship the product to you and you shall
               be responsible for its payment.
             </div>
           </div>
@@ -106,7 +106,7 @@ const TermCondition = async () => {
             </div>
             <div>
               The User hereby consents, expresses and agrees that he has read
-              and fully understands the Privacy Policy of anfmeat.com. The
+              and fully understands the Privacy Policy of dristi kalyan eye hospital.com. The
               user further consents that the terms and contents of such Privacy
               Policy are acceptable to him.
             </div>
@@ -122,8 +122,8 @@ const TermCondition = async () => {
               license, create derivative works from, transfer, or sell any
               information or software obtained from the Website. Limited
               reproduction and copying of the content of the Website is
-              permitted provided that anfmeat's name is stated as the source
-              and prior written permission of anfmeat.com is sought. For the
+              permitted provided that dristi kalyan eye hospital's name is stated as the source
+              and prior written permission of dristi kalyan eye hospital.com is sought. For the
               removal of doubt, it is clarified that unlimited or wholesale
               reproduction, copying of the content for commercial or
               non-commercial purposes and unwarranted modification of data and
@@ -219,10 +219,10 @@ const TermCondition = async () => {
               Product Description
             </div>
             <div>
-              anfmeat.com attempts to be as accurate as possible. However,
-              anfmeat.com does not warrant that product descriptions or
+              dristi kalyan eye hospital.com attempts to be as accurate as possible. However,
+              dristi kalyan eye hospital.com does not warrant that product descriptions or
               other content of the site is accurate, complete, reliable,
-              current, or error-free. If a product offered by anfmeat.com
+              current, or error-free. If a product offered by dristi kalyan eye hospital.com
               itself is not as described, your sole remedy is to return it in
               unused condition.
             </div>
@@ -234,15 +234,15 @@ const TermCondition = async () => {
             </div>
             <div>
               The Website may contain links to other websites ("Linked Sites").
-              The Linked Sites are not under the control of anfmeat.com or
-              the Website and anfmeat.com is not responsible for the
+              The Linked Sites are not under the control of dristi kalyan eye hospital.com or
+              the Website and dristi kalyan eye hospital.com is not responsible for the
               contents of any Linked Site, including without limitation any link
               contained in a Linked Site, or any changes or updates to a Linked
-              Site. anfmeat.com is not responsible for any form of
+              Site. dristi kalyan eye hospital.com is not responsible for any form of
               transmission, whatsoever, received by you from any Linked Site.
-              anfmeat.com is providing these links to you only as a
+              dristi kalyan eye hospital.com is providing these links to you only as a
               convenience, and the inclusion of any link does not imply
-              endorsement by anfmeat.com or the Website of the Linked Sites
+              endorsement by dristi kalyan eye hospital.com or the Website of the Linked Sites
               or any association with its operators or owners including the
               legal heirs or assigns thereof. The users are requested to verify
               the accuracy of all information on their own before undertaking
@@ -252,7 +252,7 @@ const TermCondition = async () => {
 
           <div className="policy-page-text">
             <div className="font-bold border-b-2 border-gray-500 pb-4 mb-2">
-              Abusing anfmeat.com
+              Abusing dristi kalyan eye hospital.com
             </div>
             <div>
               As per these Terms, users are solely responsible for every
@@ -303,7 +303,7 @@ const TermCondition = async () => {
             <div>
               Unless otherwise indicated or anything contained to the contrary
               or any proprietary material owned by a third party and so
-              expressly mentioned, anfmeat.com owns all Intellectual
+              expressly mentioned, dristi kalyan eye hospital.com owns all Intellectual
               Property Rights to and into the Website, including, without
               limitation, any and all rights, title and interest in and to
               copyright, related rights, patents, utility models, trademarks,
@@ -312,8 +312,8 @@ const TermCondition = async () => {
               meta tags, databases, text, content, graphics, icons, and
               hyperlinks. You acknowledge and agree that you shall not use,
               reproduce or distribute any content from the Website belonging to
-              anfmeat.com without obtaining authorization from
-              anfmeat.com.
+              dristi kalyan eye hospital.com without obtaining authorization from
+              dristi kalyan eye hospital.com.
             </div>
             <div className="mt-2">
               Notwithstanding the foregoing, it is expressly clarified that you
@@ -336,14 +336,14 @@ const TermCondition = async () => {
               Return & Replacement Policy
             </div>
             <div>
-              It's a rare case for anfmeat where customers didn't get their
+              It's a rare case for dristi kalyan eye hospital where customers didn't get their
               products unharmed. But sometimes we may fail to fulfill your
               expectations, sometimes situations aren't by our side. But there
-              is now a bond of trust between customers and anfmeat, So, for
+              is now a bond of trust between customers and dristi kalyan eye hospital, So, for
               further ensuring and encouraging this bond of trust
-              anfmeat.com brings you option to return the products you got
+              dristi kalyan eye hospital.com brings you option to return the products you got
               (If the product is damaged or designed mistakenly.). In that case
-              anfmeat will give you fresh products in return.
+              dristi kalyan eye hospital will give you fresh products in return.
             </div>
             <div className="mt-2">
               If for any reason you are unsatisfied with your order, you may
@@ -356,7 +356,7 @@ const TermCondition = async () => {
                 </li>
                 <li>
                   Refund/ replacement for products are subject to inspection and
-                  checking by anfmeat team.
+                  checking by dristi kalyan eye hospital team.
                 </li>
                 <li>
                   Replacement is subject to availability of stock with the
@@ -389,8 +389,8 @@ const TermCondition = async () => {
           <div className="policy-page-text">
             <div className="font-bold pb-4 mb-2">How to return:</div>
             <div className="">
-              Contact anfmeat Customer Care team by emailing
-              info@anfmeat.com within 03 days after receiving your order.
+              Contact dristi kalyan eye hospital Customer Care team by emailing
+              info@dristi kalyan eye hospital.com within 03 days after receiving your order.
             </div>
             <div className="mt-2">
               Once we pick up or receive your return, we will do a quality check
@@ -434,7 +434,7 @@ const TermCondition = async () => {
                 <li>
                   You will receive a refund anytime between 7-10 working days.
                   If you don't receive refund within this time, please write to
-                  us at info@anfmeat.com and we shall investigate.
+                  us at info@dristi kalyan eye hospital.com and we shall investigate.
                 </li>
               </ul>
             </div>
@@ -484,10 +484,10 @@ const TermCondition = async () => {
             </div>
             <div className="">
               <div className="">
-                If a dispute arises between you and anfmeat.com, our goal is
+                If a dispute arises between you and dristi kalyan eye hospital.com, our goal is
                 to provide you with a neutral and cost effective means of
                 resolving the dispute quickly. Accordingly, you and
-                'anfmeat.com' agree that we will resolve any claim or
+                'dristi kalyan eye hospital.com' agree that we will resolve any claim or
                 controversy at law or equity that arises out of this Agreement
                 or our services in accordance with one of the subsections below
                 or as we and you otherwise agree in writing. Before resorting to
@@ -529,12 +529,12 @@ const TermCondition = async () => {
             <div className="">
               <div className="">
                 If you see charges on your credit/debit card for purchases made
-                on anfmeat.com, but you never created an account or signed
+                on dristi kalyan eye hospital.com, but you never created an account or signed
                 up, please check with your family members or business colleagues
                 authorized to make purchases on your behalf, to confirm that
                 they haven't placed the order. If you're still unable to
                 recognize the charge, please report the unauthorized purchase
-                within 60 days of the transaction to enable anfmeat.com to
+                within 60 days of the transaction to enable dristi kalyan eye hospital.com to
                 begin an investigation.
               </div>
             </div>
@@ -548,9 +548,9 @@ const TermCondition = async () => {
               <div className="">
                 To provide a safe and secure shopping experience, we regularly
                 monitor transactions for fraudulent activity. In the event of
-                detecting any suspicious activity, anfmeat.com reserves the
+                detecting any suspicious activity, dristi kalyan eye hospital.com reserves the
                 right to cancel all past, pending and future orders without any
-                liability. anfmeat.com also reserves the right to refuse or
+                liability. dristi kalyan eye hospital.com also reserves the right to refuse or
                 cancel orders in scenarios like inaccuracies in pricing of
                 product on website and stock unavailability. We may also require
                 additional verifications or information before accepting any
@@ -569,7 +569,7 @@ const TermCondition = async () => {
                 <ul className="policy-page-li">
                   <li>
                     Customer doesn't reply to the payment verification mail sent
-                    by anfmeat.com
+                    by dristi kalyan eye hospital.com
                   </li>
                   <li>
                     Customer fails to produce adequate documents during the
@@ -592,11 +592,11 @@ const TermCondition = async () => {
               Indemnifications
             </div>
             <div className="">
-              You agree to indemnify, defend and hold harmless anfmeat.com
+              You agree to indemnify, defend and hold harmless dristi kalyan eye hospital.com
               from and against any and all losses, liabilities, claims, damages,
               costs and expenses (including legal fees and disbursements in
               connection therewith and interest chargeable thereon) asserted
-              against or incurred by anfmeat.com that arise out of, result
+              against or incurred by dristi kalyan eye hospital.com that arise out of, result
               from, or may be payable by virtue of, any breach or
               non-performance of any representation, warranty, covenant or
               agreement made or obligation to be performed by you pursuant to
@@ -609,11 +609,11 @@ const TermCondition = async () => {
               Disclaimer of Warranties/Limitation of Liability
             </div>
             <div className="">
-              anfmeat.com has endeavored to ensure that all the information
-              on the Website is correct, but anfmeat.com neither warrants
+              dristi kalyan eye hospital.com has endeavored to ensure that all the information
+              on the Website is correct, but dristi kalyan eye hospital.com neither warrants
               nor makes any representations regarding the quality, accuracy or
               completeness of any data, information, product or Service. In no
-              event shall anfmeat.com be liable for any direct, indirect,
+              event shall dristi kalyan eye hospital.com be liable for any direct, indirect,
               punitive, incidental, special, consequential damages or any other
               damages resulting from: (a) the use or the inability to use the
               Services or Products; (b) unauthorized access to or alteration of
@@ -621,17 +621,17 @@ const TermCondition = async () => {
               the services; including, without limitation, damages for loss of
               use, data or profits, arising out of or in any way connected with
               the use or performance of the Website or Service. Neither shall
-              anfmeat.com be responsible for the delay or inability to use
+              dristi kalyan eye hospital.com be responsible for the delay or inability to use
               the Website or related services, the provision of or failure to
               provide Services, or for any information, software, products,
               services and related graphics obtained through the Website, or
               otherwise arising out of the use of the website, whether based on
               contract, tort, negligence, strict liability or otherwise.
-              Further, anfmeat.com shall not be held responsible for
+              Further, dristi kalyan eye hospital.com shall not be held responsible for
               non-availability of the Website during periodic maintenance
               operations or any unplanned suspension of access to the website
               that may occur due to technical reasons or for any reason beyond
-              anfmeat's control. The user understands and agrees that any
+              dristi kalyan eye hospital's control. The user understands and agrees that any
               material and/or data downloaded or otherwise obtained through the
               Website is done entirely at their own discretion and risk and they
               will be solely responsible for any damage to their computer
@@ -646,7 +646,7 @@ const TermCondition = async () => {
             </div>
             <div className="">
               <div className="">
-                anfmeat.com offers Cash on Delivery (COD), Debit/Credit Card
+                dristi kalyan eye hospital.com offers Cash on Delivery (COD), Debit/Credit Card
                 (VISA, Master Card, DBBL Nexus etc.), Mobile Banking (bKash,
                 Rocket) as payment method.
               </div>
@@ -667,9 +667,9 @@ const TermCondition = async () => {
             </div>
             <div className="">
               <div className="">
-                All items purchased from anfmeat.com are made pursuant to a
+                All items purchased from dristi kalyan eye hospital.com are made pursuant to a
                 shipment contract. This means that the Risk of Loss shall remain
-                with anfmeat.com until the item is transferred to you. In
+                with dristi kalyan eye hospital.com until the item is transferred to you. In
                 the event that the items are damaged after receipt, the risk
                 falls on the customer.
               </div>
@@ -682,7 +682,7 @@ const TermCondition = async () => {
             </div>
             <div className="">
               <div className="">
-                anfmeat.com realizes the importance of a strong fraud
+                dristi kalyan eye hospital.com realizes the importance of a strong fraud
                 detection and resolution capability. We and our online payments
                 partners monitor transactions continuously for suspicious
                 activity and flag potentially fraudulent transactions for manual
@@ -699,7 +699,7 @@ const TermCondition = async () => {
               <div>
                 <ul className="policy-page-li">
                   <li>
-                    anfmeat.com may suspend or terminate your use of the
+                    dristi kalyan eye hospital.com may suspend or terminate your use of the
                     Website or any Service if it believes, in its sole and
                     absolute discretion that you have breached, violated,
                     abused, or unethically manipulated or exploited any term of
@@ -707,13 +707,13 @@ const TermCondition = async () => {
                   </li>
                   <li>
                     These Terms will survive indefinitely unless and until
-                    anfmeat.com chooses to terminate them.
+                    dristi kalyan eye hospital.com chooses to terminate them.
                   </li>
                   <li>
-                    If you or anfmeat.com terminates your use of the Website
-                    or any Service, anfmeat.com may delete any content or
+                    If you or dristi kalyan eye hospital.com terminates your use of the Website
+                    or any Service, dristi kalyan eye hospital.com may delete any content or
                     other materials relating to your use of the Service and
-                    anfmeat.com will have no liability to you or any third
+                    dristi kalyan eye hospital.com will have no liability to you or any third
                     party for doing so.
                   </li>
                   <li>
@@ -736,7 +736,7 @@ const TermCondition = async () => {
               <div>
                 <ul className="policy-page-li">
                   <li>
-                    anfmeat.com may suspend or terminate your use of the
+                    dristi kalyan eye hospital.com may suspend or terminate your use of the
                     Website or any Service if it believes, in its sole and
                     absolute discretion that you have breached, violated,
                     abused, or unethically manipulated or exploited any term of
@@ -744,13 +744,13 @@ const TermCondition = async () => {
                   </li>
                   <li>
                     These Terms will survive indefinitely unless and until
-                    anfmeat.com chooses to terminate them.
+                    dristi kalyan eye hospital.com chooses to terminate them.
                   </li>
                   <li>
-                    If you or anfmeat.com terminates your use of the Website
-                    or any Service, anfmeat.com may delete any content or
+                    If you or dristi kalyan eye hospital.com terminates your use of the Website
+                    or any Service, dristi kalyan eye hospital.com may delete any content or
                     other materials relating to your use of the Service and
-                    anfmeat.com will have no liability to you or any third
+                    dristi kalyan eye hospital.com will have no liability to you or any third
                     party for doing so.
                   </li>
                   <li>

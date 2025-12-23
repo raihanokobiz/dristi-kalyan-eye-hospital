@@ -234,21 +234,6 @@ export const CreateProductForm: React.FC = () => {
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name="videoUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Product Video URL</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter product videoUrl" {...field} />
-                  </FormControl>
-                  <FormDescription className="text-red-400 text-xs min-h-4">
-                    {form.formState.errors.videoUrl?.message}
-                  </FormDescription>
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="description"

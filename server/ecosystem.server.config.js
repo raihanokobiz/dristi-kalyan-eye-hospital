@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: "anfmeat-server",
-      script: "/var/www/anfmeat/server/src/server.js",
+      name: "dristi-kalyan-eye-hospital-server",
+      script: "/var/www/dristi-kalyan-eye-hospital/server/src/server.js",
       watch: false,
       ignore_watch: [
         "node_modules",

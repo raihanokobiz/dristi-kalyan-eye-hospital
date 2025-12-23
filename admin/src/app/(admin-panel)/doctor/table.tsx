@@ -16,12 +16,12 @@ import {
 } from "@/components/ui/table";
 import { Label } from "@radix-ui/react-label";
 import { Card } from "@/components/ui/card";
-import { TBulkOrder } from "@/types/shared";
+import { TCategory } from "@/types/shared";
 import { columns } from "./columns";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 
 interface Props {
-  data: TBulkOrder[];
+  data: TCategory[];
   pagination: {
     page: number;
     limit: number;
@@ -29,9 +29,10 @@ interface Props {
   };
 }
 
-export const BulkOrderTable: React.FC<Props> = ({ data, pagination }) => {
+export const CustomTable: React.FC<Props> = ({ data, pagination }) => {
+  const sortedData = [...data].sort((a, b) => Number(b.status) - Number(a.status));
   const table = useReactTable({
-    data,
+    data: sortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
@@ -47,7 +48,7 @@ export const BulkOrderTable: React.FC<Props> = ({ data, pagination }) => {
   return (
     <Card className="m-6 p-4 rounded-lg">
       <div className="flex justify-between items-center">
-        <Label className="text-xl font-semibold mb-4">Bulk Order List</Label>
+        <Label className="text-xl font-semibold mb-4">Category List</Label>
       </div>
 
       <Table className="rounded-lg overflow-hidden">
@@ -61,16 +62,16 @@ export const BulkOrderTable: React.FC<Props> = ({ data, pagination }) => {
                     className={
                       (header.column.columnDef.meta as any)?.align
                         ? "h-8 text-white text-" +
-                          (header.column.columnDef.meta as any)?.align
+                        (header.column.columnDef.meta as any)?.align
                         : "h-8 text-white"
                     }
                   >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </TableHead>
                 );
               })}
@@ -90,7 +91,7 @@ export const BulkOrderTable: React.FC<Props> = ({ data, pagination }) => {
                     className={
                       (cell.column.columnDef.meta as any)?.align
                         ? "py-1 text-" +
-                          (cell.column.columnDef.meta as any)?.align
+                        (cell.column.columnDef.meta as any)?.align
                         : "py-1"
                     }
                   >

@@ -90,7 +90,7 @@ export const CreateForm: React.FC = () => {
       setVectorFileList([]);
       toast({
         title: "Success",
-        description: "Coupon created successfully",
+        description: "Category created successfully",
       });
       window.location.reload();
     } catch (error: any) {
