@@ -11,14 +11,14 @@ import { revalidatePath } from "next/cache";
 
 export async function createFormAction(data: FormData) {
   try {
-     await createCategory(data);
- 
+    await createCategory(data);
+
     revalidatePath("/");
     return true;
   } catch (error: any) {
     if (error.response && error.response.data && error.response.data.message) {
       console.error("Duplicate error:", error.response.data.message);
-      throw new Error(error.response.data.message); 
+      throw new Error(error.response.data.message);
     } else {
       console.error("Something went wrong:", error.message);
       throw new Error(error.message);

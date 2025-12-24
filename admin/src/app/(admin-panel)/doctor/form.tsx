@@ -101,14 +101,15 @@ export const CreateForm: React.FC = () => {
   };
 
   const daysOptions = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
   ];
+
 
   return (
     <Card className="m-6 mt-1 p-4 rounded-lg">

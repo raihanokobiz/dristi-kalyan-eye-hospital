@@ -27,8 +27,10 @@ export const formSchema = z.object({
 
   phone: z
     .string()
-    .min(10, { message: "Phone number is required" })
-    .max(15, { message: "Phone number is too long" }),
+    .transform((val) => val.replace(/\D/g, ""))
+    .refine((val) => val.length >= 10 && val.length <= 15, {
+      message: "Phone number must be 10–15 digits",
+    }),
 
   email: z
     .string()
@@ -50,6 +52,7 @@ export const formSchema = z.object({
     .min(1, { message: "Select at least one available day" }),
 
   consultationFee: z
+    .coerce
     .number({ invalid_type_error: "Consultation fee must be a number" })
     .min(0, { message: "Consultation fee must be positive" }),
 
