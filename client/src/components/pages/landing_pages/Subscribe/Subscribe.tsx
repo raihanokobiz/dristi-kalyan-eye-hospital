@@ -3,8 +3,8 @@
 import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
-import F1 from "../../../../assets/subscribe/S1.png";
-import FAnimation from "../../../../assets/subscribe/FishAnimation.json";
+// import F1 from "../../../../assets/subscribe/S1.png";
+// import FAnimation from "../../../../assets/subscribe/FishAnimation.json";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { addSubscribe } from "@/services/subscribe";
 
@@ -55,13 +55,13 @@ export function Subscribe() {
             </form>
           </div>
           {/* Right - Woman Image */}
-          <div className="flex-1 flex justify-center md:justify-end">
+          {/* <div className="flex-1 flex justify-center md:justify-end">
             <Image
               src={F1}
               alt="Woman holding a gift box"
               className="h-[300px] md:h-[350px] object-contain relative z-10 animate-float"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

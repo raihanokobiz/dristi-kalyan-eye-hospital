@@ -7,12 +7,12 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import W1 from "../../../../assets/why-chose-us/w1.webp";
-import W2 from "../../../../assets/why-chose-us/w2.webp";
-import W3 from "../../../../assets/why-chose-us/w3.webp";
-import W4 from "../../../../assets/why-chose-us/w4.webp";
+// import W1 from "../../../../assets/why-chose-us/w1.webp";
+// import W2 from "../../../../assets/why-chose-us/w2.webp";
+// import W3 from "../../../../assets/why-chose-us/w3.webp";
+// import W4 from "../../../../assets/why-chose-us/w4.webp";
 
-const data = [W1, W2, W3, W4];
+// const data = [W1, W2, W3, W4];
 
 export function WhyChooseUs() {
   return (
@@ -59,7 +59,7 @@ export function WhyChooseUs() {
             }}
             className="rounded-md overflow-hidden"
           >
-            {data.map((img, index) => (
+            {/* {data.map((img, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-48 md:h-64 lg:h-52">
                   <Image
@@ -71,7 +71,7 @@ export function WhyChooseUs() {
                   />
                 </div>
               </SwiperSlide>
-            ))}
+            ))} */}
           </Swiper>
         </div>
       </div>
