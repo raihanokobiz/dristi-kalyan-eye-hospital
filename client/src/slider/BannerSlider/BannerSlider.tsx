@@ -30,7 +30,7 @@ const BannerSlider: React.FC<BannerProps> = ({ banners }) => {
       >
         {banners?.map((banner: TBanner) => (
           <SwiperSlide key={banner._id}>
-            <div className="2xl:h-[550px] xl:h-[450px] md:h-[350px] h-[200px]  relative">
+            <div className="2xl:h-[650px] xl:h-[550px] md:h-[450px] h-[250px] relative">
               <Image
                 src={banner.image || ""}
                 alt="Banner"

@@ -6,7 +6,7 @@ import logo from "@/assets/logo/logo.png";
 // import SearchForm from "../SearchForm/SearchForm";
 import Link from "next/link";
 import { BsCart2 } from "react-icons/bs";
-import { FiUser, FiPhone, FiMapPin } from "react-icons/fi";
+import { FiUser, FiPhone, FiMapPin, FiCalendar } from "react-icons/fi";
 import { RiCloseFill, RiMenuAddFill } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,7 +18,6 @@ import "../NavBar/NavBar.css";
 import { getUser, setCorrelation } from "@/services/auth";
 import UserPopover from "@/shared/UserPopover/UserPopover";
 import { TUser } from "@/types";
-import { openLocationModal } from "@/components/kocation/LocationModalWrapper";
 
 // import { usePathname } from "next/navigation";
 
@@ -143,7 +142,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
               <Link href="/">
                 <Image
                   src={logo || null}
-                  alt="Unicrescent | Best E-commerce platform in BD"
+                  alt="Eye Hospital"
                   width={150}
                   height={60}
                   className="w-full h-full"
@@ -153,7 +152,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
           </div>
 
           {/* Desktop Search Bar with Animated Placeholder */}
-          <div className=" hidden lg:block flex-1 max-w-md relative">
+          {/* <div className=" hidden lg:block flex-1 max-w-md relative">
             <div className="relative">
               <input
                 type="text"
@@ -174,23 +173,44 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                 <IoSearchOutline className="text-lg" />
               </button>
             </div>
+          </div> */}
+
+          {/* Nav Links Desktop */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Link href="/" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Home
+            </Link>
+
+            <Link href="/doctor" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Doctor
+            </Link>
+
+            <Link href="/coshma" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Coshma
+            </Link>
+
+            <Link href="/about-us" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              About Us
+            </Link>
+
+            <Link href="/contact" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Contact Us
+            </Link>
           </div>
+
 
           {/* Right Side Icons */}
           <div className="flex items-center lg:gap-2.5 gap-1 ">
             {/* Location Display - Desktop */}
             <div
-              onClick={() => openLocationModal()}
+
               className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
             >
               <FiMapPin className="text-primary text-lg" />
               <div className="flex flex-col">
-                <span className="text-xs text-gray-500">Deliver to</span>
+                <span className="text-xs text-gray-500">Location</span>
                 <span className="text-xs font-semibold text-gray-700">
-                  {selectedLocation.city && selectedLocation.area
-                    ? `${selectedLocation.area}, ${selectedLocation.city}`
-                    : "Select Location"
-                  }
+                  Dhamrai Drisiti Kalyan Eye Hospital
                 </span>
               </div>
             </div>
@@ -199,9 +219,25 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
               <FiPhone className="text-primary text-lg" />
               <div className="flex flex-col">
                 <span className="text-xs text-gray-500">Call Us</span>
-                <span className="text-xs font-semibold text-gray-700">+8801571-155612</span>
+                <span className="text-xs font-semibold text-gray-700">+8801922-228733</span>
               </div>
             </div>
+
+            {/* appointment button */}
+            <Link
+              href="/appointment"
+              className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full 
+  bg-blue-400 text-white 
+  hover:bg-primary hover:text-white 
+  transition-colors duration-300 
+  border border-primary/30"
+            >
+              <FiCalendar className="text-lg" />
+              <span className="text-sm font-semibold">
+                Book Appointment
+              </span>
+            </Link>
+
 
             {/* Mobile Search Icon */}
             <div

@@ -5,7 +5,7 @@
 
   :root {
     /* custom color  */
-    --primary-color: #16a34a;
+    --primary-color: #4dabf7;
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -37,7 +37,7 @@
   }
 
   .bg-primary {
-    @apply bg-[#16a34a]
+    @apply bg-[#4dabf7]
   }
 
   .text-secondary {

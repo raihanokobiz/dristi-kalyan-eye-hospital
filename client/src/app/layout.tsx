@@ -6,8 +6,8 @@ import { LanguageProvider } from "@/context/LanguageContext";
 
 
 export const metadata: Metadata = {
-  title: "ANF Meat | Best E-commerce Platform in BD",
-  description: "Best E-commerce Platform in BD",
+  title: "Dhamrai Dristi Kalyan Eye Hospital ",
+  description: "Best Eye Hospital in Dhamrai, Bangladesh",
 };
 
 export default function RootLayout({

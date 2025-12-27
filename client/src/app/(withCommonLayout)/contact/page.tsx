@@ -5,7 +5,7 @@ import ContactFrom from "@/components/pages/contact/ContactFrom";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Unicrescent | Contact",
+  title: "Eye Hospital | Contact",
   description: "Best E-commerce platform in BD",
 };
 
@@ -34,10 +34,10 @@ const Contact = async () => {
                 Dhaka 1219</div>
             </div>
             <div className="mt-2">
-              <span className="font-bold">Hotline: </span>  01571-155612
+              <span className="font-bold">Hotline: </span>  01922-228733
             </div>
             <div className="mt-2">
-              <span className="font-bold">WhatsApp: </span> 01571-155612
+              <span className="font-bold">WhatsApp: </span> 01922-228733
             </div>
             <div className="mt-2">
               <span className="font-bold">Email: </span>  anisggn@gmail.com
