@@ -211,7 +211,7 @@ const Cart = async () => {
         <div className="bg-[#F6F6F6] text-gray-600 rounded text-center py-5 px-8 my-5">
           <span>
             * If you wish to make a bulk order, please call us at{" "}
-            <span className="font-bold text-black"> 01571-155612</span>
+            <span className="font-bold text-black"> 01922-228733</span>
             or email at{" "}
             <span className="font-bold text-black">anisggn@gmail.com</span> for more
             information.

@@ -5,7 +5,7 @@ import BulkForm from "@/components/pages/bulkOrder/BulkForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Unicrescent | BulkOrder",
+  title: "Eye Hospital | BulkOrder",
   description: "Best E-commerce platform in BD",
 };
 

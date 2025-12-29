@@ -11,17 +11,21 @@ import HomeProductSection from "@/components/pages/landing_pages/HomeProductSect
 import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
 import { getCampaign } from "@/services/campaign";
 import Offer from "@/components/pages/landing_pages/offer/Offer";
+// import Text1 from "../../assets/texture/Text2.png";
+import { getAllDoctors } from "@/services/doctor/doctors";
+
 import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
-import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
+// import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
 import { getAllOffers } from "@/services/offer";
-import { LocationModalWrapper } from "@/components/kocation/LocationModalWrapper";
 import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
 import { getAllProduct } from "@/services/products";
 import {
   Flame,
   Trophy,
 } from "lucide-react";
+import BenefitsSection from "@/services/benefit/BenefitsSection";
+import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 
 // import { getCartProducts } from "@/services/cart";
 // import NavBar from "@/components/pages/header/NavBar/NavBar";
@@ -44,7 +48,10 @@ const page = async () => {
 
   // ------for campaign----
 
-  const { data: campaign } = await getCampaign();
+  // Temporarily comment out getCampaign if it's causing issues
+  // const { data: campaign } = await getCampaign();
+  const campaign = null; // Temporary fix
+
   const offrs = await getAllOffers();
 
   // const user = await getUser();
@@ -69,20 +76,25 @@ const page = async () => {
     (item: any) => item.status === "popular"
   );
 
+  // Fetch doctors - ADD THIS LINE
+  const doctors = await getAllDoctors();
+
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
       <div className="">
-        <LocationModalWrapper />
         <Banner banners={[]} />
         <div
-          style={{
-            backgroundImage: `url(${Text1.src})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        // style={{
+        //   backgroundImage: `url(${Text1.src})`,
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "center",
+        // }}
         >
+          <HomeDoctorSection doctors={doctors} />
+          <BenefitsSection />
+          <WhyChooseUs />
           <Category />
           <Offer offrs={offrs} />
           {/* <SubCategory /> */}
@@ -104,18 +116,18 @@ const page = async () => {
         </div>
 
         <div
-          style={{
-            backgroundImage: `url(${Text1.src})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        // style={{
+        //   backgroundImage: `url(${Text1.src})`,
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "center",
+        // }}
         >
-          <PopularItems products={popularProducts} />
+          {/* <PopularItems products={popularProducts} /> */}
 
-          <Campaign campaign={campaign[0]} />
-          <WhyChooseUs />
-          <Subscribe />
+          {/* <Campaign campaign={campaign[0]} /> */}
+
+          {/* <Subscribe /> */}
 
         </div>
         {/* <Testimonial/> */}
@@ -141,6 +153,7 @@ const page = async () => {
         {buttomRes?.status === "success" && (
           <HomeProductSection products={buttomRes?.data} />
         )} */}
+
       </div>
     </>
   );
