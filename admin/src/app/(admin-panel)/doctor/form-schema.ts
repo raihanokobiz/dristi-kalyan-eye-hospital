@@ -16,14 +16,10 @@ export const formSchema = z.object({
     .default([]),
 
   degree: z
-    .string()
-    .min(1, { message: "Degree is required" })
-    .max(50, { message: "Degree is too long" }),
+    .string(),
 
   visitingTime: z
-    .string()
-    .min(1, { message: "Visiting time is required" })
-    .max(50, { message: "Visiting time is too long" }),
+    .string(),
 
   phone: z
     .string()
@@ -56,8 +52,6 @@ export const formSchema = z.object({
     .number({ invalid_type_error: "Consultation fee must be a number" })
     .min(0, { message: "Consultation fee must be positive" }),
 
-  status: z.enum(["Active", "Inactive"], {
-    errorMap: () => ({ message: "Status is required" })
-  }),
+  status: z.boolean().default(true),
 });
 

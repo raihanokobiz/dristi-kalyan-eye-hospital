@@ -24,6 +24,7 @@ import {
   Star,
   Store,
   Stethoscope,
+  User,
 } from "lucide-react";
 
 export function getMenuList(pathname: string): Group[] {
@@ -54,6 +55,13 @@ export function getMenuList(pathname: string): Group[] {
           href: "/doctor",
           label: "Doctor",
           active: pathname.includes("/doctor"),
+          icon: User,
+          submenus: [],
+        },
+        {
+          href: "/service",
+          label: "Service",
+          active: pathname.includes("/service"),
           icon: Stethoscope,
           submenus: [],
         },
@@ -73,11 +81,6 @@ export function getMenuList(pathname: string): Group[] {
               label: "Subcategory",
               active: pathname === "/category/subcategory",
             },
-            // {
-            //   href: "/category/childcategory",
-            //   label: "Childcategory",
-            //   active: pathname === "/category/childcategory",
-            // },
           ],
         },
         {

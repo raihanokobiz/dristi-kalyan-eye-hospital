@@ -33,7 +33,7 @@ const defaultValues = {
   availableDays: [],
   phone: "",
   email: "",
-  status: "Active",
+  status: true,
   image: [],
 };
 
@@ -76,7 +76,7 @@ export const CreateForm: React.FC = () => {
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
-      formData.append("status", values.status);
+      formData.append("status", values.status.toString());
       formData.append("image", imageUploadResult.secure_url);
       formData.append("imagePublicId", imageUploadResult.public_id);
 
@@ -276,30 +276,28 @@ export const CreateForm: React.FC = () => {
                 control={form.control}
                 name="status"
                 render={({ field }) => (
-                  <FormItem className="col-span-2">
-                    <FormLabel>Status <b className="text-red-500">*</b></FormLabel>
+                  <FormItem>
+                    <FormLabel>
+                      Status <b className="text-red-500">*</b>
+                    </FormLabel>
                     <FormControl>
                       <div className="flex items-center gap-3">
-                        {/* Custom Switch */}
                         <button
                           type="button"
                           role="switch"
-                          aria-checked={field.value === "Active"}
-                          onClick={() => field.onChange(field.value === "Active" ? "Inactive" : "Active")}
-                          className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                            ${field.value === "Active" ? "bg-primary " : "bg-gray-300"}
-                          `}
+                          aria-checked={field.value}
+                          onClick={() => field.onChange(!field.value)}
+                          className={` relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${field.value ? "bg-primary" : "bg-gray-300"}`}
                         >
-                          {/* Circle */}
                           <span
-                            className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 ease-in-out
-                            ${field.value === "Active" ? "translate-x-9" : "translate-x-1"}
-                          `}
+                            className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 ease-in-out ${field.value ? "translate-x-9" : "translate-x-1"} `}
                           />
                         </button>
-                        {/* Label */}
-                        <span className={`font-medium ${field.value === "Active" ? "text-primary" : "text-gray-500"}`}>
-                          {field.value === "Active" ? "Active" : "Inactive"}
+                        <span
+                          className={`font-medium ${field.value ? "text-primary" : "text-gray-500"
+                            }`}
+                        >
+                          {field.value ? "Active" : "Inactive"}
                         </span>
                       </div>
                     </FormControl>

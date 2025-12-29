@@ -50,7 +50,7 @@ export const CustomTable: React.FC<Props> = ({ data, pagination }) => {
   return (
     <Card className="m-6 p-4 rounded-lg">
       <div className="flex justify-between items-center">
-        <Label className="text-xl font-semibold mb-4">Doctors List</Label>
+        <Label className="text-xl font-semibold mb-4">Services List</Label>
       </div>
       <Table className="rounded-lg overflow-hidden">
         <TableHeader className="bg-primary">

@@ -16,11 +16,6 @@ import logo from "@/assets/logo/logo.png";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
-  // const [setting, setSetting] = React.useState<Settings>();
-
-  // React.useEffect(() => {
-  //   getSetting().then((data) => setSetting(data));
-  // }, []);
 
   if (!sidebar) return null;
   const brandName = process.env.NEXT_PUBLIC_BRAND_NAME;

@@ -1,5 +1,5 @@
 {
-  "name": "unicrescent-admin",
+  "name": "eye-hospital-admin",
   "version": "0.1.0",
   "author": "Ifshad Hasan Sharan",
   "private": true,
@@ -46,7 +46,7 @@
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^3.6.0",
     "dompurify": "^3.3.1",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "downshift": "^9.0.6",
     "fs": "^0.0.1-security",
     "input-otp": "^1.4.2",

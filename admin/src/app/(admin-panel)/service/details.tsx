@@ -89,7 +89,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
 
 
   const onSubmitUpdate = async (values: z.infer<typeof formSchema>) => {
-
+    console.log(values, "OK_____________________________________________");
 
     setUpdating(true);
     try {

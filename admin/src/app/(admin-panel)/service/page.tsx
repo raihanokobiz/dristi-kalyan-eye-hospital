@@ -23,7 +23,7 @@ export default async function DoctorPage({ searchParams }: Props) {
   const { data } = await getDoctorWithPagination(page, limit);
 
   return (
-    <ContentLayout title="Doctor">
+    <ContentLayout title="Service">
       <CreateForm />
       <CustomTable
         data={data.result.map((item) => ({

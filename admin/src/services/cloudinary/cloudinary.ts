@@ -25,7 +25,7 @@ export const uploadImageToCloudinary = async (
   return await res.json();
 };
 
-export const deleteImageFromCloudinary = async (imagePublicId:string | undefined) => {
+export const deleteImageFromCloudinary = async (imagePublicId: string | undefined) => {
   const res = await fetch(`${BASE_URL}/cloudinary/delete`, {
     method: "POST",
     headers: {
