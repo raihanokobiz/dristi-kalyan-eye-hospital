@@ -22,14 +22,12 @@ import { Label } from "@/components/ui/label";
 import { createFormAction } from "./actions";
 import { useRouter } from "next/navigation";
 import { uploadImageToCloudinary } from "@/services/cloudinary/cloudinary";
-import { Switch } from "antd";
 import { formSchema } from "./form-schema";
 
 const defaultValues = {
   title: "",
   description: "",
-  price: "",
-  slug: "",
+  price: undefined as any,
   status: true,
   image: [],
 };
@@ -46,10 +44,9 @@ export const CreateForm: React.FC = () => {
   });
 
   const handleImageFileChange = ({ fileList }: any) => {
-    const latestFileList = fileList.slice(-1);
-    setFileList(latestFileList);
+    setFileList(fileList);
 
-    const rawFiles = latestFileList
+    const rawFiles = fileList
       .map((f: any) => f.originFileObj)
       .filter(Boolean);
     form.setValue("image", rawFiles);
@@ -60,6 +57,16 @@ export const CreateForm: React.FC = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
+      // Validate image
+      if (!values.image || values.image.length === 0) {
+        toast({
+          title: "Error",
+          description: "Please upload an image",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
 
       // Image upload to Cloudinary
       const imageFile = values.image[0];
@@ -69,13 +76,10 @@ export const CreateForm: React.FC = () => {
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("description", values.description);
-      formData.append("price", values.price.toString());
-      formData.append("slug", values.slug || "");
+      formData.append("price", (values.price ?? 0).toString());
       formData.append("status", values.status.toString());
       formData.append("image", imageUploadResult?.secure_url || "");
       formData.append("imagePublicId", imageUploadResult?.public_id || "");
-
-
 
       await createFormAction(formData);
       form.reset();
@@ -140,23 +144,28 @@ export const CreateForm: React.FC = () => {
                     )}
                   />
                 </div>
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Price</FormLabel>
-                        <FormControl>
-                          <Input type="number" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                          {form.formState.errors.price?.message}
-                        </FormDescription>
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          value={field.value ?? ""}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            field.onChange(val === "" ? undefined : Number(val));
+                          }}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {form.formState.errors.price?.message}
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
                 {/* Status */}
                 <div>
                   <FormField

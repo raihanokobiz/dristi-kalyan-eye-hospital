@@ -21,7 +21,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   MoreHorizontal,
-  Upload as LucideUpload,
   Paperclip,
   FileUp,
 } from "lucide-react";
@@ -31,20 +30,18 @@ import { z } from "zod";
 import { deleteAction, updateFormAction } from "./actions";
 import { confirmation } from "@/components/modals/confirm-modal";
 import { formSchema } from "./form-schema";
-import { BASE_URL } from "@/config/config";
 import { Upload, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { humanFileSize } from "@/utils/helpers";
-import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import {
   deleteImageFromCloudinary,
   uploadImageToCloudinary,
 } from "@/services/cloudinary/cloudinary";
-import { TDoctor } from "./types";
+import { TService } from "./types";
 
 interface Props {
-  item: TDoctor;
+  item: TService;
 }
 
 export const DetailsSheet: React.FC<Props> = ({ item }) => {
@@ -64,15 +61,11 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: item.name,
-      degree: item.degree,
-      visitingTime: item.visitingTime,
-      phone: item.phone,
-      email: item.email || "",
-      availableDays: item.availableDays || [],
+      title: item.title,
+      description: item.description,
+      price: item.price,
       image: [],
-      consultationFee: item.consultationFee,
-      status: item.status
+      status: item.status,
     },
   });
 
@@ -83,17 +76,12 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
       .map((file: any) => file.originFileObj)
       .filter(Boolean);
 
-    // Sync with react-hook-form
     form.setValue("image", rawFiles);
   };
 
-
   const onSubmitUpdate = async (values: z.infer<typeof formSchema>) => {
-    console.log(values, "OK_____________________________________________");
-
     setUpdating(true);
     try {
-
       let imageUrl = item.image;
       let imagePublicId = item.imagePublicId || "";
 
@@ -107,7 +95,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
         // new image upload
         const uploadResult = await uploadImageToCloudinary(
           values.image[0],
-          "doctors"
+          "services"
         );
         imageUrl = uploadResult.secure_url;
         imagePublicId = uploadResult.public_id;
@@ -115,20 +103,16 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
 
       // FormData
       const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("degree", values.degree);
-      formData.append("visitingTime", values.visitingTime);
-      formData.append("consultationFee", values.consultationFee.toString());
-      formData.append("availableDays", JSON.stringify(values.availableDays));
-      formData.append("phone", values.phone);
-      formData.append("email", values.email || "");
+      formData.append("title", values.title);
+      formData.append("description", values.description);
+      formData.append("price", (values.price ?? 0).toString());
       formData.append("status", values.status.toString());
-      formData.append("image", imageUrl);
+      formData.append("image", imageUrl || "");
       formData.append("imagePublicId", imagePublicId);
 
       await updateFormAction(String(item._id), formData);
       toast({
-        title: "Doctor updated successfully",
+        title: "Service updated successfully",
       });
       setSheetOpen(false);
     } catch (error: any) {
@@ -143,7 +127,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
   };
 
   const handleDeleteClick = async () => {
-    if (await confirmation("Are you sure you want to delete this item?")) {
+    if (await confirmation("Are you sure you want to delete this service?")) {
       setDeleting(true);
 
       try {
@@ -151,14 +135,10 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
           await deleteImageFromCloudinary(item.imagePublicId);
         }
 
-        if (item.vectorImagePublicId) {
-          await deleteImageFromCloudinary(item.vectorImagePublicId);
-        }
-
         const deleted = await deleteAction(String(item._id));
         if (deleted) {
           toast({
-            title: "Doctor deleted successfully",
+            title: "Service deleted successfully",
           });
           setSheetOpen(false);
         }
@@ -189,7 +169,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <SheetHeader>
-          <SheetTitle>Doctor Details</SheetTitle>
+          <SheetTitle>Service Details</SheetTitle>
         </SheetHeader>
 
         <Form {...form}>
@@ -197,87 +177,67 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
             onSubmit={form.handleSubmit(onSubmitUpdate)}
             className="grid grid-cols-2 gap-4 items-end py-4"
           >
-            {/* Name Field */}
+            {/* Title Field */}
             <div className="col-span-2">
-              {[
-                ["name", "Doctor Name"],
-                ["degree", "Degree"],
-                ["visitingTime", "Visiting Time"],
-                ["phone", "Phone"],
-                ["email", "Email"],
-              ].map(([name, label]) => (
-                <FormField
-                  key={name}
-                  control={form.control}
-                  name={name as any}
-                  render={({ field }) => (
-                    <FormItem className="col-span-2">
-                      <FormLabel>{label}</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        {form.formState.errors[name as any]?.message}
-                      </FormDescription>
-                    </FormItem>
-                  )}
-                />
-              ))}
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Service Title</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      {form.formState.errors.title?.message}
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
             </div>
 
-            {/* AVAILABLE DAYS */}
-            <FormField
-              control={form.control}
-              name="availableDays"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Available Days</FormLabel>
-                  <div className="flex flex-wrap gap-3 mt-2">
-                    {[
-                      "monday",
-                      "tuesday",
-                      "wednesday",
-                      "thursday",
-                      "friday",
-                      "saturday",
-                      "sunday",
-                    ].map((day) => (
-                      <label key={day} className="flex gap-2 items-center">
-                        <input
-                          type="checkbox"
-                          checked={field.value.includes(day)}
-                          onChange={(e) =>
-                            field.onChange(
-                              e.target.checked
-                                ? [...field.value, day]
-                                : field.value.filter((d) => d !== day)
-                            )
-                          }
-                        />
-                        {day}
-                      </label>
-                    ))}
-                  </div>
-                </FormItem>
-              )}
-            />
+            {/* Description Field */}
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <textarea
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                        rows={4}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      {form.formState.errors.description?.message}
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            {/* Consultation Fee */}
+            {/* Price Field */}
             <FormField
               control={form.control}
-              name="consultationFee"
+              name="price"
               render={({ field }) => (
-                <FormItem className="col-span-1">
-                  <FormLabel>Consultation Fee</FormLabel>
+                <FormItem>
+                  <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
-                      {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      value={field.value ?? ""}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        field.onChange(val === "" ? undefined : Number(val));
+                      }}
                     />
                   </FormControl>
                   <FormDescription>
-                    {form.formState.errors.consultationFee?.message}
+                    {form.formState.errors.price?.message}
                   </FormDescription>
                 </FormItem>
               )}
@@ -319,12 +279,11 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                 </FormItem>
               )}
             />
+
             {/* Image */}
-            <div className="col-span-1 grid grid-cols-2">
+            <div className="col-span-2">
               <div className="">
-                <Label>
-                  Image <b className="text-red-500">*</b>
-                </Label>
+                <Label>Image</Label>
                 <FormField
                   control={form.control}
                   name="image"
@@ -335,6 +294,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                         beforeUpload={() => false}
                         fileList={imageFileList}
                         onChange={handleImageFileChange}
+                        maxCount={1}
                       >
                         <div>
                           <UploadOutlined />
@@ -349,18 +309,15 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                   {form.getValues("image") &&
                     form.getValues("image").length > 0 &&
                     form.getValues("image").map((file, i) => (
-                      <div className="border-dashed border-2 rounded-lg p-2 px-3">
-                        <div
-                          key={i}
-                          className="flex flex-col gap-2 text-xs text-gray-500 justify-center h-full"
-                        >
+                      <div key={i} className="border-dashed border-2 rounded-lg p-2 px-3">
+                        <div className="flex flex-col gap-2 text-xs text-gray-500 justify-center h-full">
                           <div className="flex items-center gap-2">
                             <Paperclip className="h-4 w-4 stroke-current" />
-                            <span>{file.name}</span>
+                            <span>{(file as any).name}</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <FileUp className="h-4 w-4 stroke-current" />
-                            <span>{humanFileSize(file.size)}</span>
+                            <span>{humanFileSize((file as any).size)}</span>
                           </div>
                         </div>
                       </div>

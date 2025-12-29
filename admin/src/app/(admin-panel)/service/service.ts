@@ -1,10 +1,10 @@
 "use server";
 
 import { BASE_URL } from "@/config/config";
-import { AllDoctorResponse, AllDoctorWithPaginationResponse, SingleDoctorResponse } from "./types";
+import { AllServiceResponse, AllServiceWithPaginationResponse, SingleServiceResponse } from "./types";
 
-export async function createDoctor(data: any) {
-    const response = await fetch(`${BASE_URL}/doctor`, {
+export async function createService(data: any) {
+    const response = await fetch(`${BASE_URL}/service`, {
         method: "POST",
         body: data,
     });
@@ -14,24 +14,24 @@ export async function createDoctor(data: any) {
     return response.json();
 }
 
-export async function getAllDoctor(): Promise<AllDoctorResponse> {
-    const response = await fetch(`${BASE_URL}/doctor`);
+export async function getAllService(): Promise<AllServiceResponse> {
+    const response = await fetch(`${BASE_URL}/service`);
     if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
     }
     return response.json();
 }
 
-export async function getDoctorWithPagination(
+export async function getServiceWithPagination(
     page?: string,
     limit?: string
-): Promise<AllDoctorWithPaginationResponse> {
+): Promise<AllServiceWithPaginationResponse> {
     const queryParams = new URLSearchParams();
     if (page) queryParams.set("page", page);
     if (limit) queryParams.set("limit", limit);
 
     const response = await fetch(
-        `${BASE_URL}/doctor/pagination?${queryParams.toString()}`,
+        `${BASE_URL}/service/pagination?${queryParams.toString()}`,
         { cache: "no-store" }
     );
 
@@ -42,18 +42,18 @@ export async function getDoctorWithPagination(
     return response.json();
 }
 
-export async function getDoctorById(id: string): Promise<SingleDoctorResponse> {
-    const response = await fetch(`${BASE_URL}/doctor/${id}`);
+export async function getServiceById(id: string): Promise<SingleServiceResponse> {
+    const response = await fetch(`${BASE_URL}/service/${id}`);
     if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
     }
     return response.json();
 }
 
-export async function updateDoctor(id: string, data: any) {
-    console.log(data, "OK________________________________________________________________________________");
+export async function updateService(id: string, data: any) {
 
-    const response = await fetch(`${BASE_URL}/doctor/${id}`, {
+
+    const response = await fetch(`${BASE_URL}/service/${id}`, {
         method: "PUT",
         body: data,
     });
@@ -63,8 +63,8 @@ export async function updateDoctor(id: string, data: any) {
     return response.json();
 }
 
-export async function deleteDoctor(id: string) {
-    const response = await fetch(`${BASE_URL}/doctor/${id}`, {
+export async function deleteService(id: string) {
+    const response = await fetch(`${BASE_URL}/service/${id}`, {
         method: "DELETE",
     });
     if (!response.ok) {

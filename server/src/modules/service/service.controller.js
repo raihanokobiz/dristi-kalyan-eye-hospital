@@ -13,7 +13,9 @@ class ServiceController {
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,
-            status: req.body.status
+            status: req.body.status,
+            image: req.body.image,
+            imagePublicId: req.body.imagePublicId
         };
 
         const serviceResult = await ServiceService.createService(
@@ -69,7 +71,9 @@ class ServiceController {
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,
-            status: req.body.status
+            status: req.body.status,
+            image: req.body.image,
+            imagePublicId: req.body.imagePublicId
         };
 
         await ServiceService.updateService(

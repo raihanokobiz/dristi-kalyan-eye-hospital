@@ -17,13 +17,13 @@ import {
 import { Label } from "@radix-ui/react-label";
 import { Card } from "@/components/ui/card";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
-import { TDoctor } from "./types";
-import { doctorColumns } from "./columns";
+import { TService } from "./types";
+import { serviceColumns } from "./columns";
 
 
 
 interface Props {
-  data: TDoctor[];
+  data: TService[];
   pagination: {
     page: number;
     limit: number;
@@ -35,7 +35,7 @@ export const CustomTable: React.FC<Props> = ({ data, pagination }) => {
   const sortedData = [...data].sort((a, b) => Number(b.status) - Number(a.status));
   const table = useReactTable({
     data: sortedData,
-    columns: doctorColumns,
+    columns: serviceColumns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     pageCount: Math.ceil(pagination.total / pagination.limit),
@@ -103,7 +103,7 @@ export const CustomTable: React.FC<Props> = ({ data, pagination }) => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={doctorColumns.length} className="h-24 text-center">
+              <TableCell colSpan={serviceColumns.length} className="h-24 text-center">
                 No results.
               </TableCell>
             </TableRow>

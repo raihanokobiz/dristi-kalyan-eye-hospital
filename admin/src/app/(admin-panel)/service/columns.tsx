@@ -2,10 +2,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import { DetailsSheet } from "./details";
-import { TDoctor } from "./types";
+import { TService } from "./types";
 
-
-export const doctorColumns: ColumnDef<TDoctor>[] = [
+export const serviceColumns: ColumnDef<TService>[] = [
   {
     header: "SL",
     cell: ({ row }) => row.index + 1,
@@ -19,7 +18,7 @@ export const doctorColumns: ColumnDef<TDoctor>[] = [
         <div className="w-20 h-20 relative">
           <Image
             src={imageUrl || "/placeholder.png"}
-            alt={row.original.name}
+            alt={row.original.title}
             fill
             className="object-cover rounded-lg"
           />
@@ -28,33 +27,20 @@ export const doctorColumns: ColumnDef<TDoctor>[] = [
     },
   },
   {
-    header: "Name",
-    accessorKey: "name",
+    header: "Title",
+    accessorKey: "title",
   },
   {
-    header: "Degree",
-    accessorKey: "degree",
+    header: "Description",
+    accessorKey: "description",
+    cell: ({ row }) => (
+      <div className="max-w-xs truncate">{row.original.description}</div>
+    ),
   },
   {
-    header: "Visiting Time",
-    accessorKey: "visitingTime",
-  },
-  {
-    header: "Phone",
-    accessorKey: "phone",
-  },
-  {
-    header: "Email",
-    accessorKey: "email",
-  },
-  {
-    header: "Available Days",
-    accessorKey: "availableDays",
-    cell: ({ row }) => row.original.availableDays.join(", "),
-  },
-  {
-    header: "Consultation Fee",
-    accessorKey: "consultationFee",
+    header: "Price",
+    accessorKey: "price",
+    cell: ({ row }) => `৳${row.original.price}`,
   },
   {
     header: "Status",

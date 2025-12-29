@@ -2,7 +2,8 @@ import { ContentLayout } from "@/components/admin-panel/content-layout";
 import React from "react";
 import { CustomTable } from "./table";
 import { CreateForm } from "./form";
-import { getDoctorWithPagination } from "./service";
+import { getServiceWithPagination } from "./service";
+
 
 export const revalidate = 0;
 
@@ -20,13 +21,13 @@ export default async function DoctorPage({ searchParams }: Props) {
     ? searchParams.limit[0]
     : searchParams.limit || "10";
 
-  const { data } = await getDoctorWithPagination(page, limit);
+  const { data } = await getServiceWithPagination(page, limit);
 
   return (
     <ContentLayout title="Service">
       <CreateForm />
       <CustomTable
-        data={data.result.map((item) => ({
+        data={data.result.map((item: any) => ({
           ...item,
         }))}
         pagination={{

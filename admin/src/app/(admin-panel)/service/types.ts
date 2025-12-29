@@ -1,30 +1,31 @@
-export type TDoctor = {
-    name: string;
-    image?: File[];
-    degree: string;
-    visitingTime: string;
-    phone: string;
-    email?: string;
-    availableDays: ("monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday")[];
-    consultationFee: number;
-    status: "Active" | "Inactive";
+export type TService = {
+    _id?: string;
+    title: string;
+    description: string;
+    price: number;
+    image?: string;
+    imagePublicId?: string;
+    slug?: string;
+    status: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 };
 
-// Response for all doctors without pagination
-export type AllDoctorResponse = {
+// Response for all services without pagination
+export type AllServiceResponse = {
     statusCode: number;
     status: string;
     message: string;
-    data: TDoctor[];
+    data: TService[];
 };
 
-// Response for all doctors with pagination
-export type AllDoctorWithPaginationResponse = {
+// Response for all services with pagination
+export type AllServiceWithPaginationResponse = {
     statusCode: number;
     status: string;
     message: string;
     data: {
-        result: TDoctor[];
+        result: TService[];
         pagination: {
             currentPage: number;
             currentPageLimit: number;
@@ -38,10 +39,10 @@ export type AllDoctorWithPaginationResponse = {
     };
 };
 
-// Response for a single doctor
-export type SingleDoctorResponse = {
+// Response for a single service
+export type SingleServiceResponse = {
     statusCode: number;
     status: string;
     message: string;
-    data: TDoctor;
+    data: TService;
 };

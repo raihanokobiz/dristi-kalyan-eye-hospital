@@ -2,11 +2,11 @@
 
 
 import { revalidatePath } from "next/cache";
-import { createDoctor, deleteDoctor, updateDoctor } from "./service";
+import { createService, deleteService, updateService } from "./service";
 
 export async function createFormAction(data: FormData) {
   try {
-    await createDoctor(data);
+    await createService(data);
     revalidatePath("/");
     return true;
   } catch (error: any) {
@@ -22,7 +22,7 @@ export async function createFormAction(data: FormData) {
 
 export async function updateFormAction(id: string, data: any) {
   try {
-    await updateDoctor(id, data);
+    await updateService(id, data);
     revalidatePath("/");
     return true;
   } catch (error: any) {
@@ -33,7 +33,7 @@ export async function updateFormAction(id: string, data: any) {
 export async function deleteAction(id: string) {
 
   try {
-    await deleteDoctor(id);
+    await deleteService(id);
     revalidatePath("/");
     return true;
   } catch (error: any) {

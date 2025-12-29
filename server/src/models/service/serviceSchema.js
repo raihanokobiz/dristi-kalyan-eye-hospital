@@ -21,6 +21,9 @@ const ServiceSchema = new Schema(
         image: {
             type: String
         },
+        imagePublicId: {
+            type: String
+        },
         slug: {
             type: String,
             unique: true

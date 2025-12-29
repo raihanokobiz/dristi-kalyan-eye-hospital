@@ -11,16 +11,19 @@ export const formSchema = z.object({
     .min(1, { message: "Description is required" }),
 
   price: z
-    .coerce
     .number({ invalid_type_error: "Price must be a number" })
     .min(0, { message: "Price must be positive" })
     .optional()
-    .default(0),
+    .or(z.literal(undefined)),
 
   image: z
-    .string()
+    .array(
+      z.instanceof(File).refine((file) => file.size < 8 * 1024 * 1024, {
+        message: "File size must be less than 8 MB",
+      })
+    )
     .optional()
-    .nullable(),
+    .default([]),
 
   slug: z
     .string()
