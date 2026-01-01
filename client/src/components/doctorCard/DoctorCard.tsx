@@ -9,22 +9,18 @@ interface DoctorCardProps {
 }
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
-    const imageUrl = doctor?.image || "/images/default-doctor.jpg";
+
 
     return (
         <div className="bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition overflow-hidden">
             {/* Image */}
             <div className="relative h-40 sm:h-44 w-full bg-gray-200">
                 <Image
-                    src={imageUrl}
+                    src={doctor?.image}
                     alt={doctor.name}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 25vw"
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "/images/default-doctor.jpg";
-                    }}
                 />
 
                 {doctor.status && (

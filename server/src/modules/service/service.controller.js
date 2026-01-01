@@ -61,6 +61,17 @@ class ServiceController {
         res.status(resDoc.statusCode).json(resDoc);
     });
 
+    getSingleServiceBySlug = catchError(async (req, res) => {
+        const slug = req.params.slug;
+        const serviceResult = await ServiceService.getSingleServiceBySlug(slug);
+        const resDoc = responseHandler(
+            200,
+            "Single service retrieved successfully",
+            serviceResult
+        );
+        res.status(resDoc.statusCode).json(resDoc);
+    });
+
     updateService = catchError(async (req, res) => {
         const id = req.params.id;
         const payloadFiles = {

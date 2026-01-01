@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { addToCart } from "@/services/cart";
 // import { TbWeight } from 'react-icons/tb';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { TbWeight } from "react-icons/tb";

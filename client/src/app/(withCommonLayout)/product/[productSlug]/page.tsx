@@ -45,7 +45,7 @@ const Page = async ({ params }: PageProps) => {
   // const userCartProducts = await getCartProducts(userRef, coupon);
 
   return (
-    <div className="max-w-6xl mx-auto mt-20">
+    <div className="max-w-7xl mx-auto mt-20">
       {/* <NavBar userCartProducts={userCartProducts?.data} /> */}
       <ProductDetails product={product} />
       <ProductReview userRef={userRef} productRef={productId} />

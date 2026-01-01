@@ -64,6 +64,13 @@ class ServiceService {
         return serviceData;
     }
 
+    // Get Single Service by Slug
+    async getSingleServiceBySlug(slug) {
+        const serviceData = await ServiceSchema.findOne({ slug });
+        if (!serviceData) throw new NotFoundError("Service not found");
+        return serviceData;
+    }
+
     // Update Service
     async updateService(id, payloadFiles, payload) {
         const { files } = payloadFiles;

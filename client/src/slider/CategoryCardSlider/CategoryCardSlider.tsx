@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -58,10 +58,9 @@ const CategoryCardSlider: React.FC<CategoryProps> = ({ categoriesList }) => {
                 <div
                   className={`group relative h-40 w-full
                     bg-white rounded-md overflow-hidden transition-all duration-300
-                    ${
-                      isUpcoming
-                        ? "cursor-default bg-gray-100"
-                        : "cursor-pointer hover:bg-[#1e6a39] hover:scale-105"
+                    ${isUpcoming
+                      ? "cursor-default bg-gray-100"
+                      : "cursor-pointer hover:bg-[#1e6a39] hover:scale-105"
                     } 
                     flex flex-col shadow-sm`}
                 >
@@ -79,11 +78,10 @@ const CategoryCardSlider: React.FC<CategoryProps> = ({ categoriesList }) => {
                   )}
                   <div className="pb-2 px-2 text-center">
                     <p
-                      className={`text-xs lg:text-sm font-semibold ${
-                        isUpcoming
+                      className={`text-xs lg:text-sm font-semibold ${isUpcoming
                           ? "text-gray-400"
                           : "text-gray-700 group-hover:text-white"
-                      } transition-colors duration-300 capitalize line-clamp-2`}
+                        } transition-colors duration-300 capitalize line-clamp-2`}
                     >
                       {isUpcoming ? "Upcoming" : category.name}
                     </p>

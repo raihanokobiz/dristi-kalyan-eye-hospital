@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useRef } from "react";
 import { TBanner } from "@/types";
 
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import { apiBaseUrl } from "@/config/config";
@@ -30,13 +30,12 @@ const BannerSlider: React.FC<BannerProps> = ({ banners }) => {
       >
         {banners?.map((banner: TBanner) => (
           <SwiperSlide key={banner._id}>
-            <div className="2xl:h-[650px] xl:h-[550px] md:h-[450px] h-[250px] relative">
+            <div className="h-[250px] md:h-[450px] xl:h-[80vh] 2xl:h-[80vh] relative">
               <Image
                 src={banner.image || ""}
                 alt="Banner"
-                width={1600}
-                height={600}
-                objectFit="cover" // Ensures images scale nicely
+                fill
+                objectFit="cover"
                 className="w-full h-full"
               />
             </div>

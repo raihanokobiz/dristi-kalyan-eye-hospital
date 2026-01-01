@@ -9,8 +9,8 @@ import { getCampaign } from "@/services/campaign";
 import Offer from "@/components/pages/landing_pages/offer/Offer";
 // import Text1 from "../../assets/texture/Text2.png";
 import { getAllDoctors } from "@/services/doctor/doctors";
+import { getAllService } from "@/services/service";
 
-import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
 // import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
 import { getAllOffers } from "@/services/offer";
@@ -22,6 +22,10 @@ import {
 } from "lucide-react";
 import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
+import { EyeServices } from "@/components/pages/service/EyeServices";
+import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
+
+
 
 // import { getCartProducts } from "@/services/cart";
 // import NavBar from "@/components/pages/header/NavBar/NavBar";
@@ -59,21 +63,12 @@ const page = async () => {
   const data = await getAllProduct();
 
   const allProducts = data?.data || [];
-
-  const bestDealProducts = allProducts.filter(
-    (item: any) => item.status === "bestDeal"
-  );
-
-  const bestSellerProducts = allProducts.filter(
-    (item: any) => item.status === "bestSeller"
-  );
-
-  const popularProducts = allProducts.filter(
-    (item: any) => item.status === "popular"
-  );
-
   // Fetch doctors - ADD THIS LINE
   const doctors = await getAllDoctors();
+
+  // Fetch services
+  const services = await getAllService()
+
 
   return (
     <>
@@ -88,27 +83,15 @@ const page = async () => {
         //   backgroundPosition: "center",
         // }}
         >
-          <HomeDoctorSection doctors={doctors} />
           <BenefitsSection />
+          <HomeDoctorSection doctors={doctors} />
+          <EyeServices services={services} />
           <WhyChooseUs />
-          <Category />
-          <Offer offrs={offrs} />
+          {/* <WhyChooseUs /> */}
+          {/* <Category /> */}
+          {/* <Offer offrs={offrs} /> */}
           {/* <SubCategory /> */}
           {/* <ChildCategory />   */}
-          {bestDealProducts.length > 0 && (
-            <HomeProductSection
-              title="Best Deals"
-              products={bestDealProducts}
-              icon={Trophy}
-            />
-          )}
-          {bestSellerProducts.length > 0 && (
-            <HomeProductSection
-              title="Best Sellers"
-              products={bestSellerProducts}
-              icon={Flame}
-            />
-          )}
         </div>
 
         <div
@@ -126,29 +109,8 @@ const page = async () => {
           {/* <Subscribe /> */}
 
         </div>
-        {/* <Testimonial/> */}
-        {/* <MiddleChildCategory
-          childCategoriesList={middleChildCategoriesList?.data}
-        />
-        {middleRes?.status === "success" && (
-          <HomeProductSection products={middleRes?.data} />
-        )} */}
 
-        {/* <LowerMiddleChildCategory
-          childCategoriesList={lowerMiddleChildCategoriesList?.data}
-        />
-
-        {lowerMiddleRes?.status === "success" && (
-          <HomeProductSection products={lowerMiddleRes?.data} />
-        )}
-
-        <ButtomChildCategory
-          childCategoriesList={buttomChildCategoriesList?.data}
-        />
-
-        {buttomRes?.status === "success" && (
-          <HomeProductSection products={buttomRes?.data} />
-        )} */}
+        {/* <HomeProductSection /> */}
 
       </div>
     </>

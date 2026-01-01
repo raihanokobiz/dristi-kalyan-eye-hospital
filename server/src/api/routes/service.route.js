@@ -11,6 +11,8 @@ ServiceRoute.route("/")
 
 ServiceRoute.get("/pagination", controller.getServiceWithPagination);
 
+ServiceRoute.get("/slug/:slug", controller.getSingleServiceBySlug);
+
 ServiceRoute.route("/:id")
     .get(controller.getSingleService)
     .put(upload.any(), controller.updateService)
