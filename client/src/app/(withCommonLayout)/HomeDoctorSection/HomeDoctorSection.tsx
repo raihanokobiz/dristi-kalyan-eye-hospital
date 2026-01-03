@@ -9,7 +9,7 @@ interface HomeDoctorSectionProps {
 
 const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
     // Show only first 6 doctors
-    const displayDoctors = doctors.slice(0, 6);
+    const displayDoctors = doctors.slice(0, 8);
 
     if (displayDoctors.length === 0) {
         return null;
@@ -17,10 +17,10 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
     }
 
     return (
-        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-5">
+            <div className="max-w-7xl mx-auto ">
                 {/* Section Header */}
-                <div className="text-center mb-10">
+                <div className="text-center lg:mb-8">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <Stethoscope className="h-8 w-8 text-primary" />
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -33,16 +33,16 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
                 </div>
 
                 {/* Doctor Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-4 
+                lg:mb-8">
                     {displayDoctors.map((doctor) => (
                         <DoctorCard key={doctor._id} doctor={doctor} />
                     ))}
                 </div>
-
                 {/* View All Button */}
                 <div className="text-center">
                     <Link href="/doctor">
-                        <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                        <button className="bg-primary hover:bg-primary/90  font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1">
                             View All Doctors
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -51,6 +51,7 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                             >
+
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"

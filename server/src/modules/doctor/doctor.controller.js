@@ -75,7 +75,6 @@ class DoctorController {
             image: req.body.image,
             imagePublicId: req.body.imagePublicId,
         };
-
         const doctorResult = await DoctorService.updateDoctor(
             id,
             payload
@@ -98,7 +97,6 @@ class DoctorController {
         const resDoc = responseHandler(200, "Doctor deleted successfully");
         res.status(resDoc.statusCode).json(resDoc);
     });
-
 
     getDoctorsByAvailableDay = catchError(async (req, res) => {
         const day = req.params.day;

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken")?.value;
+console.log("Middleware accessed for path:", request.nextUrl.pathname,request.url, accessToken);
 
   const isProtectedRoute =
     request.nextUrl.pathname.startsWith("/banners") ||
@@ -18,12 +19,8 @@ export function middleware(request: NextRequest) {
     const loginUrl = new URL("/", request.url);
     return NextResponse.redirect(loginUrl);
   }
-
-  // Allow the request
   return NextResponse.next();
 }
-
-// Optional: Only run middleware on certain routes
 export const config = {
   matcher: [
     "/dashboard/:path*",

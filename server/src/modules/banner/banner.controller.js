@@ -11,7 +11,6 @@ class BannerController {
       image: req?.body?.image,
       imagePublicId: req?.body?.imagePublicId,
     };
-
     const bannerResult = await BannerService.createBanner(payload, session);
     const resDoc = responseHandler(
       201,
@@ -20,7 +19,6 @@ class BannerController {
     );
     res.status(resDoc.statusCode).json(resDoc);
   });
-
   getAllBanner = catchError(async (req, res, next) => {
     let payload = {
       type: req.query.type,

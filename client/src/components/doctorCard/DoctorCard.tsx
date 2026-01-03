@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { DotIcon, Clock } from "lucide-react";
 import { Doctor } from "@/types/doctor";
 
 interface DoctorCardProps {
@@ -12,70 +13,71 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
 
     return (
-        <div className="bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition overflow-hidden">
-            {/* Image */}
-            <div className="relative h-40 sm:h-44 w-full bg-gray-200">
-                <Image
-                    src={doctor?.image}
-                    alt={doctor.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 25vw"
-                />
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+            <Link href={`/doctor/${doctor._id}`} className="block">
+                {/* IMAGE */}
+                <div className="relative h-52 w-full">
+                    <Image
+                        src={imageUrl}
+                        alt={doctor.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = "/images/default-doctor.jpg";
+                        }}
+                    />
 
-                {doctor.status && (
-                    <span className="absolute top-2 right-2 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full">
-                        Available
-                    </span>
-                )}
-            </div>
-
-            {/* Content */}
-            <div className="p-3">
-                {/* Name */}
-                <h3 className="text-sm sm:text-base font-semibold text-gray-800 line-clamp-1">
-                    {doctor.name}
-                </h3>
-
-                {/* Degree */}
-                <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                    {doctor.degree}
-                </p>
-
-                {/* Visiting Time */}
-                <div className="flex items-center gap-1.5 mt-2">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
-                    <span className="text-xs text-gray-600 line-clamp-1">
-                        {doctor.visitingTime}
-                    </span>
+                    {/* STATUS BADGE */}
+                    {doctor.status && (
+                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">
+                            <DotIcon className="text-green-500" />
+                            <span className="text-xs font-semibold text-green-600">
+                                Available
+                            </span>
+                        </div>
+                    )}
                 </div>
 
-                {/* Fee + Button */}
-                <div className="flex items-center justify-between mt-3">
-                    <span className="text-sm font-bold text-primary">
-                        ৳{doctor.consultationFee}
-                    </span>
+                {/* CONTENT */}
+                <div className="p-5">
+                    {/* NAME */}
+                    <h3 className="text-base font-semibold text-gray-900 leading-tight line-clamp-1">
+                        {doctor.name}
+                    </h3>
 
-                    <Link href={`/doctor/${doctor._id}`}>
-                        <button className="text-xs bg-primary hover:bg-primary/90 text-white px-3 py-1.5 rounded-md">
-                            Details
-                        </button>
-                    </Link>
+                    {/* DEGREE / SPECIALTY */}
+                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                        {doctor.degree}
+                    </p>
+
+                    {/* VISITING TIME */}
+                    <div className="flex items-center gap-2 mt-4 text-gray-600">
+                        <Clock className="h-4 w-4 text-primary" />
+                        <span className="text-sm line-clamp-1">
+                            {doctor.visitingTime}
+                        </span>
+                    </div>
+
+                    {/* DIVIDER */}
+                    <div className="border-t border-gray-100 my-4" />
+
+                    {/* CTA */}
+                    <div className="flex items-center justify-between">
+                        {/* Fee (optional, uncomment if needed) */}
+                        {doctor.consultationFee && (
+                            <span className="text-sm font-semibold text-gray-800">
+                                ৳{doctor.consultationFee}
+                            </span>
+                        )}
+
+                        <span className="ml-auto inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-400 text-white text-sm font-medium hover:bg-primary/90 transition">
+                            View Details
+                        </span>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
     );
 };
