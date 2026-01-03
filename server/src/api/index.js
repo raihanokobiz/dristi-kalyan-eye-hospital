@@ -33,12 +33,14 @@ const ServiceRouter = require("./routes/service.route.js");
 
 const { Router } = require("express");
 const CampaignRoute = require("./routes/campaign.route.js");
+const BookingRoute = require("./routes/booking.route");
 const rootRouter = Router();
 rootRouter.use("/product", ProductRouter);
 rootRouter.use("/auth", AuthRouter);
 rootRouter.use("/banners", BannerRouter);
 rootRouter.use("/about-us", AboutUsRouter);
 rootRouter.use("/brand", BrandRouter);
+rootRouter.use("/booking",BookingRoute);
 rootRouter.use("/category", CategoryRouter);
 rootRouter.use("/offer", OfferRoute);
 rootRouter.use("/contact-info", ContactRouter);

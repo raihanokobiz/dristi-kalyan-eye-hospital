@@ -1,5 +1,4 @@
 import { File } from "buffer";
-
 export type Submenu = {
   href: string;
   label: string;
@@ -31,6 +30,30 @@ export type OrderReport = {
   totalSubTotalPrice: number;
   totalProducts: number;
 };
+export type BookingStatus = "pending" | "confirmed" | "completed" | "cancelled";
+
+export type  AllBookings = {
+  appointmentDay?: string;
+  patientName?: string;
+  phone?: string;
+  age?: string;
+  problem?: string;
+  status?: BookingStatus[];          // enum array
+  doctorId: string | any;    // populate করলে Doctor document আসতে পারে
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+// export interface IBooking {
+//   appointmentDay?: string;
+//   patientName?: string;
+//   phone?: string;
+//   age?: string;
+//   problem?: string;
+//   status?: BookingStatus[];          // enum array
+//   doctorId: string | any;    // populate করলে Doctor document আসতে পারে
+//   createdAt?: Date;
+//   updatedAt?: Date;
+// }
 export type TUser = {
   userId?: string;
   name?: string;
