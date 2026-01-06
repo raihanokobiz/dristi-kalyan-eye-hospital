@@ -5,7 +5,7 @@ import MainCheckOut from "@/components/pages/checkoutPage/MainCheckOut/MainCheck
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ANF Meat | Checkout",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | Checkout",
   description: "Best E-commerce platform in BD",
 };
 

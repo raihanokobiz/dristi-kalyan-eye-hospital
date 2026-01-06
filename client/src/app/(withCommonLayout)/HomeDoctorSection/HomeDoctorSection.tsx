@@ -13,7 +13,7 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
 
     if (displayDoctors.length === 0) {
         return null;
-        
+
     }
 
     return (

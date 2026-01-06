@@ -226,11 +226,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
             {/* appointment button */}
             <Link
               href="/appointment"
-              className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full 
-  bg-blue-400 text-white 
-  hover:bg-primary hover:text-white 
-  transition-colors duration-300 
-  border border-primary/30"
+              className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-white hover:bg-primary hover:text-white transition-colors duration-300 border border-primary/30"
             >
               <FiCalendar className="text-lg" />
               <span className="text-sm font-semibold">

@@ -1,60 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShoppingCart, X, Plus, Minus, Check } from "lucide-react";
+import { ShoppingCart, X, Plus, Minus, Check, Eye } from "lucide-react";
 import Image from "next/image";
 import { apiBaseUrl } from "@/config/config";
-import Link from "next/link";
 import { toast } from "react-toastify";
 import { addToCart } from "@/services/cart";
-// import { TbWeight } from 'react-icons/tb';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { TbWeight } from "react-icons/tb";
+import { InventoryItem, TProductWithInventory } from "./types";
 
-interface InventoryItem {
-  _id?: string;
-  level?: string;
-  size?: string;
-  name?: string;
-  quantity?: number;
-}
 
-interface TProduct {
-  _id: string;
-  name: string;
-  slug: string;
-  thumbnailImage: string;
-  backViewImage?: string;
-  images: string[];
-  price: number;
-  mrpPrice: number;
-  discount: number;
-  discountType: string;
-  discountAmount: number;
-  description: string;
-  inventoryType: string;
-  inventoryRef: InventoryItem[];
-  mainInventory: number;
-  productId: string;
-  sizeChartImage?: string;
-  videoUrl?: string;
-  subCategoryRef?: any;
-  freeShipping: boolean;
-}
 
 interface HomeProductSectionProps {
-  products: TProduct[];
+  products: TProductWithInventory[];
   userRef?: string;
 }
 
 // Product Card Component onViewDetails
 const ProductCard: React.FC<{
-  product: TProduct;
-  onQuickAdd: (product: TProduct) => void;
-  onViewDetails?: (product: TProduct) => void;
+  product: TProductWithInventory;
+  onQuickAdd: (product: TProductWithInventory) => void;
+  onViewDetails?: (product: TProductWithInventory) => void;
 }> = ({ product, onQuickAdd }) => {
   const [imageError, setImageError] = useState(false);
   const hasDiscount = product.discount > 0;
@@ -74,6 +43,7 @@ const ProductCard: React.FC<{
     e.preventDefault();
     e.stopPropagation();
     if (!isStockOut) {
+      console.log("ok");
       onQuickAdd(product);
     }
   };
@@ -84,123 +54,79 @@ const ProductCard: React.FC<{
   //   onViewDetails(product);
   // };
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Only navigate if not clicking on button
+    const target = e.target as HTMLElement;
+    if (!target.closest('button')) {
+      window.location.href = `/product/${product.slug}`;
+    }
+  };
+
   return (
-    <div className="w-full p-2 md:p-4 bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group border border-gray-100 flex flex-col max-h-80">
-      <div className="relative overflow-hidden h-40 sm:h-52 md:h-48  lg:h-52 ">
-        <Link
-          href={`/product/${product.slug}`}
-          className="absolute inset-0 z-0"
-        >
-          {imageError ? (
-            <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <div className="text-center">
-                <ShoppingCart
-                  size={48}
-                  className="mx-auto text-gray-400 mb-2"
-                />
-                <p className="text-sm text-gray-500">{product.name}</p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <Image
-                src={apiBaseUrl + displayImage}
-                alt={product.name}
-                fill
-                onError={handleImageError}
-                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-          )}
-        </Link>
-
-        {/* Stock Out Ribbon */}
-        {/* {isStockOut && (
-          <div className="absolute top-0 left-0 w-20 h-20 overflow-hidden pointer-events-none z-20">
-            <div className="bg-[#FF6C0C] text-white font-bold text-[10px] px-8 py-1  shadow-lg rotate-45 transform  text-center ">
-              STOCK OUT
-            </div>
+    <>
+      <div
+        key={product._id}
+        className="group flex flex-col items-center text-center cursor-pointer"
+        onClick={handleCardClick}
+      >
+        <div className="relative w-full mb-6 border border-[#eee] bg-white flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(26,75,140,0.2)]">
+          <div className=" h-48 relative rounded-md">
+            <Image
+              src={product.thumbnailImage ? (product.thumbnailImage.startsWith('http') ? product.thumbnailImage : apiBaseUrl + product.thumbnailImage) : "/placeholder.svg"}
+              alt={product.name}
+              fill
+              className=" w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300 rounded-md"
+            />
           </div>
-        )} */}
+          {/* Hover Overlay */}
+          <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20 cursor-pointer">
+            {/* Add to Cart Bar */}
+            {isStockOut ? (
+              <>
 
-        {isStockOut && (
-          <div className="absolute top-0 left-0 w-20 h-20 overflow-hidden z-20">
-            <div className="absolute top-4 -left-7 w-32 bg-gradient-to-r from-yellow-600 to-red-700 text-white text-center font-bold text-[10px] py-1 shadow-md transform -rotate-45">
-              STOCK OUT
-            </div>
-          </div>
-        )}
-
-        {hasDiscount && !isStockOut && (
-          <div className="absolute top-2 left-2 bg-linear-to-r from-red-500 to-red-600 text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-lg z-10">
-            {product.discountType === "percentage"
-              ? `${product.discount}% OFF`
-              : `৳${product.discountAmount} OFF`}
-          </div>
-        )}
-
-        {product.freeShipping && !isStockOut && (
-          <div className="absolute top-2 right-2 bg-linear-to-r from-green-500 to-green-600 text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-lg z-10">
-            Free Ship
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col">
-        <h3 className=" font-semibold text-gray-800 mb-3 line-clamp-1 md:line-clamp-2 text-sm md:text-lg leading-tight">
-          {product.name}
-        </h3>
-        <div >
-          <div className="flex justify-between">
-            <p className='text-sm font-medium md:font-semibold lg:font-bold text-gray-900  flex items-center'>
-              <TbWeight className='text-sm md:text-xl' />
-              {product?.inventoryRef?.[0]?.level}
-            </p>
-            <div className="flex items-center gap-1 md:gap-2 flex-wrap">
-              <span className=" text-xs md:text-base font-medium md:font-semibold lg:font-bold text-gray-900">
-                ৳{product.price}
-              </span>
-              {hasDiscount && (
-                <>
-                  <span className="text-[12px] text-gray-600 line-through ">
-                    ৳{product.mrpPrice}
-                  </span>
-                </>
-              )}
-            </div>
-          </div>
-          <div className=" block mt-3 w-full">
-            <button
-              onClick={handleQuickAddClick}
-              disabled={isStockOut}
-              className={`w-full px-3 py-1.5 rounded-sm transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold text-xs shadow-md transform cursor-pointer ${isStockOut
-                ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                : "bg-primary text-white hover:from-[#E55A00] hover:to-[#CC4F00] hover:shadow-lg hover:-translate-y-0.5"
-                }`}
-            >
-              {isStockOut ? (
-                <>
+                <button
+                  type="button"
+                  disabled={isStockOut}
+                  className="w-full text-[12px] font-bold py-2.5 uppercase tracking-wider  transition-colors cursor-pointer flex items-center justify-center gap-1.5 font-semibold bg-gray-400 text-gray-200 cursor-not-allowed"
+                >
                   <X size={16} strokeWidth={2.5} />
-                  স্টক আউট
-                </>
-              ) : (
-                <>
+                  Out of stock
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleQuickAddClick}
+                  type="button"
+                  className="w-full bg-primary text-white text-[12px] font-bold py-2.5 uppercase tracking-wider hover:bg-primary transition-colors cursor-pointer flex items-center justify-center gap-1.5 font-semibold"
+                >
                   <ShoppingCart size={16} strokeWidth={2.5} />
-                  কার্টে যোগ করুন
-                </>
-              )}
-            </button>
+                  Add to Cart
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="space-y-2">
+          <h3 className="text-[#666] font-medium leading-tight">{product.name}</h3>
+          <div className="flex items-center justify-center gap-2 font-semibold">
+            <span className="text-[#666]">{product.price}$</span>
+            {
+              hasDiscount && product.mrpPrice > product.price && (
+                <span className="text-[#999] line-through text-sm font-normal">৳{product.mrpPrice}</span>
+              )
+            }
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 
 // Modal Component 
 export const AddToCartModal: React.FC<{
-  product: TProduct | null;
+  product: TProductWithInventory | null;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (quantity: number, inventoryRef?: string) => void;
@@ -254,7 +180,7 @@ export const AddToCartModal: React.FC<{
           <div className="flex gap-3 mb-4 bg-gray-50 p-3 rounded-lg">
             <div className="w-24 h-24 shrink-0 bg-white rounded-lg overflow-hidden shadow-md relative">
               <Image
-                src={apiBaseUrl + modalImage}
+                src={modalImage ? (modalImage.startsWith('http') ? modalImage : apiBaseUrl + modalImage) : "/placeholder.svg"}
                 alt={product.name}
                 fill
                 className="w-full h-full object-cover"
@@ -291,10 +217,10 @@ export const AddToCartModal: React.FC<{
             <div className="mb-4">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {product.inventoryType === "levelInventory"
-                  ? "ওজন নির্বাচন করুন"
+                  ? "Select weight"
                   : product.inventoryType === "colorInventory"
-                    ? "কালার নির্বাচন করুন"
-                    : "সাইজ ও কালার নির্বাচন করুন"}
+                    ? "Select color"
+                    : "Select size and color"}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {product.inventoryRef.map((item: InventoryItem) => {
@@ -438,13 +364,13 @@ export const AddToCartModal: React.FC<{
 
           {hasInventoryOptions && !selectedInventory && (
             <p className="text-center text-sm text-primary mt-3 font-semibold">
-              অনুগ্রহ করে{" "}
+              Please
               {product.inventoryType === "levelInventory"
-                ? "সাইজ"
+                ? "size"
                 : product.inventoryType === "colorInventory"
-                  ? "কালার"
-                  : "সাইজ/কালার"}{" "}
-              নির্বাচন করুন
+                  ? "color"
+                  : "size/color"}
+              select
             </p>
           )}
         </div>
@@ -474,11 +400,11 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({
   products,
   userRef,
 }) => {
-  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<TProductWithInventory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleQuickAdd = (product: TProduct) => {
+  const handleQuickAdd = (product: TProductWithInventory) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
@@ -511,37 +437,52 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({
   const displayProducts = products?.slice(0, 8) || [];
 
   return (
-    <div className="relative w-full px-4 md:px-0">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-28 bg-green-600 z-0"></div>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={16}
-        slidesPerView={2}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-          1280: { slidesPerView: 4 },
-        }}
-      >
-        {displayProducts.map((product) => (
-          <SwiperSlide key={product._id} className="w-full" >
-            <ProductCard product={product} onQuickAdd={handleQuickAdd} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="relative  py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto text-center space-y-4 mb-12">
+        <h2 className="text-3xl font-bold tracking-tight text-[#444] uppercase">
+          Our <span className="text-primary">Shop</span>
+        </h2>
+        <p className="text-muted-foreground">We Have Wide Range Of Glasses And Lenses</p>
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px bg-[#ddd] w-12" />
+          <Eye className="w-4 h-4 text-primary" />
+          <div className="h-px bg-[#ddd] w-12" />
+        </div>
+      </div>
 
-      {/* AddToCartModal */}
-      {selectedProduct && (
-        <AddToCartModal
-          product={selectedProduct}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onConfirm={handleConfirmCart}
-          isLoading={isLoading}
-        />
-      )}
+      <div className="max-w-7xl mx-auto">
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={16}
+          slidesPerView={2}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+            1280: { slidesPerView: 5 },
+          }}
+        >
+          {displayProducts.map((product) => (
+            <SwiperSlide key={product._id} className="w-full" >
+              <ProductCard product={product} onQuickAdd={handleQuickAdd} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* AddToCartModal */}
+        {selectedProduct && (
+          <AddToCartModal
+            product={selectedProduct}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onConfirm={handleConfirmCart}
+            isLoading={isLoading}
+          />
+        )}
+
+      </div>
+
     </div>
   );
 };

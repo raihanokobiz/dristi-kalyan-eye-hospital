@@ -135,7 +135,7 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
       </div>
       <div className="bg-[#37383F] text-white text-center py-4">
         <div className=" max-w-7xl lg:mx-auto md:mx-6 flex flex-col gap-1 md:flex-row items-center justify-between">
-          <h2>Copyright © 2025 ANF Meat. All Right Reserved.</h2>
+          <h2>Copyright © 2025 Dhamrai Drisiti Kalyan Eye Hospital. All Right Reserved.</h2>
           <h3>   Developed by{" "}
             <a target="_blank" href="https://okobiz.com/">
               Okobiz

@@ -23,11 +23,11 @@ const PrivacyPolicy = async () => {
           </h1>
 
           <p className="policy-page-text">
-            ANF Meat considers each of our customers to be a part of our
+            Dhamrai Drisiti Kalyan Eye Hospital considers each of our customers to be a part of our
             family. Ensuring and encouraging the bond of trust with our
-            customers, ANF Meat brings you the option to return products
+            customers, Dhamrai Drisiti Kalyan Eye Hospital brings you the option to return products
             you received (if the product is damaged or mistakenly designed).
-            In such cases, ANF Meat will provide you with fresh
+            In such cases, Dhamrai Drisiti Kalyan Eye Hospital will provide you with fresh
             replacement products.
           </p>
 
@@ -89,7 +89,7 @@ const PrivacyPolicy = async () => {
 
           <h2 className="text-xl font-semibold mt-4">How to Return</h2>
           <p className="policy-page-text">
-            Contact ANF Meat Customer Care at{" "}
+            Contact Dhamrai Drisiti Kalyan Eye Hospital Customer Care at{" "}
             <a href="mailto:anisggn@gmail.com" className="text-blue-600">
               anisggn@gmail.com
             </a>{" "}

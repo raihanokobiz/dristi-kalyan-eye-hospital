@@ -31,7 +31,7 @@ import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Label } from "@/components/ui/label";
 import { TCategory, TChildCategory, TSubCategory } from "@/types/shared";
-import { ColorPicker } from "antd";
+// import { ColorPicker } from "antd";
 import { getAllCategory } from "@/services/category";
 import { getAllSubCategory } from "@/services/sub-category";
 import { getAllChildCategory } from "@/services/child-category";
@@ -64,7 +64,7 @@ export const discountTypes = [
 ];
 
 export const inventoryTypes = [
-  { name: "Size", key: "levelInventory" },
+  // { name: "Size", key: "levelInventory" },
   { name: "Without Any", key: "inventory" },
 ];
 
@@ -455,7 +455,7 @@ export const CreateProductForm: React.FC = () => {
                   key={field.id}
                   className="grid grid-cols-4 gap-1 border p-2 mb-2 rounded-md space-y-2 relative justify-center items-center"
                 >
-                  {(selectedInventoryType === "levelInventory" ||
+                  {/* {(selectedInventoryType === "levelInventory" ||
                     selectedInventoryType === "colorLevelInventory") && (
                       <FormItem>
                         <FormLabel>Size</FormLabel>
@@ -469,7 +469,7 @@ export const CreateProductForm: React.FC = () => {
                           {formState.errors?.inventories?.[index]?.size?.message}
                         </FormDescription>
                       </FormItem>
-                    )}
+                    )} */}
 
                   {selectedInventoryType !== "" && (
                     <FormItem>

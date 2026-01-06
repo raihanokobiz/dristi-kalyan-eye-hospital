@@ -2,7 +2,6 @@ import Banner from "@/components/pages/landing_pages/Banner/Banner";
 import Category from "@/components/pages/landing_pages/Category/Category";
 // import SubCategory from "@/components/pages/landing_pages/SubCategory/SubCategory";
 import React from "react";
-import HomeProductSection from "@/components/pages/landing_pages/HomeProductSection/HomeProductSection";
 // import { getAllChildCategorys } from "@/services/childCategorys";
 import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
 import { getCampaign } from "@/services/campaign";
@@ -24,6 +23,7 @@ import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
 import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
+import HomeProductSection from "@/components/pages/products/ProductCard/ProductCard";
 
 
 
@@ -70,6 +70,7 @@ const page = async () => {
   const services = await getAllService()
 
 
+
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
@@ -110,7 +111,7 @@ const page = async () => {
 
         </div>
 
-        {/* <HomeProductSection /> */}
+        <HomeProductSection products={allProducts} />
 
       </div>
     </>

@@ -29,3 +29,35 @@ export interface TProduct {
   categoryRef?: any; // Add missing properties
   // Add other missing properties as needed
 }
+
+
+export interface InventoryItem {
+  _id?: string;
+  level?: string;
+  size?: string;
+  name?: string;
+  quantity?: number;
+}
+
+export interface TProductWithInventory {
+  _id: string;
+  name: string;
+  slug: string;
+  thumbnailImage: string;
+  backViewImage?: string;
+  images: string[];
+  price: number;
+  mrpPrice: number;
+  discount: number;
+  discountType: string;
+  discountAmount: number;
+  description: string;
+  inventoryType: string;
+  inventoryRef: InventoryItem[];
+  mainInventory: number;
+  productId: string;
+  sizeChartImage?: string;
+  videoUrl?: string;
+  subCategoryRef?: any;
+  freeShipping: boolean;
+}

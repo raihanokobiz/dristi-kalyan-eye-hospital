@@ -18,7 +18,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 {/* IMAGE */}
                 <div className="relative h-52 w-full">
                     <Image
-                        src={imageUrl}
+                        src={doctor?.image}
                         alt={doctor.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -72,7 +72,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                             </span>
                         )}
 
-                        <span className="ml-auto inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-400 text-white text-sm font-medium hover:bg-primary/90 transition">
+                        <span className="ml-auto inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition">
                             View Details
                         </span>
                     </div>

@@ -10,7 +10,7 @@ import { Key, ReactNode } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ANF Meat | cart",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | cart",
   description: "Best E-commerce platform in BD",
 };
 

@@ -59,11 +59,11 @@ export function getMenuList(pathname: string): Group[] {
           icon: User,
           submenus: [],
         },
-          {
+        {
           href: "/booking",
           label: "Booking",
           active: pathname.includes("/booking"),
-          icon:BookImageIcon ,
+          icon: BookImageIcon,
           submenus: [],
         },
         {
@@ -91,13 +91,13 @@ export function getMenuList(pathname: string): Group[] {
             },
           ],
         },
-        {
-          href: "/offer",
-          label: "Offer",
-          active: pathname.includes("/offer"),
-          icon: Tag,
-          submenus: [],
-        },
+        // {
+        //   href: "/offer",
+        //   label: "Offer",
+        //   active: pathname.includes("/offer"),
+        //   icon: Tag,
+        //   submenus: [],
+        // },
         {
           href: "/products",
           label: "Products",
@@ -105,20 +105,20 @@ export function getMenuList(pathname: string): Group[] {
           icon: Package2,
           submenus: [],
         },
-        {
-          href: "/coupon",
-          label: "Coupon",
-          active: pathname.includes("/coupon"),
-          icon: TicketPercent,
-          submenus: [],
-        },
-        {
-          href: "/campaign",
-          label: "Campaign",
-          active: pathname.includes("/campaign"),
-          icon: FlameKindling,
-          submenus: [],
-        },
+        // {
+        //   href: "/coupon",
+        //   label: "Coupon",
+        //   active: pathname.includes("/coupon"),
+        //   icon: TicketPercent,
+        //   submenus: [],
+        // },
+        // {
+        //   href: "/campaign",
+        //   label: "Campaign",
+        //   active: pathname.includes("/campaign"),
+        //   icon: FlameKindling,
+        //   submenus: [],
+        // },
       ],
     },
     {

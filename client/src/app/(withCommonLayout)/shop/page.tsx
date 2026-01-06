@@ -11,7 +11,7 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ANF Meat | All Product",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | All Product",
   description: "Best E-commerce platform in BD",
 };
 

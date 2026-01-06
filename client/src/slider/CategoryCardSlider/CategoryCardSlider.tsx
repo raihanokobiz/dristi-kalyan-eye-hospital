@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -79,8 +79,8 @@ const CategoryCardSlider: React.FC<CategoryProps> = ({ categoriesList }) => {
                   <div className="pb-2 px-2 text-center">
                     <p
                       className={`text-xs lg:text-sm font-semibold ${isUpcoming
-                          ? "text-gray-400"
-                          : "text-gray-700 group-hover:text-white"
+                        ? "text-gray-400"
+                        : "text-gray-700 group-hover:text-white"
                         } transition-colors duration-300 capitalize line-clamp-2`}
                     >
                       {isUpcoming ? "Upcoming" : category.name}

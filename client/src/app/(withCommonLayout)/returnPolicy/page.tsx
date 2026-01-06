@@ -6,7 +6,7 @@ import React from "react";
 
 
 export const metadata: Metadata = {
-  title: "ANF Meat | Return Policy",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | Return Policy",
   description: "Best E-commerce platform in BD",
 };
 
@@ -21,10 +21,10 @@ const ReturnPolicy = async () => {
       <div className="policy-container text-gray-800 leading-relaxed  lg:px-20  px-6 lg:w-10/12 w-full  mx-auto mt-24 ">
 
         <p>
-          <strong>ANF Meat</strong> considers each of our customers to be a part of our family.
-          To uphold this bond of trust, ANF Meat offers you the option to return products you received
+          <strong>Dhamrai Drisiti Kalyan Eye Hospital</strong> considers each of our customers to be a part of our family.
+          To uphold this bond of trust, Dhamrai Drisiti Kalyan Eye Hospital offers you the option to return products you received
           <strong> if they are damaged or designed incorrectly.</strong>
-          In such cases, ANF Meat will provide a fresh replacement.
+          In such cases, Dhamrai Drisiti Kalyan Eye Hospital will provide a fresh replacement.
         </p>
 
         <p>
@@ -40,7 +40,7 @@ const ReturnPolicy = async () => {
             tags and packaging intact, and must not be broken or tampered with.
           </li>
           <li>If the product included a free promotional item, it must also be returned.</li>
-          <li>All returned products will undergo inspection by the ANF Meat team.</li>
+          <li>All returned products will undergo inspection by the Dhamrai Drisiti Kalyan Eye Hospital team.</li>
           <li>
             Replacement depends on <strong>stock availability</strong>. If unavailable, you will receive a
             full refund.
@@ -71,7 +71,7 @@ const ReturnPolicy = async () => {
         <h2 className="text-xl font-semibold">How to Return an Item</h2>
         <ol className="list-decimal ml-6 space-y-3">
           <li>
-            Contact ANF Meat Customer Care at
+            Contact Dhamrai Drisiti Kalyan Eye Hospital Customer Care at
             <a href="mailto:anisggn@gmail.com" className="text-blue-600 underline ml-1">
               anisggn@gmail.com
             </a>

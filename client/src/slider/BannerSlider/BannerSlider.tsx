@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useRef } from "react";
 import { TBanner } from "@/types";
 
-import { Autoplay, Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import { apiBaseUrl } from "@/config/config";
