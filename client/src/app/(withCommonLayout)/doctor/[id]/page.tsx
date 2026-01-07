@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Doctor, DoctorResponse } from "@/types/doctor";
 import { FaArrowRight, FaTimes, FaShareAlt } from "react-icons/fa";
 import { DotIcon } from "lucide-react";
-import { FiPhoneCall } from "react-icons/fi";
+import { FiClock, FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
@@ -72,7 +72,7 @@ const DoctorDetailsPage: React.FC = () => {
             age: patient?.age,
             problem: patient?.problem,
         };
-      console.log("Payload from client",payload);
+        console.log("Payload from client", payload);
         try {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API_BASE_URL}/booking`,
@@ -86,11 +86,11 @@ const DoctorDetailsPage: React.FC = () => {
             if (!res.ok) throw new Error("Failed");
 
             Swal.fire({
-  icon: "success",
-  title: "Booking Successful!",
-  text: "Appointment booked successfull. Our team Will call you soon",
-  confirmButtonText: "OK"
-});
+                icon: "success",
+                title: "Booking Successful!",
+                text: "Appointment booked successfull. Our team Will call you soon",
+                confirmButtonText: "OK"
+            });
             setModalOpen(false);
             setSelectedDay("");
             setPatient({ name: "", phone: "", age: "", problem: "" });
@@ -142,139 +142,127 @@ const DoctorDetailsPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen py-10 px-4 mt-10 lg:mt-14">
-            <div className="max-w-3xl mx-auto">
-                {/* GLASS CARD */}
-                <div className="bg-white/30 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl overflow-hidden">
-                    {/* IMAGE */}
-                    <div className="relative h-64 sm:h-72 lg:h-96 rounded-xl overflow-hidden bg-white/20 backdrop-blur-md">
-                        <Image
-                            src={doctor.image || "/images/default-doctor.jpg"}
-                            alt={doctor.name}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className="p-6">
-                        {/* STATUS */}
-                        {doctor.status && (
-                            <div className="inline-flex items-center gap-1 text-green-700 bg-green-100 px-3 py-1 rounded-full text-xs font-semibold mb-4">
-                                <DotIcon size={16} />
-                                Available
+        <div className="min-h-screen bg-gray-50 py-12 px-4 mt-20">
+            <div className="max-w-5xl mx-auto">
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                        {/* LEFT: Image */}
+                        <div className="flex  justify-center">
+                            <div className="relative w-full h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
+                                <Image
+                                    src={doctor.image || "/placeholder.svg"}
+                                    alt={doctor.name}
+                                    fill
+                                    className="object-cover hover:scale-105 transition-transform duration-500"
+                                    priority
+                                />
+                                {doctor.status && (
+                                    <div className="absolute top-4 right-4 inline-flex items-center gap-2 bg-white text-teal-600 px-4 py-2 rounded-full text-xs font-bold shadow-md">
+                                        <div className="w-2 h-2 bg-teal-600 rounded-full animate-pulse" />
+                                        <span>Available</span>
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        </div>
 
-                        {/* HEADER */}
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                        {/* RIGHT: Information */}
+                        <div className="flex flex-col justify-between">
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                                    {doctor.name}
-                                </h1>
-                                <p className="text-gray-600 text-sm sm:text-base mt-1">
-                                    {doctor.degree}
-                                </p>
+                                <h1 className="text-4xl font-bold text-gray-900 mb-1">{doctor.name}</h1>
+                                <p className="text-teal-600 font-semibold text-lg mb-4">{doctor.degree}</p>
+
+                                <div className="flex items-center gap-2 text-gray-600 mb-6">
+                                    <FiMapPin size={18} className="text-teal-600" />
+                                    <span>Dhaka Medical Center</span>
+                                </div>
+
+                                <div className="space-y-3 mb-6">
+                                    <a
+                                        href={`tel:${doctor.phone}`}
+                                        className="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
+                                    >
+                                        <div className="p-2 bg-gray-100 rounded-lg">
+                                            <FiPhoneCall size={18} className="text-teal-600" />
+                                        </div>
+                                        <span className="font-medium">{doctor.phone}</span>
+                                    </a>
+
+                                    <a
+                                        href={`mailto:${doctor.email}`}
+                                        className="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
+                                    >
+                                        <div className="p-2 bg-gray-100 rounded-lg">
+                                            <span className="text-lg">✉</span>
+                                        </div>
+                                        <span className="font-medium break-all">{doctor.email}</span>
+                                    </a>
+                                </div>
+
+                                <div className="flex items-center gap-3 text-gray-700 mb-6">
+                                    <div className="p-2 bg-gray-100 rounded-lg">
+                                        <FiClock size={18} className="text-teal-600" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-600 font-semibold">VISITING HOURS</p>
+                                        <p className="font-bold">{doctor.visitingTime}</p>
+                                    </div>
+                                </div>
+
+                                <div className="mb-6">
+                                    <p className="text-xs text-gray-600 font-semibold mb-2">AVAILABLE DAYS</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {doctor.availableDays?.map((day) => (
+                                            <span
+                                                key={day}
+                                                className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-teal-50 transition-colors"
+                                            >
+                                                {day}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="mb-6">
+                                    <p className="text-xs text-gray-600 font-semibold mb-2">CONSULTATION FEE</p>
+                                    <p className="text-3xl font-bold text-teal-600">৳{doctor.consultationFee}</p>
+                                </div>
                             </div>
 
-                            <button
-                                onClick={shareDoctor}
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-green-500 text-white hover:bg-green-600 shadow-md hover:shadow-lg transition-all active:scale-95 text-sm sm:text-base"
-                            >
-                                <FaShareAlt />
-                                Share
-                            </button>
-                        </div>
-
-                        {/* CONTACT */}
-                        <div className="py-2">
-                            <a
-                                href={`tel:${doctor.phone}`}
-                                className="flex items-center gap-3  rounded-xl bg-white/40 backdrop-blur-md border border-white/30 hover:shadow transition"
-                            >
-                                <FiPhoneCall className="text-blue-600" />
-                                <span>{doctor.phone}</span>
-                            </a>
-
-                            <a
-                                href={`mailto:${doctor.email}`}
-                                className="rounded-xl bg-white/40 backdrop-blur-md border border-white/30 hover:shadow transition break-all"
-                            >
-                                ✉ {doctor.email}
-                            </a>
-                        </div>
-
-                        {/* VISITING TIME */}
-                        <p className="mt-1 text-sm sm:text-base">
-                            <strong>Visiting Time:</strong>{" "}
-                            {doctor.visitingTime}
-                        </p>
-
-                        {/* DAYS */}
-                        <div className="flex flex-wrap gap-2 mt-2">
-                            {doctor.availableDays?.map((day) => (
-                                <span
-                                    key={day}
-                                    className="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full capitalize"
-                                >
-                                    {day}
-                                </span>
-                            ))}
-                        </div>
-
-                        {/* FEE */}
-                        <div className="flex justify-between items-center border-t mt-6 pt-4">
-                            <span className="font-semibold">
-                                Consultation Fee
-                            </span>
-                            <span className="text-2xl font-bold text-blue-600">
-                                ৳{doctor.consultationFee}
-                            </span>
-                        </div>
-
-                        {/* BOOK BUTTON */}
-                        <div className="mt-6">
                             <button
                                 disabled={!doctor.status}
                                 onClick={() => setModalOpen(true)}
-                                className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all
-                                ${
-                                    doctor.status
-                                        ? "bg-blue-500 hover:bg-blue-600 text-white"
-                                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                }`}
+                                className={`w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all text-base ${doctor.status
+                                    ? "bg-teal-600 hover:bg-teal-700 text-white shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                    }`}
                             >
-                                Book Appointment <FaArrowRight />
+                                Book Appointment
+                                {doctor.status && <FaArrowRight size={16} />}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* MODAL */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-                    <div className="bg-white/30 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl w-full max-w-md p-6 relative">
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative animate-in fade-in zoom-in-95">
                         <button
                             onClick={() => setModalOpen(false)}
-                            className="absolute top-4 right-4 text-gray-600 hover:text-red-500"
+                            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 cursor-pointer"
                         >
-                            <FaTimes />
+                            <FaTimes size={20} />
                         </button>
 
-                        <h2 className="text-2xl font-bold mb-6 text-center">
-                            Book Appointment
-                        </h2>
+                        <h2 className="text-2xl font-bold mb-2 text-gray-900">Book Appointment</h2>
+                        <p className="text-gray-600 text-sm mb-6 font-medium">With {doctor.name}</p>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <select
                                 required
                                 value={selectedDay}
-                                onChange={(e) =>
-                                    setSelectedDay(e.target.value)
-                                }
-                                className="w-full p-3 bg-white/40 backdrop-blur-md border border-white/30 rounded-lg"
+                                onChange={(e) => setSelectedDay(e.target.value)}
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                             >
                                 <option value="">Select Appointment Day</option>
                                 {doctor.availableDays.map((day) => (
@@ -290,7 +278,7 @@ const DoctorDetailsPage: React.FC = () => {
                                 placeholder="Patient Name"
                                 value={patient.name}
                                 onChange={handleChange}
-                                className="w-full p-3 bg-white/40 border border-white/30 rounded-lg"
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                             />
 
                             <input
@@ -299,7 +287,7 @@ const DoctorDetailsPage: React.FC = () => {
                                 placeholder="Phone Number"
                                 value={patient.phone}
                                 onChange={handleChange}
-                                className="w-full p-3 bg-white/40 border border-white/30 rounded-lg"
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                             />
 
                             <input
@@ -307,7 +295,7 @@ const DoctorDetailsPage: React.FC = () => {
                                 placeholder="Age (optional)"
                                 value={patient.age}
                                 onChange={handleChange}
-                                className="w-full p-3 bg-white/40 border border-white/30 rounded-lg"
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                             />
 
                             <textarea
@@ -315,12 +303,13 @@ const DoctorDetailsPage: React.FC = () => {
                                 placeholder="Describe your problem"
                                 value={patient.problem}
                                 onChange={handleChange}
-                                className="w-full p-3 bg-white/40 border border-white/30 rounded-lg h-24 resize-none"
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent h-24 resize-none"
                             />
 
                             <button
                                 type="submit"
-                                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold"
+                                style={{ backgroundColor: "#03c0b4" }}
+                                className="w-full text-white py-3 rounded-lg font-bold transition-all hover:shadow-lg active:scale-95 cursor-pointer"
                             >
                                 Book Now
                             </button>

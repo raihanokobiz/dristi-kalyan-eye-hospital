@@ -17,33 +17,22 @@ import { useRef, useState } from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
-
 import { motion, useAnimation } from "framer-motion";
+import { InventoryItem } from "../ProductCard/types";
 
-interface InventoryItem {
-  _id: string;
-  availableQuantity: number;
-  barcode: string;
-  color: string;
-  createdAt: string;
-  holdQuantity: number;
-  inventoryID: string;
-  level: string;
-  name: string;
-  productRef: string;
-  quantity: number;
-  soldQuantity: number;
-  updatedAt: string;
-}
+
+
 
 interface Product {
   name: string;
   thumbnailImage: string;
-  inventoryRef: InventoryItem[]; // ✅ Use array type
+  inventoryRef: InventoryItem[];
   inventoryType: string;
   price: number;
   productRef: string;
 }
+
+
 const ProductDialog: React.FC<Product> = ({
   name,
   thumbnailImage,
@@ -166,7 +155,7 @@ const ProductDialog: React.FC<Product> = ({
           <span className="capitalize">add to cart</span>
         </button>
       </DialogTrigger>
-      <DialogContent className="">
+      <DialogContent className="[&>button]:cursor-pointer">
         <DialogHeader>
           <DialogTitle className="border-b border-[#262626]/20 p-4">
             Price Details
@@ -177,7 +166,6 @@ const ProductDialog: React.FC<Product> = ({
         </DialogHeader>
         <div className="md:px-4 pb-4 flex md:flex-row flex-col md:justify-normal  gap-4">
           <div className="flex items-center justify-between bg-[#F8F8F8] px-8">
-
             <div className=" md:w-[200px] w-[60px] md:rounded relative">
               <div>
                 {thumbnailImage && (
@@ -211,7 +199,7 @@ const ProductDialog: React.FC<Product> = ({
           </div>
 
           <div className="w-full">
-            <div className="md:px-0 px-6">
+            {/* <div className="md:px-0 px-6">
               {(inventoryType === "levelInventory" ||
                 inventoryType === "colorLevelInventory") && (
                   <div className="flex flex-col">
@@ -303,7 +291,7 @@ const ProductDialog: React.FC<Product> = ({
                   )}
                 </div>
               ) : null}
-            </div>
+            </div> */}
 
             <div className="flex gap-2 w-full md:px-0 px-6 mt-2">
               <div className="flex md:w-[30%] w-[40%] items-center justify-between border rounded px-3">
@@ -315,7 +303,7 @@ const ProductDialog: React.FC<Product> = ({
                   <FiPlus />
                 </p>
               </div>
-              <div onClick={handleAddToCart} className="w-[50%] bg-[#FF6C0C] text-center flex items-center justify-center rounded cursor-pointer">
+              <div onClick={handleAddToCart} className="w-[50%] bg-primary text-center flex items-center justify-center rounded cursor-pointer">
                 <button
 
                   className=" flex items-center justify-center gap-1 px-4 py-3 font-semibold text-[12px] cursor-pointer rounded text-[#fff] "

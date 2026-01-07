@@ -56,7 +56,7 @@ export default async function ShopPage({
   return (
     <>
       {/* <NavBar userCartProducts={cartProducts?.data} /> */}
-      <div className="max-w-6xl mx-auto Container mt-20">
+      <div className="max-w-7xl mx-auto Container mt-20">
         <div className="w-full mb-8">
           <ShopProductsCategories shopSideBar={shopSideBar} />
         </div>

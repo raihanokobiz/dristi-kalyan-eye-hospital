@@ -95,7 +95,7 @@ const DownFooter: React.FC<FooterProps> = ({ userCartProducts }) => {
         <Link href="/cart">
           <div className="flex flex-col items-center justify-between capitalize text-sm font-semibold">
             <p className="relative">
-              <BsCart2 className="text-lg text-[#1D4095]" />
+              <BsCart2 className="text-lg text-primary" />
               <span className="top-[-12px] right-[-8px] absolute w-[20px] h-[20px] text-sm text-[#fff] text-center rounded-full bg-[red]">
                 {userCartProducts?.cartDetails?.length || 0}
               </span>

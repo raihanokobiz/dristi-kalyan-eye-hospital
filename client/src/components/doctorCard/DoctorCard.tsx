@@ -13,7 +13,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
 
     return (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+        <div className="bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
             <Link href={`/doctor/${doctor._id}`} className="block">
                 {/* IMAGE */}
                 <div className="relative h-52 w-full">

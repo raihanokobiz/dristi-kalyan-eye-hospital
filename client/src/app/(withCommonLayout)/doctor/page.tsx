@@ -47,11 +47,11 @@ const DoctorPage = () => {
         }
     };
 
-    const filteredDoctors = doctors.filter((doctor:any) => {
+    const filteredDoctors = doctors.filter((doctor: any) => {
         const dayMatch =
             filter.day === "all" ||
             doctor.availableDays?.some(
-                (d:any) => d.toLowerCase() === filter.day.toLowerCase()
+                (d: any) => d.toLowerCase() === filter.day.toLowerCase()
             );
 
         return doctor.status && dayMatch;
@@ -74,7 +74,7 @@ const DoctorPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-20">
             <div className="max-w-7xl mx-auto">
                 {/* HEADER */}
                 <div className="mb-12">
@@ -109,7 +109,7 @@ const DoctorPage = () => {
                                         {day === "all"
                                             ? "All Days"
                                             : day.charAt(0).toUpperCase() +
-                                              day.slice(1)}
+                                            day.slice(1)}
                                     </option>
                                 ))}
                             </select>
@@ -121,7 +121,7 @@ const DoctorPage = () => {
                 {/* DOCTOR LIST */}
                 {filteredDoctors.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {filteredDoctors.map((doctor:any) => (
+                        {filteredDoctors.map((doctor: any) => (
                             <DoctorCard
                                 key={doctor._id}
                                 doctor={doctor}
