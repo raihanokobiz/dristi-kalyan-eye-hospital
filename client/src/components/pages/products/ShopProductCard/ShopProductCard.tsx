@@ -103,7 +103,6 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
             )}
           </div>
         </Link>
-
       </div>
 
       <div className="flex flex-col justify-between">
@@ -114,7 +113,6 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
             </h3>
             <div className="flex justify-between gap-4">
               <p className="text-sm font-medium md:font-semibold lg:font-bold text-gray-900  flex items-center">
-                <TbWeight className="text-sm md:text-xl" />
                 {product?.inventoryRef?.[0]?.level}
               </p>
               <div className="flex items-center gap-1 md:gap-2 flex-wrap">
