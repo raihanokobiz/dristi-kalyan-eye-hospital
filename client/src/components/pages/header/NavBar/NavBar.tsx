@@ -185,7 +185,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
               Doctor
             </Link>
 
-            <Link href="/coshma" className="text-gray-700 hover:text-primary text-sm font-semibold">
+            <Link href="/shop" className="text-gray-700 hover:text-primary text-sm font-semibold">
               Coshma
             </Link>
 
@@ -225,7 +225,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
             {/* appointment button */}
             <Link
-              href="/appointment"
+              href="/doctor"
               className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-white hover:bg-primary hover:text-white transition-colors duration-300 border border-primary/30"
             >
               <FiCalendar className="text-lg" />

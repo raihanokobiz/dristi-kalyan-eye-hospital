@@ -72,7 +72,7 @@ const DoctorDetailsPage: React.FC = () => {
             age: patient?.age,
             problem: patient?.problem,
         };
-      console.log("Payload from client",payload);
+        console.log("Payload from client", payload);
         try {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API_BASE_URL}/booking`,
@@ -86,11 +86,11 @@ const DoctorDetailsPage: React.FC = () => {
             if (!res.ok) throw new Error("Failed");
 
             Swal.fire({
-  icon: "success",
-  title: "Booking Successful!",
-  text: "Appointment booked successfull. Our team Will call you soon",
-  confirmButtonText: "OK"
-});
+                icon: "success",
+                title: "Booking Successful!",
+                text: "Appointment booked successfull. Our team Will call you soon",
+                confirmButtonText: "OK"
+            });
             setModalOpen(false);
             setSelectedDay("");
             setPatient({ name: "", phone: "", age: "", problem: "" });
@@ -239,11 +239,10 @@ const DoctorDetailsPage: React.FC = () => {
                                 disabled={!doctor.status}
                                 onClick={() => setModalOpen(true)}
                                 className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all
-                                ${
-                                    doctor.status
+                                ${doctor.status
                                         ? "bg-blue-500 hover:bg-blue-600 text-white"
                                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                }`}
+                                    }`}
                             >
                                 Book Appointment <FaArrowRight />
                             </button>
