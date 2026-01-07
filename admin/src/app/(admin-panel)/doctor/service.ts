@@ -51,7 +51,7 @@ export async function getDoctorById(id: string): Promise<SingleDoctorResponse> {
 }
 
 export async function updateDoctor(id: string, data: any) {
-    console.log(data, "OK________________________________________________________________________________");
+
 
     const response = await fetch(`${BASE_URL}/doctor/${id}`, {
         method: "PUT",
