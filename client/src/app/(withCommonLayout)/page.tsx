@@ -1,24 +1,20 @@
 import Banner from "@/components/pages/landing_pages/Banner/Banner";
-import Category from "@/components/pages/landing_pages/Category/Category";
+// import Category from "@/components/pages/landing_pages/Category/Category";
 // import SubCategory from "@/components/pages/landing_pages/SubCategory/SubCategory";
 import React from "react";
 // import { getAllChildCategorys } from "@/services/childCategorys";
-import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
-import { getCampaign } from "@/services/campaign";
-import Offer from "@/components/pages/landing_pages/offer/Offer";
+// import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
+// import { getCampaign } from "@/services/campaign";
+// import Offer from "@/components/pages/landing_pages/offer/Offer";
 // import Text1 from "../../assets/texture/Text2.png";
 import { getAllDoctors } from "@/services/doctor/doctors";
 import { getAllService } from "@/services/service";
 
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
 // import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
-import { getAllOffers } from "@/services/offer";
-import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
+// import { getAllOffers } from "@/services/offer";
+// import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
 import { getAllProduct } from "@/services/products";
-import {
-  Flame,
-  Trophy,
-} from "lucide-react";
 import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
@@ -50,9 +46,9 @@ const page = async () => {
 
   // Temporarily comment out getCampaign if it's causing issues
   // const { data: campaign } = await getCampaign();
-  const campaign = null; // Temporary fix
+  // const campaign = null; // Temporary fix
 
-  const offrs = await getAllOffers();
+  // const offrs = await getAllOffers();
 
   // const user = await getUser();
   // const userId = user?.id;

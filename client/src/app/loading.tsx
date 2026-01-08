@@ -1,7 +1,7 @@
 "use client";
 
 // import Image from "next/image";
-import React, { CSSProperties } from "react";
+// import React, { CSSProperties } from "react";
 // import loader from "@/assets/loader/file.png";
 import { BeatLoader } from "react-spinners";
 

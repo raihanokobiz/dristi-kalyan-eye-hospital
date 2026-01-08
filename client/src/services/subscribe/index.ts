@@ -1,5 +1,6 @@
 "use server";
 
+
 import { apiRequest } from "@/lib/apiRequest";
 
 export const addSubscribe = async (data: { email: string }) => {

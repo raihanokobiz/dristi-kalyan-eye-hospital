@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 // import timerImage from "@/assets/images/timer.webp";
-import Image from "next/image";
 import { TCampaign } from "@/types";
 import Link from "next/link";
 

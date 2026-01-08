@@ -23,10 +23,10 @@ interface HomeProductSectionProps {
 const ProductCard: React.FC<{
   product: TProductWithInventory;
   onQuickAdd: (product: TProductWithInventory) => void;
-}> = ({ product, onQuickAdd }) => {
-  const [imageError, setImageError] = useState(false);
+}> = ({ product }) => {
+  // const [imageError, setImageError] = useState(false);
   const hasDiscount = product.discount > 0;
-  const isStockOut = product.mainInventory <= 0;
+  // const isStockOut = product.mainInventory <= 0;
 
   const displayImage =
     product.images && product.images.length > 0
@@ -51,7 +51,6 @@ const ProductCard: React.FC<{
             alt={product.name}
             fill
             className="object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
-            onError={() => setImageError(true)}
           />
         </div>
       </Link>

@@ -1,5 +1,6 @@
 "use server";
 
+
 import { apiBaseUrl } from "@/config/config";
 
 export const getSingleCoupon = async (couponId: { couponId: string }) => {

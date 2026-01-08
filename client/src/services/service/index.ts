@@ -6,9 +6,6 @@ export const getAllService = async (): Promise<Service[]> => {
     try {
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/service`,
-            {
-                cache: "no-store",
-            }
         );
 
         if (!response.ok) {
@@ -33,9 +30,6 @@ export const getServiceBySlug = async (slug: string): Promise<Service | null> =>
     try {
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/service/slug/${slug}`,
-            {
-                cache: "no-store",
-            }
         );
 
         if (!response.ok) {

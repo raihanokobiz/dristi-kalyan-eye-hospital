@@ -1,12 +1,11 @@
+
+
 import { Doctor, DoctorResponse } from "@/types/doctor";
 
 export const getAllDoctors = async (): Promise<Doctor[]> => {
     try {
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/doctor`,
-            {
-                cache: "no-store",
-            }
         );
 
         if (!response.ok) {
