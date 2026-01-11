@@ -199,7 +199,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
           <div className="border-b-2 pb-4 border-primary">
             <div className="mt-4 flex items-center gap-2 ">
-              <div className=" w-full flex items-center justify-between border border-primary rounded px-3 py-[7px]">
+              <div className=" flex items-center gap-5 justify-between border border-primary rounded px-3 py-[7px]">
                 <p onClick={handleDecrement} className="cursor-pointer">
                   <FiMinus />
                 </p>
@@ -216,27 +216,14 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                   <span>
                     <FiPlus />
                   </span>
-                  <span>কার্টে যোগ করুন </span>
+                  <span>Add to cart </span>
                 </button>
-              </div>
-              <div className="w-full cursor-pointer">
-                <Link href="/cart">
-                  <button
-                    className="bg-primary flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
-                  >
-                    <span>
-                      <FiPlus />
-                    </span>
-                    <span>কার্টে যান</span>
-                  </button>
-                </Link>
               </div>
             </div>
           </div>
           <div className="mt-3 flex flex-col gap-2">
             <div dangerouslySetInnerHTML={{ __html: description }} />
           </div>
-
           <div className="mt-3">
             <div className="mt-2">
               {sizeChartImage && (

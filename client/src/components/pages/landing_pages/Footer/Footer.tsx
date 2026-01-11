@@ -20,15 +20,15 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
 
   const quickLink = [
     {
-      name: "Shop",
+      name: "Doctor Appointment",
+      link: "/doctor",
+    },
+    {
+      name: "Product",
       link: "/shop",
     },
     {
-      name: "Our Outlets",
-      link: "/outlets",
-    },
-    {
-      name: "Our story",
+      name: "About us",
       link: "/about",
     },
     {
@@ -63,8 +63,8 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
             <div className="text-black text-md lg:text-lg flex flex-col space-y-1">
               <div>WhatsApp: 01922-228733</div>
               <div>Phone: 01922-228733</div>
-              <div>email: anisggn@gmail.com</div>
-              {/* <div>Address: Miprur 2, Oposite of Stadium Gate no. 1. Dhaka</div> */}
+              <div>email: careerhunter81@gmail.com</div>
+              <div>Address: Alam Plaza (2nd Floor), Rothkhola, <br className=" hidden lg:block" /> Dhamrai Bazar, Dhamrai, Dhaka-1350</div>
             </div>
           </div>
           <div>
@@ -108,9 +108,9 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
               Social Media
             </div>
             <div className="">
-              <div className="flex lg:justify-center lg:items-center gap-2 mt-4">
+              <div className="flex lg:items-center gap-2 mt-4">
                 <a
-                  href="https://www.facebook.com/share/16seK1S2dm/"
+                  href="https://www.facebook.com/people/%E0%A6%A7%E0%A6%BE%E0%A6%AE%E0%A6%B0%E0%A6%BE%E0%A6%87-%E0%A6%A6%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%9F%E0%A6%BF-%E0%A6%95%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A3-%E0%A6%9A%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%81-%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2/61579453017415/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-2 py-2 bg-[#2563EB] rounded text-white border border-[#fff]/0 hover:scale-95 hover:border-[#fff] hover:border duration-300"
@@ -118,16 +118,11 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
                 >
                   <FaFacebookF />
                 </a>
-
-                <a
-                  href="https://www.youtube.com/@ANFMeatFish"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-2 py-2 bg-[#F60000] rounded text-[#fff] border border-[#fff]/0 hover:scale-95 hover:border-[#fff] hover:border duration-300"
-                  aria-label="youtube"
-                >
-                  <FaYoutube />
-                </a>
+              </div>
+            </div>
+            <div className="mt-4" >
+              <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d937548.7191268265!2d89.5944864637911!3d23.377373444051237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe2955f76cf27b%3A0xe77754f2d6c02859!2z4Kaw4Kal4KaW4KeL4Kay4Ka-IOCmrOCmvuCmnOCmvuCmsA!5e0!3m2!1sen!2sbd!4v1768053267114!5m2!1sen!2sbd"></iframe>
               </div>
             </div>
           </div>

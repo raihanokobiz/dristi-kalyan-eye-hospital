@@ -52,14 +52,31 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>([
-    {
-      uid: "-1",
-      name: String(item.image).split("/").pop() || "",
-      status: "done",
-      url: item.image,
-    },
-  ]);
+  // const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>([
+  //   {
+  //     uid: "-1",
+  //     name: String(item.image).split("/").pop() || "",
+  //     status: "done",
+  //     url: item.image,
+  //   },
+  // ]);
+
+  const imageUrl = item.image;
+
+  const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>(
+    imageUrl
+      ? [
+        {
+          uid: "-1",
+          name: imageUrl.split("/").pop() || "image",
+          status: "done",
+          url: imageUrl,
+        },
+      ]
+      : []
+  );
+
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -123,7 +140,8 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
       formData.append("status", values.status.toString());
-      formData.append("image", imageUrl);
+      formData.append("image", imageUrl || "");
+
       formData.append("imagePublicId", imagePublicId);
 
       await updateFormAction(String(item._id), formData);
@@ -245,7 +263,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                       <label key={day} className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          checked={field.value.includes(day)}
+                          checked={field.value.includes(day as TDoctor['availableDays'][number])}
                           onChange={(e) =>
                             field.onChange(
                               e.target.checked

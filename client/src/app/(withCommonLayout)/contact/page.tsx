@@ -18,7 +18,7 @@ const Contact = async () => {
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
       <div className="py-6 px-4">
-        <div className="text-2xl lg:text-4xl text-center font-bold mt-14 lg:mt-0 mb-3 lg:mb-6">
+        <div className="text-2xl lg:text-4xl text-center font-bold mt-14 lg:mt-0 mb-3 lg:mb-6 mt-20">
           Contact Us
         </div>
         <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-10 space-y-10 lg:space-y-0 lg:px-10 max-w-7xl mx-auto">
@@ -29,9 +29,7 @@ const Contact = async () => {
             <div className="text-xl">Our Information</div>
             <div className="mt-2">
               <div className="font-bold">Address:</div>
-              <div>Dhaka Office:
-                1022, Malibagh Bazar, 2nd Floor
-                Dhaka 1219</div>
+              <div>Alam Plaza (2nd Floor), Rothkhola, Dhamrai Bazar, Dhamrai, Dhaka-1350</div>
             </div>
             <div className="mt-2">
               <span className="font-bold">Hotline: </span>  01922-228733
@@ -40,7 +38,7 @@ const Contact = async () => {
               <span className="font-bold">WhatsApp: </span> 01922-228733
             </div>
             <div className="mt-2">
-              <span className="font-bold">Email: </span>  anisggn@gmail.com
+              <span className="font-bold">Email: </span>  careerhunter81@gmail.com
             </div>
           </div>
         </div>

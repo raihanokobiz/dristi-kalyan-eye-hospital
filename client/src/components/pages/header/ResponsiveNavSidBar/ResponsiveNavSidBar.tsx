@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {  motion } from "framer-motion";
-import {  TShopSideBar } from "@/types";
+import { motion } from "framer-motion";
+import { TShopSideBar } from "@/types";
 import { usePathname } from "next/navigation";
 import { getShopSidebar } from "@/services/shopSidebar";
 import ShopPageSidebar from "./ShopPageSidebar";
@@ -47,7 +47,7 @@ const ResponsiveNavSidBar: React.FC<ResponsiveNavSidBarProps> = ({
         transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
         className="w-[70%] lg:w-[20%] bg-white h-screen fixed top-[60px] left-0 z-30"
       >
-        <h2 className="md:px-10 px-4 py-4 text-xl font-medium inline-flex relative">
+        <h2 className="md:px-10 px-4 py-4 text-xl font-medium inline-flex relative mt-10">
           Categories
           <span className="absolute md:left-10 left-5 bottom-3 w-10 h-0.5 bg-[#231E1F]"></span>
         </h2>
@@ -57,7 +57,7 @@ const ResponsiveNavSidBar: React.FC<ResponsiveNavSidBarProps> = ({
         ) : (
           <AllPageSidebar shopSideBar={shopSideBar} />
         )}
-        
+
       </motion.div>
     </>
   );

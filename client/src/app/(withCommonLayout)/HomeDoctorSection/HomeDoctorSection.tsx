@@ -20,7 +20,7 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
         <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-5">
             <div className="max-w-7xl mx-auto ">
                 {/* Section Header */}
-                <div className="text-center lg:mb-8">
+                <div className="text-center mb-5 lg:mb-8">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <Stethoscope className="h-8 w-8 text-primary" />
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">

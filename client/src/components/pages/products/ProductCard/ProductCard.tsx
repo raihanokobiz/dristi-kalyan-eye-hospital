@@ -369,7 +369,7 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({ products, userR
     <div className="relative py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto text-center space-y-4 mb-12">
         <h2 className="text-3xl font-bold tracking-tight text-[#444] uppercase">
-          Our <span className="text-primary">Shop</span>
+          Our <span className="text-primary">Product</span>
         </h2>
         <p className="text-muted-foreground">We Have Wide Range Of Glasses And Lenses</p>
         <div className="flex items-center justify-center gap-4">

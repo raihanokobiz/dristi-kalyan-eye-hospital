@@ -202,10 +202,10 @@ const CheckOutForm: React.FC<Props> = ({
         <div className="lg:flex justify-center items-center lg:space-x-2 space-x-0">
 
           <div className="w-full">
-            <h2 className="font-semibold text-gray-700">আপনার নাম</h2>
+            <h2 className="font-semibold text-gray-700">Your Name</h2>
             <input
               type="text"
-              placeholder="আপনার নাম লিখুন *"
+              placeholder="Enter your name *"
               className="w-full my-2.5 border border-black/20 p-1.5 rounded
              focus:border-black focus:outline-none"
               {...register("customerName", { required: "Name is required" })}
@@ -217,10 +217,10 @@ const CheckOutForm: React.FC<Props> = ({
             )}
           </div>
           <div className="w-full">
-            <h2 className="font-semibold text-gray-700 ">আপনার মোবাইল </h2>
+            <h2 className="font-semibold text-gray-700 ">Your Mobile </h2>
             <input
               type="text"
-              placeholder="আপনার মোবাইল নাম্বার লিখুন*"
+              placeholder="Enter your mobile number*"
               className="w-full my-2.5 border border-black/20 p-1.5 rounded focus:border-black focus:outline-none"
               {...register("customerPhone", {
                 required: "Number is required",
@@ -239,10 +239,10 @@ const CheckOutForm: React.FC<Props> = ({
         </div>
 
         <div>
-          <h2 className="font-semibold text-gray-700 ">আপনার ঠিকানা</h2>
+          <h2 className="font-semibold text-gray-700 ">Your Address</h2>
           <input
             type="text"
-            placeholder="আপনার বিস্তারিত ঠিকানা লিখুন *"
+            placeholder="Enter your full address*"
             className="w-full my-2.5 border border-black/20 p-1.5 rounded focus:border-black focus:outline-none"
             {...register("customerAddress", {
               required: "Address is required",
@@ -258,7 +258,7 @@ const CheckOutForm: React.FC<Props> = ({
 
         <div className="flex md:flex-row flex-col items-center md:gap-3 gap-1  ">
           <div className="w-full ">
-            <h2 className="font-semibold text-gray-700 ">আপনার থানা </h2>
+            <h2 className="font-semibold text-gray-700 ">Your Thana </h2>
             <input
               {...register("customerThana", {
                 required: "Thana is required"
@@ -266,7 +266,7 @@ const CheckOutForm: React.FC<Props> = ({
               className="w-full  border border-black/20 p-1.5 
             rounded focus:border-black focus:outline-none "
               type="text"
-              placeholder="আপনার থানা লিখুন*"
+              placeholder="Enter your Thana*"
             />
             {errors.customerThana && (
               <span className="text-red-500">
@@ -275,7 +275,7 @@ const CheckOutForm: React.FC<Props> = ({
             )}
           </div>
           <div className="w-full">
-            <h2 className="font-semibold text-gray-700 "> জেলা সিলেক্ট করুন</h2>
+            <h2 className="font-semibold text-gray-700 ">Select District</h2>
             <select
               className="w-full my-2.5 border border-black/20 p-1.5 rounded focus:border-black focus:outline-none"
               {...register("customerCity", {
@@ -502,7 +502,7 @@ const CheckOutForm: React.FC<Props> = ({
               onClick={() => handleAddCoupon()}
               className="bg-primary py-2 px-10 text-white 2xl:w-[30%] xl:w-[40%] lg:w-[50%] rounded cursor-pointer text-center w-full"
             >
-              কুপন যোগ করুন
+              Add Coupon
             </div>
           </div>
 
@@ -591,7 +591,7 @@ const CheckOutForm: React.FC<Props> = ({
                 )}
               </>
             ) : (
-              "অর্ডার নিশ্চিত করুন"
+              "Confirm Order"
             )}
           </button>
         </div>

@@ -1,13 +1,29 @@
 export type TDoctor = {
+    id: string;
     name: string;
-    image?: File[];
+    image?: string;
+    imagePublicId?: string;
+    vectorImagePublicId: string;
     degree: string;
     visitingTime: string;
     phone: string;
     email?: string;
     availableDays: ("monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday")[];
     consultationFee: number;
-    status: "Active" | "Inactive";
+    // status: "Active" | "Inactive";
+    status: boolean;
+};
+
+export type TDoctorForm = {
+    name: string;
+    image?: File[];              
+    degree: string;
+    visitingTime: string;
+    phone: string;
+    email?: string;
+    availableDays: (("monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"))[];
+    consultationFee: number;
+    status: boolean;
 };
 
 // Response for all doctors without pagination

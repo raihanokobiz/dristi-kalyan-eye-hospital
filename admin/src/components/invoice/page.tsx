@@ -30,27 +30,30 @@ const PrintInvoice = React.forwardRef<HTMLDivElement, PrintInvoiceProps>(
       Number(orderData.subTotalPrice || 0) +
       Number(orderData.shippingCost || 0) -
       Number(orderData.totalPrice || 0);
-// console.log(calculatedShipping)
+    // console.log(calculatedShipping)
     return (
       <div
         ref={ref}
         className="print-area w-[60mm] mx-auto px-2 py-4 text-[11px] font-medium"
       >
-        <div className="w-full flex flex-col justify-center items-center text-center py-2">
-         <Image
-            src={logo} alt={""}   
-            className="h-[0.8cm] object-cover"        
-           />
+        <div className="w-full flex flex-col justify-center items-center text-center py-2 ">
+          <div className=" relative h-[80px] w-[80px] mt-10">
+            <Image
+              src={logo} alt={""}
+              fill
+              className=" object-cover"
+            />
+          </div>
           <p className="mt-2">{BRAND_NAME}</p>
           <p className="text-[10px]">
             Address: Miprur 2, Oposite of Stadium Gate no. 1. Dhaka.
           </p>
           <div className="flex items-center justify-start text-[10px]">
             <span>Hotline:</span>{" "}
-            <span className="">Phone: +880 01700000000</span>
+            <span className="">Phone: +01922-228733</span>
           </div>
-          <p className="text-[10px]">Email :a..............@gmail.com</p>
-          <p className="text-[10px]">Website : www...............com</p>
+          <p className="text-[10px]">Email :careerhunter81@gmail.com</p>
+          {/* <p className="text-[10px]">Website : www...............com</p> */}
         </div>
 
         <div className="w-full border-b border-[#000000] py-2">
@@ -88,15 +91,13 @@ const PrintInvoice = React.forwardRef<HTMLDivElement, PrintInvoiceProps>(
             >
               <div className="flex w-5/6">
                 <p>#{index + 1}.</p>
-                <p>{`${item?.productRef?.name} - ${
-                  item?.inventoryRef?.name
-                    ? upperCase(item?.inventoryRef?.name)
-                    : "N/A"
-                } - ${
-                  item?.inventoryRef?.level
+                <p>{`${item?.productRef?.name} - ${item?.inventoryRef?.name
+                  ? upperCase(item?.inventoryRef?.name)
+                  : "N/A"
+                  } - ${item?.inventoryRef?.level
                     ? upperCase(item?.inventoryRef?.level)
                     : "N/A"
-                }, Unit: ${item?.quantity} x ${makeBDPrice(item?.price)}`}</p>
+                  }, Unit: ${item?.quantity} x ${makeBDPrice(item?.price)}`}</p>
               </div>
 
               <h1 className="font-bold w-1/6">

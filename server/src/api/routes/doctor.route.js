@@ -18,7 +18,6 @@ DoctorRoute.route("/")
 
 DoctorRoute.get("/pagination", controller.getDoctorWithPagination);
 
-
 DoctorRoute.get("/available-day/:day", controller.getDoctorsByAvailableDay);
 
 DoctorRoute.route("/:id")

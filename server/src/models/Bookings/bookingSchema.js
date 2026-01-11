@@ -3,39 +3,43 @@ const Schema = mongoose.Schema;
 
 const Bookingchema = new Schema(
   {
-    appointmentDay:{
-       type:String
+    appointmentDate: {
+      type: String,
+      required: true
+    },
+    appointmentDay: {
+      type: String
     },
     patientName: {
       type: String,
     },
     phone: {
-      type:String,
-      optional:true
+      type: String,
+      optional: true
     },
-    age:{
-        type:String,
+    age: {
+      type: String,
     },
     problem: {
       type: String,
     },
- status: {
-  type: [
-    {
-      type: String,
-      enum: ["pending", "confirmed", "completed", "cancelled"]
-    }
-  ],
-  default: ["pending"]
-},
-    doctorId:{
-      type:Schema.Types.ObjectId,
-      ref:"Doctor"
+    status: {
+      type: [
+        {
+          type: String,
+          enum: ["pending", "confirmed", "completed", "cancelled"]
+        }
+      ],
+      default: ["pending"]
+    },
+    doctorId: {
+      type: Schema.Types.ObjectId,
+      ref: "Doctor"
     }
   },
   { timestamps: true }
 );
 
-const BookingSchema = mongoose.model("Booking",Bookingchema);
+const BookingSchema = mongoose.model("Booking", Bookingchema);
 
 module.exports = { BookingSchema };

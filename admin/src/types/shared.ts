@@ -32,7 +32,7 @@ export type OrderReport = {
 };
 export type BookingStatus = "pending" | "confirmed" | "completed" | "cancelled";
 
-export type  AllBookings = {
+export type AllBookings = {
   appointmentDay?: string;
   patientName?: string;
   phone?: string;
@@ -43,6 +43,24 @@ export type  AllBookings = {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type AllBookingsWithPaginationResponse = {
+  data: {
+    result: AllBookings[];
+    pagination: {
+      currentPage: number;
+      currentPageLimit: number;
+      total: number;
+      totalPage?: number;
+      prevPage?: number | null;
+      nextPage?: number | null;
+    };
+  };
+};
+
+
+
+
 // export interface IBooking {
 //   appointmentDay?: string;
 //   patientName?: string;
@@ -387,10 +405,10 @@ export type TProduct = {
   mainInventory?: number;
   quantity?: number;
   inventoryType?:
-    | "colorInventory"
-    | "levelInventory"
-    | "colorLevelInventory"
-    | "inventory";
+  | "colorInventory"
+  | "levelInventory"
+  | "colorLevelInventory"
+  | "inventory";
   inventoryRef?: TInventory[];
   categoryRef?: TCategory;
   subCategoryRef?: TSubCategory;

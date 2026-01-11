@@ -57,7 +57,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [placeholders.length]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -124,7 +124,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
   return (
     <>
       {/* Main Navbar - Sticky */}
-      <div className="py-2 fixed w-full z-40 top-0 bg-white px-4 md:px-6 shadow-sm backdrop-blur-lg">
+      <div className="py-4 md:py-5 fixed w-full z-40 top-0 bg-white px-4 md:px-6 shadow-sm backdrop-blur-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center justify-between  gap-4">
@@ -138,7 +138,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                 <RiMenuAddFill className="text-2xl" />
               )}
             </div>
-            <div className="md:w-[80px] w-[50px]">
+            <div className="md:w-[90px] w-[50px] h-[60px]">
               <Link href="/">
                 <Image
                   src={logo || null}
@@ -177,20 +177,17 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
           {/* Nav Links Desktop */}
           <div className="hidden lg:flex items-center gap-6">
-            <Link href="/" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Home
+
+            <Link href="/about" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              About Us
             </Link>
 
             <Link href="/doctor" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Doctor
+              Doctor Appointment
             </Link>
 
             <Link href="/shop" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Coshma
-            </Link>
-
-            <Link href="/about-us" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              About Us
+              Product
             </Link>
 
             <Link href="/contact" className="text-gray-700 hover:text-primary text-sm font-semibold">
@@ -204,7 +201,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
             {/* Location Display - Desktop */}
             <div
 
-              className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
+              className="  hidden md:block flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
             >
               <FiMapPin className="text-primary text-lg" />
               <div className="flex flex-col">

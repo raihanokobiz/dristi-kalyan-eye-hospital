@@ -27,20 +27,20 @@ const OrderBulkRoute = require("./routes/order.bulk.route.js");
 const Payment = require("./routes/payment.route.js");
 const OfferRoute = require("./routes/offer.route.js");
 const OutletsRoute = require("./routes/outlets.route.js");
-const SubscribeRoute = require("./routes/subscribe.route.js");
 const DoctorRouter = require("./routes/doctor.route.js");
 const ServiceRouter = require("./routes/service.route.js");
-
 const { Router } = require("express");
 const CampaignRoute = require("./routes/campaign.route.js");
 const BookingRoute = require("./routes/booking.route");
 const rootRouter = Router();
+
+
 rootRouter.use("/product", ProductRouter);
 rootRouter.use("/auth", AuthRouter);
 rootRouter.use("/banners", BannerRouter);
 rootRouter.use("/about-us", AboutUsRouter);
 rootRouter.use("/brand", BrandRouter);
-rootRouter.use("/booking",BookingRoute);
+rootRouter.use("/booking", BookingRoute);
 rootRouter.use("/category", CategoryRouter);
 rootRouter.use("/offer", OfferRoute);
 rootRouter.use("/contact-info", ContactRouter);
@@ -69,7 +69,6 @@ rootRouter.use("/warehouse-transfer", WarehouseTransferRoute);
 rootRouter.use("/order-bulk", OrderBulkRoute);
 rootRouter.use("/campaign", CampaignRoute);
 rootRouter.use("/outlet", OutletsRoute);
-rootRouter.use("/subscribe", SubscribeRoute);
 rootRouter.use("/doctor", DoctorRouter);
 rootRouter.use("/service", ServiceRouter);
 

@@ -199,13 +199,13 @@ const Cart = async () => {
             href={products?.data?.cartDetails?.length ? "/checkout" : "/shop"}
             className="text-white text-sm  items-center text-center w-[70%] sm:w-[50%] md:w-[40%]  bg-primary hover:bg-green-700 px-2 py-2"
           >
-            <span>অর্ডার করুন</span>
+            <span>Place Order</span>
           </Link>
           <Link
             href="/shop"
             className="text-white text-sm  items-center text-center  w-[70%] sm:w-[50%] md:w-[40%]  bg-primary hover:bg-green-700 px-2 py-2 mt-5"
           >
-            <span>শপে যান</span>
+            <span>Go to Shop</span>
           </Link>
         </div>
         <div className="bg-[#F6F6F6] text-gray-600 rounded text-center py-5 px-8 my-5">

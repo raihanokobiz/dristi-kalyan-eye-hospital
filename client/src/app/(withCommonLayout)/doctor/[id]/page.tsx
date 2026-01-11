@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Doctor, DoctorResponse } from "@/types/doctor";
-import { FaArrowRight, FaTimes, FaShareAlt } from "react-icons/fa";
-import { DotIcon } from "lucide-react";
+import { FaArrowRight, FaTimes } from "react-icons/fa";
 import { FiClock, FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -17,7 +16,9 @@ const DoctorDetailsPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState("");
     const [selectedDay, setSelectedDay] = useState("");
+
 
     const [patient, setPatient] = useState({
         name: "",
@@ -60,19 +61,23 @@ const DoctorDetailsPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!selectedDay) {
-            toast.error("Please select appointment day");
+        if (!selectedDate) {
+            toast.error("Please select appointment date");
             return;
         }
+
         const payload = {
             doctorId: doctor?._id,
+            appointmentDate: selectedDate,
             appointmentDay: selectedDay,
             patientName: patient.name,
             phone: patient.phone,
             age: patient?.age,
             problem: patient?.problem,
         };
+
         console.log("Payload from client", payload);
+
         try {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API_BASE_URL}/booking`,
@@ -92,32 +97,49 @@ const DoctorDetailsPage: React.FC = () => {
                 confirmButtonText: "OK"
             });
             setModalOpen(false);
-            setSelectedDay("");
+            setSelectedDate("");
             setPatient({ name: "", phone: "", age: "", problem: "" });
         } catch {
             toast.error("Appointment booking failed ❌");
         }
     };
 
-    const shareDoctor = () => {
-        if (typeof window === "undefined" || !doctor) return;
+    // const shareDoctor = () => {
+    //     if (typeof window === "undefined" || !doctor) return;
 
-        const url = window.location.href;
-        const text = `Check out Dr. ${doctor.name} (${doctor.degree})`;
+    //     const url = window.location.href;
+    //     const text = `Check out Dr. ${doctor.name} (${doctor.degree})`;
 
-        if (navigator.share) {
-            navigator.share({
-                title: doctor.name,
-                text,
-                url,
-            });
-        } else {
-            window.open(
-                `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
-                "_blank"
-            );
-        }
+    //     if (navigator.share) {
+    //         navigator.share({
+    //             title: doctor.name,
+    //             text,
+    //             url,
+    //         });
+    //     } else {
+    //         window.open(
+    //             `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
+    //             "_blank"
+    //         );
+    //     }
+    // };
+
+    const getDayName = (dateString: string) => {
+
+        const days = [
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+        ];
+        const [year, month, day] = dateString.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
+        return days[date.getDay()];
     };
+
 
     if (loading) {
         return (
@@ -142,7 +164,7 @@ const DoctorDetailsPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 mt-20">
+        <div className=" bg-gray-50 py-12 px-4 mt-20">
             <div className="max-w-5xl mx-auto">
                 <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
@@ -176,7 +198,7 @@ const DoctorDetailsPage: React.FC = () => {
                                     <span>Dhaka Medical Center</span>
                                 </div>
 
-                                <div className="space-y-3 mb-6">
+                                {/* <div className="space-y-3 mb-6">
                                     <a
                                         href={`tel:${doctor.phone}`}
                                         className="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
@@ -196,7 +218,7 @@ const DoctorDetailsPage: React.FC = () => {
                                         </div>
                                         <span className="font-medium break-all">{doctor.email}</span>
                                     </a>
-                                </div>
+                                </div> */}
 
                                 <div className="flex items-center gap-3 text-gray-700 mb-6">
                                     <div className="p-2 bg-gray-100 rounded-lg">
@@ -222,10 +244,10 @@ const DoctorDetailsPage: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="mb-6">
+                                {/* <div className="mb-6">
                                     <p className="text-xs text-gray-600 font-semibold mb-2">CONSULTATION FEE</p>
                                     <p className="text-3xl font-bold text-teal-600">৳{doctor.consultationFee}</p>
-                                </div>
+                                </div> */}
                             </div>
 
                             <button
@@ -258,19 +280,31 @@ const DoctorDetailsPage: React.FC = () => {
                         <p className="text-gray-600 text-sm mb-6 font-medium">With {doctor.name}</p>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <select
+                            <input
+                                type="date"
                                 required
-                                value={selectedDay}
-                                onChange={(e) => setSelectedDay(e.target.value)}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                            >
-                                <option value="">Select Appointment Day</option>
-                                {doctor.availableDays.map((day) => (
-                                    <option key={day} value={day}>
-                                        {day}
-                                    </option>
-                                ))}
-                            </select>
+                                value={selectedDate}
+                                onChange={(e) => {
+                                    const dateValue = e.target.value;
+                                    const dayName = getDayName(dateValue);
+
+                                    if (!doctor.availableDays.includes(dayName)) {
+                                        toast.error(`Doctor is not available on ${dayName}`);
+                                        setSelectedDate("");
+                                        setSelectedDay(""); // clear day too
+                                        return;
+                                    }
+
+                                    setSelectedDate(dateValue);
+                                    setSelectedDay(dayName); // ✅ add this line
+                                }}
+                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent cursor-pointer "
+                            />
+
+                            <p className="text-xs text-primary">
+                                Available days: {doctor.availableDays.join(", ")}
+                            </p>
+
 
                             <input
                                 name="name"

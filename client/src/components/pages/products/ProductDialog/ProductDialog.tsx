@@ -45,8 +45,8 @@ const ProductDialog: React.FC<Product> = ({
   const [selectedColor] = useState<string | null>(null);
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
-  const [ setLevelError] = useState(false);
-  const [ setColorError] = useState(false);
+  const [levelError, setLevelError] = useState(false);
+  const [colorError, setColorError] = useState(false);
   const controls = useAnimation();
   const imageRef = useRef<HTMLDivElement>(null);
 
