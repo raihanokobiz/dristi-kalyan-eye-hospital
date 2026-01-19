@@ -47,6 +47,9 @@ interface Props {
   item: TDoctor;
 }
 
+type DoctorFormValues = z.infer<typeof formSchema>;
+
+
 export const DetailsSheet: React.FC<Props> = ({ item }) => {
   const { toast } = useToast();
   const [sheetOpen, setSheetOpen] = useState(false);

@@ -1,4 +1,5 @@
 export type TDoctor = {
+    _id: string;
     id: string;
     name: string;
     image?: string;
@@ -16,7 +17,7 @@ export type TDoctor = {
 
 export type TDoctorForm = {
     name: string;
-    image?: File[];              
+    image?: File[];
     degree: string;
     visitingTime: string;
     phone: string;
