@@ -22,7 +22,7 @@ const Checkout = async () => {
 
 
   return (
-    <div className="max-w-6xl mx-auto" >
+    <div className="max-w-6xl mx-auto px-4" >
       {/* <NavBar userCartProducts={products?.data} /> */}
       <MainCheckOut />
     </div>
