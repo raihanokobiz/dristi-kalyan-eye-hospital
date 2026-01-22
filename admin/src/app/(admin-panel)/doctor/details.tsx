@@ -231,14 +231,14 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                   key={name}
                   control={form.control}
                   name={name as any}
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>{label}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
                       <FormDescription>
-                        {form.formState.errors[name as any]?.message}
+                        {fieldState.error?.message}
                       </FormDescription>
                     </FormItem>
                   )}

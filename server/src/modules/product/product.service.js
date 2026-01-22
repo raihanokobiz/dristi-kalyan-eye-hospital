@@ -43,6 +43,7 @@ class ProductService extends BaseService {
   async createProduct(payloadFiles, payload, session) {
     // console.log("Payload", payload);
     const { files } = payloadFiles;
+
     const {
       name,
       // description,

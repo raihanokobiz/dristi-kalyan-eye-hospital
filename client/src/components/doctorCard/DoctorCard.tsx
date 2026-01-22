@@ -11,12 +11,11 @@ interface DoctorCardProps {
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
-
     return (
         <div className="bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
             <Link href={`/doctor/${doctor._id}`} className="block">
                 {/* IMAGE */}
-                <div className="relative h-52 w-full">
+                <div className="relative h-40 lg:h-52 w-full">
                     <Image
                         src={doctor?.image}
                         alt={doctor.name}
@@ -31,8 +30,8 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
                     {/* STATUS BADGE */}
                     {doctor.status && (
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">
-                            <DotIcon className="text-green-500" />
+                        <div className="absolute top-1 left-1 lg:top-3 lg:left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">
+                            <DotIcon className=" hidden lg:block text-green-500" />
                             <span className="text-xs font-semibold text-green-600">
                                 Available
                             </span>
@@ -48,7 +47,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                     </h3>
 
                     {/* DEGREE / SPECIALTY */}
-                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                    <p className=" hidden lg:block text-sm text-gray-500 mt-1 line-clamp-2">
                         {doctor.degree}
                     </p>
 

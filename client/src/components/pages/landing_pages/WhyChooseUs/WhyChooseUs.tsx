@@ -26,7 +26,7 @@ export function WhyChooseUs() {
             <div className="px-4 md:px-6 lg:px-0 md:px-6 py-6 md:py-10  lg:py-12 max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Left: Image */}
-                    <div className="relative w-full h-[400px] lg:h-[500px] overflow-hidden rounded-md shadow-md">
+                    <div className="relative w-full h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-md shadow-md">
                         <Image
                             src={TextureWhy}
                             alt="Child undergoing eye examination"
@@ -36,23 +36,23 @@ export function WhyChooseUs() {
                         />
                     </div>
                     {/* Right: Content */}
-                    <div className="flex flex-col space-y-8">
+                    <div className="flex flex-col space-y-4  lg:space-y-8">
                         <div className="relative">
                             {/* Background Text */}
                             <span className="absolute -top-10 left-0 text-6xl md:text-8xl font-bold text-gray-50 select-none -z-10">
                                 Why Choose Us
                             </span>
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
+                            <h2 className=" text-center lg:text-left text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-700 leading-tight">
                                 Great Reasons For People <br />
                                 Choose Optcare
                             </h2>
                         </div>
 
-                        <p className="text-gray-500 text-lg leading-relaxed max-w-2xl">
+                        <p className="text-center lg:text-left text-gray-500 text-lg leading-relaxed max-w-2xl">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt labore aliqua.
                         </p>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 pt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 lg:gap-x-8 lg:gap-y-8 pt-4">
                             {reasons.map((reason, index) => (
                                 <div key={index} className="space-y-3">
                                     <h3 className="text-xl font-bold text-gray-900">{reason.title}</h3>

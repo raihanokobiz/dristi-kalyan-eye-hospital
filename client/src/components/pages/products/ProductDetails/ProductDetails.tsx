@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import { getUser } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useAnimation } from "framer-motion";
-import Link from "next/link";
 interface Props {
   product: TProduct;
 }
@@ -23,6 +22,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [level, setLevel] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [addedToCart, setAddedToCart] = useState(false);
+
 
   const [levelError, setLevelError] = useState(false);
   const [colorError, setColorError] = useState(false);
@@ -112,6 +113,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         transition: { duration: 0.6, ease: "easeInOut" },
       });
 
+      setAddedToCart(true);
+
       setTimeout(() => {
         controls.set({ x: 10, scale: 0 });
       }, 1000);
@@ -120,6 +123,63 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
       toast.error("Failed to add product to cart.");
     }
   };
+
+  const handleBuyNow = async () => {
+    const user = await getUser();
+
+    if (!user) {
+      toast.error("Please login to continue.");
+      router.push("/login");
+      return;
+    }
+
+    if (
+      (inventoryType === "levelInventory" ||
+        inventoryType === "colorLevelInventory") &&
+      !selectedLevel
+    ) {
+      setLevelError(true);
+      return;
+    }
+
+    if (
+      (inventoryType === "colorLevelInventory" ||
+        inventoryType === "colorInventory") &&
+      !selectedColor
+    ) {
+      setColorError(true);
+      return;
+    }
+
+    try {
+      const productData: {
+        quantity: number;
+        productRef: string;
+        userRef: string | undefined;
+        inventoryRef?: string | null;
+      } = {
+        quantity: count,
+        productRef: _id,
+        userRef: user?.id,
+      };
+
+      if (inventoryType == "inventory") {
+        productData.inventoryRef = inventoryRef[0]._id;
+      } else if (inventoryType == "levelInventory") {
+        productData.inventoryRef = selectedLevel;
+      } else if (inventoryType == "colorInventory") {
+        productData.inventoryRef = selectedColor;
+      } else if (inventoryType == "colorLevelInventory") {
+        productData.inventoryRef = selectedColor;
+      }
+
+      await addToCart(productData);
+      router.push("/checkout"); // 👈 checkout page
+    } catch (err) {
+      toast.error("Failed to process Buy Now");
+    }
+  };
+
 
   return (
     <div className="Container  py-8  lg:mt-10 mt-16">
@@ -208,16 +268,34 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                   <FiPlus />
                 </p>
               </div>
-              <div className="w-full cursor-pointer">
-                <button
-                  onClick={handleAddToCart}
-                  className="bg-primary flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
-                >
-                  <span>
-                    <FiPlus />
-                  </span>
-                  <span>Add to cart </span>
-                </button>
+              <div className="w-full flex gap-2 ">
+                {!addedToCart ? (
+                  <>
+                    <button
+                      onClick={handleAddToCart}
+                      className="bg-primary flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
+                    >
+                      <span>
+                        <FiPlus />
+                      </span>
+                      <span>Add to cart </span>
+                    </button>
+
+                    <button
+                      onClick={handleBuyNow}
+                      className="border border-primary text-primary px-6 py-2.5 font-semibold text-sm rounded cursor-pointer"
+                    >
+                      Buy Now
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => router.push("/cart")}
+                    className="bg-primary flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
+                  >
+                    Go to Cart
+                  </button>
+                )}
               </div>
             </div>
           </div>

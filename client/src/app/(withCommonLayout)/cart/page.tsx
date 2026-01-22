@@ -23,15 +23,15 @@ const Cart = async () => {
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
-      <div className="max-w-6xl lg:mx-auto mx-4 md:mx-6 mt-16 lg:mt-18">
+      <div className="max-w-6xl lg:mx-auto mx-4 md:mx-6 mt-24 lg:mt-28">
         <div className="hidden lg:block">
           <h2 className="font-bold text-3xl text-center py-8">Your Cart</h2>
 
           {/* Header row */}
-          <div className="grid grid-cols-7 font-bold border-t border-black/20 py-5">
+          <div className="grid grid-cols-6 font-bold border-t border-black/20 py-5">
             <div className="col-span-2">Product</div>
             <div>Unit Price</div>
-            <div>Size</div>
+            {/* <div>Size</div> */}
             <div>Quantity</div>
             <div>Subtotal</div>
             <div>Action</div>
@@ -51,7 +51,7 @@ const Cart = async () => {
             }) => (
               <div
                 key={product._id}
-                className="grid grid-cols-7 items-center border-t border-black/20 py-3"
+                className="grid grid-cols-6 items-center border-t border-black/20 py-3"
               >
                 {/* Product */}
                 <div className="col-span-2 flex flex-col xl:flex-row items-start xl:items-center gap-3">
@@ -81,14 +81,14 @@ const Cart = async () => {
 
 
                 {/* Size */}
-                <div>
+                {/* <div>
                   <p>
 
                     <span className="uppercase">
                       {product?.inventory?.level || "N/A"}
                     </span>
                   </p>
-                </div>
+                </div> */}
 
                 {/* Quantity */}
                 <div>{product?.quantity || "N/A"}</div>
@@ -157,12 +157,6 @@ const Cart = async () => {
                     </div>
                   </div>
 
-                  {/* Size */}
-                  <div className=" flex justify-between border-t border-black/5 py-3 px-3">
-                    <p className="font-bold text-[15px]">Size</p>
-                    {product?.product?.inventory?.level || "N/A"}
-                  </div>
-
                   {/* Quantity */}
                   <div className=" flex justify-between border-t border-black/5 py-3 px-3">
                     <p className="font-bold text-[15px]">Quantity</p>
@@ -170,6 +164,7 @@ const Cart = async () => {
                   </div>
 
                   {/* Subtotal */}
+                  
                   <div className=" flex justify-between border-t border-black/5 py-3 px-3">
                     <p className="font-bold text-[15px]">Subtotal</p>
                     <div className="flex  gap-2">
@@ -180,8 +175,12 @@ const Cart = async () => {
                     </div>
                   </div>
 
-                  {/* Action buttons */}
-                  <CartDelete cardId={product?.cartId} />
+                  {/* Action */}
+                  <div className="flex justify-between items-center border-t border-black/5 py-3 px-3">
+                    <p className="font-bold text-[15px]">Action</p>
+                    <CartDelete cardId={product?.cartId} />
+                  </div>
+
                 </div>
               </div>
             )
@@ -203,7 +202,7 @@ const Cart = async () => {
           </Link>
           <Link
             href="/shop"
-            className="text-white text-sm  items-center text-center  w-[70%] sm:w-[50%] md:w-[40%]  bg-primary hover:bg-green-700 px-2 py-2 mt-5"
+            className="text-white text-sm  items-center text-center  w-[70%] sm:w-[50%] md:w-[40%]  bg-primary hover:bg-green-700 px-2 py-2 -mt-4 lg:-mt-0"
           >
             <span>Go to Shop</span>
           </Link>
@@ -217,24 +216,6 @@ const Cart = async () => {
             information.
           </span>
         </div>
-        {/* You May Also Like */}
-        {/* ------------------------if we have enough time after completed all required then we work this part------------------------------ */}
-        {/* <div className="text-center py-5  my-5">
-        <span className=" font-bold text-[20px] ">You May Also Like</span>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 py-8 text-black border-t border-black/20 ">
-          {products?.cartDetails?.slice(0, 4).map((product) => (
-            <ProductCard
-              key={product._id}
-              product={{
-                thumbnailImage: product.image,
-                name: product.title,
-                mrpPrice: product.price,
-                price: product.salePrice,
-              }}
-            />
-          ))}
-        </div>
-      </div> */}
       </div>
     </>
   );

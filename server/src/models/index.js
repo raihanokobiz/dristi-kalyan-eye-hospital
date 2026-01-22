@@ -4,7 +4,6 @@ module.exports = {
   BannerSchema: require("./banner/bannerSchema.js").BannerSchema,
   BrandSchema: require("./brand/brandSchema.js").BrandSchema,
   CategorySchema: require("./category/categorySchema.js").CategorySchema,
-  OfferSchema: require("./offer/offerSchema.js").OfferSchema,
   SubCategorySchema: require("./subCategory/subCategorySchema.js")
     .SubCategorySchema,
   ChildCategorySchema: require("./childCategory/childCategorySchema.js")
@@ -36,9 +35,7 @@ module.exports = {
     require("./warehouseTransfer/warehouseTransferSchema.js")
       .WarehouseTransferSchema,
   PaymentSchema: require("./payment/paymentSchema.js").PaymentSchema,
-  OrderBulkSchema: require("./orderBulk/orderBulkSchema.js").OrderBulkSchema,
   CampaignSchema: require("./campaign/campaignSchema.js").CampaignSchema,
-  OutletSchema: require("./outlets/outletsSchema.js").OutletSchema,
   DoctorSchema: require("./doctor/doctorSchema.js").DoctorSchema,
   ServiceSchema: require("./service/serviceSchema.js").ServiceSchema,
 };

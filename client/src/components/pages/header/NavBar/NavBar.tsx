@@ -138,13 +138,12 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                 <RiMenuAddFill className="text-2xl" />
               )}
             </div>
-            <div className="md:w-[90px] w-[50px] h-[60px]">
+            <div className=" relative w-[90px] md:w-[90px]  h-[60px]">
               <Link href="/">
                 <Image
                   src={logo || null}
                   alt="Eye Hospital"
-                  width={150}
-                  height={60}
+                  fill
                   className="w-full h-full"
                 />
               </Link>
@@ -199,9 +198,9 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
           {/* Right Side Icons */}
           <div className="flex items-center lg:gap-2.5 gap-1 ">
             {/* Location Display - Desktop */}
-            <div
+            {/* <div
 
-              className="  hidden md:block flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
+              className="  hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
             >
               <FiMapPin className="text-primary text-lg" />
               <div className="flex flex-col">
@@ -210,7 +209,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                   Dhamrai Drisiti Kalyan Eye Hospital
                 </span>
               </div>
-            </div>
+            </div> */}
             {/* Contact Number */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
               <FiPhone className="text-primary text-lg" />

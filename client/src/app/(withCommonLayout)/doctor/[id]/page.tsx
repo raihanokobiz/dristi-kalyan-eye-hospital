@@ -76,7 +76,6 @@ const DoctorDetailsPage: React.FC = () => {
             problem: patient?.problem,
         };
 
-        console.log("Payload from client", payload);
 
         try {
             const res = await fetch(
@@ -92,10 +91,42 @@ const DoctorDetailsPage: React.FC = () => {
 
             Swal.fire({
                 icon: "success",
-                title: "Booking Successful!",
-                text: "Appointment booked successfull. Our team Will call you soon",
-                confirmButtonText: "OK"
+                title: "Appointment Confirmed!",
+                html: `
+                    <div class="bg-white border-2 border-teal-100 rounded-lg p-4 my-4">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <span class="text-gray-500 text-sm">Patient</span>
+                                <span class="text-gray-700 font-medium">${patient.name}</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <span class="text-gray-500 text-sm">Doctor</span>
+                                <span class="text-gray-700 font-medium">${doctor?.name ?? ""}</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <span class="text-gray-500 text-sm">Date</span>
+                                <span class="text-gray-700 font-medium">${new Date(selectedDate).toLocaleDateString('en-GB')}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500 text-sm">Time</span>
+                                <span class="text-gray-700 font-medium">${doctor?.visitingTime ?? ""}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-teal-50 rounded-lg p-3 mt-3">
+                        <p class="text-sm text-teal-800">
+                            📞 Our team will call you soon with your serial number
+                        </p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">
+                        💡 Please take a screenshot for future reference
+                    </p>
+                `,
+                confirmButtonText: "OK",
+                confirmButtonColor: "#0d9488",
+                width: "450px"
             });
+
             setModalOpen(false);
             setSelectedDate("");
             setPatient({ name: "", phone: "", age: "", problem: "" });
@@ -104,25 +135,7 @@ const DoctorDetailsPage: React.FC = () => {
         }
     };
 
-    // const shareDoctor = () => {
-    //     if (typeof window === "undefined" || !doctor) return;
 
-    //     const url = window.location.href;
-    //     const text = `Check out Dr. ${doctor.name} (${doctor.degree})`;
-
-    //     if (navigator.share) {
-    //         navigator.share({
-    //             title: doctor.name,
-    //             text,
-    //             url,
-    //         });
-    //     } else {
-    //         window.open(
-    //             `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
-    //             "_blank"
-    //         );
-    //     }
-    // };
 
     const getDayName = (dateString: string) => {
 
@@ -155,7 +168,7 @@ const DoctorDetailsPage: React.FC = () => {
                 <p className="text-red-500">{error}</p>
                 <button
                     onClick={() => router.push("/doctor")}
-                    className="px-6 py-2 bg-blue-500 text-white rounded-lg"
+                    className="px-6 py-2 bg-blue-500 text-white rounded-md"
                 >
                     Back to Doctors
                 </button>
@@ -166,11 +179,11 @@ const DoctorDetailsPage: React.FC = () => {
     return (
         <div className=" bg-gray-50 py-12 px-4 mt-20">
             <div className="max-w-5xl mx-auto">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                <div className="bg-white rounded-md shadow-md overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 p-4 lg:p-8">
                         {/* LEFT: Image */}
                         <div className="flex  justify-center">
-                            <div className="relative w-full h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
+                            <div className="relative w-full h-60 lg:h-96 rounded-md overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
                                 <Image
                                     src={doctor.image || "/placeholder.svg"}
                                     alt={doctor.name}
@@ -190,71 +203,39 @@ const DoctorDetailsPage: React.FC = () => {
                         {/* RIGHT: Information */}
                         <div className="flex flex-col justify-between">
                             <div>
-                                <h1 className="text-4xl font-bold text-gray-900 mb-1">{doctor.name}</h1>
-                                <p className="text-teal-600 font-semibold text-lg mb-4">{doctor.degree}</p>
-
-                                <div className="flex items-center gap-2 text-gray-600 mb-6">
-                                    <FiMapPin size={18} className="text-teal-600" />
-                                    <span>Dhaka Medical Center</span>
-                                </div>
-
-                                {/* <div className="space-y-3 mb-6">
-                                    <a
-                                        href={`tel:${doctor.phone}`}
-                                        className="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
-                                    >
-                                        <div className="p-2 bg-gray-100 rounded-lg">
-                                            <FiPhoneCall size={18} className="text-teal-600" />
-                                        </div>
-                                        <span className="font-medium">{doctor.phone}</span>
-                                    </a>
-
-                                    <a
-                                        href={`mailto:${doctor.email}`}
-                                        className="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
-                                    >
-                                        <div className="p-2 bg-gray-100 rounded-lg">
-                                            <span className="text-lg">✉</span>
-                                        </div>
-                                        <span className="font-medium break-all">{doctor.email}</span>
-                                    </a>
-                                </div> */}
+                                <h1 className=" text-2xl lg:text-3xl font-bold text-gray-700 mb-1">{doctor?.name}</h1>
+                                <p className="text-teal-600 font-semibold text-sm mb-4">{doctor?.degree}</p>
 
                                 <div className="flex items-center gap-3 text-gray-700 mb-6">
-                                    <div className="p-2 bg-gray-100 rounded-lg">
+                                    <div className="p-2 bg-gray-100 rounded-md">
                                         <FiClock size={18} className="text-teal-600" />
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-600 font-semibold">VISITING HOURS</p>
-                                        <p className="font-bold">{doctor.visitingTime}</p>
+                                        <p className="font-bold">{doctor?.visitingTime}</p>
                                     </div>
                                 </div>
 
                                 <div className="mb-6">
                                     <p className="text-xs text-gray-600 font-semibold mb-2">AVAILABLE DAYS</p>
                                     <div className="flex flex-wrap gap-2">
-                                        {doctor.availableDays?.map((day) => (
+                                        {doctor?.availableDays?.map((day) => (
                                             <span
                                                 key={day}
-                                                className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-teal-50 transition-colors"
+                                                className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-teal-50 transition-colors"
                                             >
                                                 {day}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
-
-                                {/* <div className="mb-6">
-                                    <p className="text-xs text-gray-600 font-semibold mb-2">CONSULTATION FEE</p>
-                                    <p className="text-3xl font-bold text-teal-600">৳{doctor.consultationFee}</p>
-                                </div> */}
                             </div>
 
                             <button
                                 disabled={!doctor.status}
                                 onClick={() => setModalOpen(true)}
-                                className={`w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all text-base ${doctor.status
-                                    ? "bg-teal-600 hover:bg-teal-700 text-white shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                                className={`w-full py-3 rounded-md font-bold flex items-center justify-center gap-2 transition-all text-base ${doctor.status
+                                    ? "bg-teal-600 hover:bg-teal-700 text-white shadow-md hover:shadow-md active:scale-95 cursor-pointer"
                                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                                     }`}
                             >
@@ -267,90 +248,114 @@ const DoctorDetailsPage: React.FC = () => {
             </div>
 
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative animate-in fade-in zoom-in-95">
-                        <button
-                            onClick={() => setModalOpen(false)}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 cursor-pointer"
-                        >
-                            <FaTimes size={20} />
-                        </button>
-
-                        <h2 className="text-2xl font-bold mb-2 text-gray-900">Book Appointment</h2>
-                        <p className="text-gray-600 text-sm mb-6 font-medium">With {doctor.name}</p>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <input
-                                type="date"
-                                required
-                                value={selectedDate}
-                                onChange={(e) => {
-                                    const dateValue = e.target.value;
-                                    const dayName = getDayName(dateValue);
-
-                                    if (!doctor.availableDays.includes(dayName)) {
-                                        toast.error(`Doctor is not available on ${dayName}`);
-                                        setSelectedDate("");
-                                        setSelectedDay(""); // clear day too
-                                        return;
-                                    }
-
-                                    setSelectedDate(dateValue);
-                                    setSelectedDay(dayName); // ✅ add this line
-                                }}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent cursor-pointer "
-                            />
-
-                            <p className="text-xs text-primary">
-                                Available days: {doctor.availableDays.join(", ")}
-                            </p>
-
-
-                            <input
-                                name="name"
-                                required
-                                placeholder="Patient Name"
-                                value={patient.name}
-                                onChange={handleChange}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                            />
-
-                            <input
-                                name="phone"
-                                required
-                                placeholder="Phone Number"
-                                value={patient.phone}
-                                onChange={handleChange}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                            />
-
-                            <input
-                                name="age"
-                                placeholder="Age (optional)"
-                                value={patient.age}
-                                onChange={handleChange}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                            />
-
-                            <textarea
-                                name="problem"
-                                placeholder="Describe your problem"
-                                value={patient.problem}
-                                onChange={handleChange}
-                                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent h-24 resize-none"
-                            />
-
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 overflow-y-auto py-7">
+                    <div className=" flex items-center justify-center p-4">
+                        <div className="bg-white rounded-md shadow-xl w-full max-w-md p-4 lg:p-8 relative animate-in fade-in zoom-in-95 my-8">
                             <button
-                                type="submit"
-                                style={{ backgroundColor: "#03c0b4" }}
-                                className="w-full text-white py-3 rounded-lg font-bold transition-all hover:shadow-lg active:scale-95 cursor-pointer"
+                                onClick={() => setModalOpen(false)}
+                                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 cursor-pointer"
                             >
-                                Book Now
+                                <FaTimes size={20} />
                             </button>
-                        </form>
+                            <h2 className="text-2xl font-bold mb-2 text-gray-900">Book Appointment</h2>
+                            <p className="text-gray-600 text-sm mb-6 font-medium">With {doctor.name}</p>
+
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <input
+                                    type="date"
+                                    required
+                                    value={selectedDate}
+                                    min={new Date().toISOString().split('T')[0]}
+                                    onChange={(e) => {
+                                        const dateValue = e.target.value;
+                                        const dayName = getDayName(dateValue);
+
+                                        if (!doctor.availableDays.includes(dayName)) {
+                                            toast.error(`Doctor is not available on ${dayName}`);
+                                            setSelectedDate("");
+                                            setSelectedDay(""); // clear day too
+                                            return;
+                                        }
+
+                                        setSelectedDate(dateValue);
+                                        setSelectedDay(dayName); // ✅ add this line
+                                    }}
+                                    className="w-full p-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent cursor-pointer "
+                                />
+
+                                <p className=" text-primary">
+                                    Available days: {doctor.availableDays.join(", ")}
+                                </p>
+
+
+                                <input
+                                    name="name"
+                                    required
+                                    placeholder="Patient Name"
+                                    value={patient.name}
+                                    onChange={handleChange}
+                                    className="w-full p-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                                />
+
+                                <div>
+                                    <input
+                                        name="phone"
+                                        type="tel"
+                                        required
+                                        placeholder="Phone Number (11 digits)"
+                                        value={patient.phone}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, '');
+                                            if (value.length <= 11) {
+                                                setPatient({ ...patient, phone: value });
+                                            }
+                                        }}
+                                        className={`w-full p-3 bg-gray-50 border rounded-md text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent ${patient.phone && patient.phone.length !== 11
+                                            ? 'border-red-500'
+                                            : 'border-gray-300'
+                                            }`}
+                                    />
+                                    {patient.phone && patient.phone.length !== 11 && (
+                                        <p className="text-xs text-red-500 mt-1">
+                                            Phone number must be exactly 11 digits ({patient.phone.length}/11)
+                                        </p>
+                                    )}
+                                </div>
+
+                                <input
+                                    name="age"
+                                    type="number"
+                                    placeholder="Age (optional)"
+                                    value={patient.age}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/\D/g, '');
+                                        setPatient({ ...patient, age: value });
+                                    }}
+                                    min="1"
+                                    max="150"
+                                    className="w-full p-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                                />
+
+                                <textarea
+                                    name="problem"
+                                    placeholder="Describe your problem"
+                                    value={patient.problem}
+                                    onChange={handleChange}
+                                    className="w-full p-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent h-24 resize-none"
+                                />
+
+                                <button
+                                    type="submit"
+                                    className="w-full bg-primary text-white py-3 rounded-md font-bold transition-all hover:shadow-md active:scale-95 cursor-pointer"
+                                >
+                                    Book Now
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}
+
         </div>
     );
 };

@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Orderschema = new Schema(
+const Quoteschema = new Schema(
   {
-    orderId: {
+
+    quoteId: {
       type: String,
       required: true,
       unique: true,
+      default: function () {
+        return `QUO-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+      },
     },
 
     subTotalPrice: {
@@ -63,7 +67,6 @@ const Orderschema = new Schema(
       default: "CashOnDelivery",
     },
 
-    // ⭐⭐⭐ Added Fields Here
     mobileBankingProvider: {
       type: String, // e.g., bKash, Nagad, Rocket
     },
@@ -73,7 +76,7 @@ const Orderschema = new Schema(
     transactionId: {
       type: String,
     },
-    // ⭐⭐⭐ End Added Fields
+
 
     paymentRef: [
       {
@@ -111,7 +114,7 @@ const Orderschema = new Schema(
     status: {
       type: String,
       enum: [
-        "OrderPlaced",
+        "QuotePlaced",
         "Pending",
         "Delivered",
         "Cancelled",
@@ -135,10 +138,13 @@ const Orderschema = new Schema(
     note: {
       type: String,
     },
+    prescription: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
 
-const OrderSchema = mongoose.model("order", Orderschema);
+const QuoteSchema = mongoose.model("quote", Quoteschema);
 
-module.exports = { OrderSchema };
+module.exports = { QuoteSchema };

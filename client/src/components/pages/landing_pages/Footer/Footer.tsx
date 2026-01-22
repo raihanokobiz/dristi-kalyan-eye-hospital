@@ -110,7 +110,7 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
             <div className="">
               <div className="flex lg:items-center gap-2 mt-4">
                 <a
-                  href="https://www.facebook.com/people/%E0%A6%A7%E0%A6%BE%E0%A6%AE%E0%A6%B0%E0%A6%BE%E0%A6%87-%E0%A6%A6%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%9F%E0%A6%BF-%E0%A6%95%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A3-%E0%A6%9A%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%81-%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2/61579453017415/"
+                  href="https://www.facebook.com/61579453017415"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-2 py-2 bg-[#2563EB] rounded text-white border border-[#fff]/0 hover:scale-95 hover:border-[#fff] hover:border duration-300"

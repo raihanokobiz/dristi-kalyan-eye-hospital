@@ -99,7 +99,21 @@ class InventoryRepository extends BaseRepository {
     return products
   }
   async inventoryOrderPlace(inventoryID, inventoryPayload, session) {
- 
+
+    const results = await this.#model.findByIdAndUpdate(
+      inventoryID,
+      {
+        $set: {
+          availableQuantity: inventoryPayload.availableQuantity,
+          holdQuantity: inventoryPayload.holdQuantity,
+        },
+      },
+      { new: true, session }
+    );
+    return results;
+  }
+
+  async inventoryQuotePlace(inventoryID, inventoryPayload, session) {
     const results = await this.#model.findByIdAndUpdate(
       inventoryID,
       {
@@ -114,7 +128,7 @@ class InventoryRepository extends BaseRepository {
   }
 
   async updateInventoryStatus(status, orderData, session) {
-   
+
     // 'OrderPlaced', 
     // 'DeliveredPending', 
     // 'Delivered', 
@@ -127,12 +141,12 @@ class InventoryRepository extends BaseRepository {
 
     let result;
     if (status == 'OrderPlaced') {
-    
+
       if (orderData?.status == 'OrderPlaced') {
         con
         return result;
       } else if (orderData?.status == 'DeliveredPending') {
-      
+
         return result;
       } else if (orderData?.status == 'Delivered') {
 
@@ -151,7 +165,7 @@ class InventoryRepository extends BaseRepository {
 
         }
       } else if (orderData?.status == 'Cancelled') {
-     
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -164,17 +178,17 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-     
+
         }
       } else if (orderData?.status == 'Hold') {
 
         return result;
       } else if (orderData?.status == 'InReview') {
-     
+
         return result;
       }
     } else if (status == 'DeliveredPending') {
-  
+
       if (orderData?.status == 'OrderPlaced') {
 
         return result;
@@ -195,10 +209,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-  
+
         }
       } else if (orderData?.status == 'Cancelled') {
-  
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -211,19 +225,19 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-      
+
         }
       } else if (orderData?.status == 'Hold') {
 
         return result;
       } else if (orderData?.status == 'InReview') {
-      
+
         return result;
       }
     } else if (status == 'Delivered') {
- 
+
       if (orderData?.status == 'OrderPlaced') {
-  
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -254,13 +268,13 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-   
+
         }
       } else if (orderData?.status == 'Delivered') {
-  
+
         return result;
       } else if (orderData?.status == 'Cancelled') {
-     
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -274,10 +288,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-         
+
         }
       } else if (orderData?.status == 'Hold') {
-      
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -314,7 +328,7 @@ class InventoryRepository extends BaseRepository {
     } else if (status == 'Cancelled') {
 
       if (orderData?.status == 'OrderPlaced') {
-  
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -327,10 +341,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-    
+
         }
       } else if (orderData?.status == 'DeliveredPending') {
-     
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -343,11 +357,11 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-  
+
         }
 
       } else if (orderData?.status == 'Delivered') {
- 
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -365,10 +379,10 @@ class InventoryRepository extends BaseRepository {
         }
 
       } else if (orderData?.status == 'Cancelled') {
-  
+
         return result;
       } else if (orderData?.status == 'Hold') {
-   
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -397,19 +411,19 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-      
+
         }
       }
     } else if (status == 'Hold') {
-    
+
       if (orderData?.status == 'OrderPlaced') {
-     
+
         return result;
       } else if (orderData?.status == 'DeliveredPending') {
 
         return result;
       } else if (orderData?.status == 'Delivered') {
- 
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -423,10 +437,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-    
+
         }
       } else if (orderData?.status == 'Cancelled') {
-    
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -439,10 +453,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-          
+
         }
       } else if (orderData?.status == 'Hold') {
-      
+
         return result;
       } else if (orderData?.status == 'InReview') {
 
@@ -454,10 +468,10 @@ class InventoryRepository extends BaseRepository {
 
         return result;
       } else if (orderData?.status == 'DeliveredPending') {
-       
+
         return result;
       } else if (orderData?.status == 'Delivered') {
-   
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -471,10 +485,10 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-          
+
         }
       } else if (orderData?.status == 'Cancelled') {
-    
+
         for (const product of orderData?.products) {
           result = await this.#model.findByIdAndUpdate(
             product.inventoryRef,
@@ -487,18 +501,18 @@ class InventoryRepository extends BaseRepository {
             },
             { new: true, session }
           );
-          
+
         }
       } else if (orderData?.status == 'Hold') {
-  
+
         return result;
       } else if (orderData?.status == 'InReview') {
-       
+
         return result;
       }
     }
 
-    
+
     return result;
 
   }

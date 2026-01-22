@@ -29,7 +29,7 @@ const defaultValues = {
   name: "",
   degree: "",
   visitingTime: "",
-  consultationFee: "",
+  consultationFee: 0,
   availableDays: [],
   phone: "",
   email: "",
@@ -72,7 +72,7 @@ export const CreateForm: React.FC = () => {
       formData.append("name", values.name);
       formData.append("degree", values.degree);
       formData.append("visitingTime", values.visitingTime);
-      formData.append("consultationFee", values.consultationFee);
+      formData.append("consultationFee", values.consultationFee.toString());
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
@@ -108,7 +108,7 @@ export const CreateForm: React.FC = () => {
     "friday",
     "saturday",
     "sunday",
-  ];
+  ] as const
 
 
   return (

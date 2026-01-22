@@ -14,15 +14,15 @@ const LottieAnimationForThankyou = () => {
         className="h-[120px] lg:h-[200px]"
         loop={true}
       />
-      <h1 className="text-3xl font-bold text-gray-800">ধন্যবাদ!</h1>
+      <h1 className="text-3xl font-bold text-gray-800">Thank You!</h1>
       <p className="text-gray-600 text-lg">
-        আপনার অর্ডারটি সফলভাবে সম্পূর্ণ হয়েছে 😊
+        Your order has been placed successfully 😊
       </p>
       <Link
         href="/shop"
         className="inline-block bg-primary text-white font-semibold px-6 py-2 rounded hover:bg-primary transition duration-300"
       >
-        শপে ফিরে যান
+        Back to Shop
       </Link>
     </div>
   );

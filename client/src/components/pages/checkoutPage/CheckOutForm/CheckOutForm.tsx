@@ -14,6 +14,8 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import orderGift from "@/assets/gift/animation.gif";
 import { useRef, useState } from "react";
+import { apiBaseUrl } from "@/config/config";
+import Swal from "sweetalert2";
 
 interface FormData {
   customerName: string;
@@ -32,7 +34,10 @@ interface FormData {
   mobileBankingProvider?: string;
   mobileNumber?: string;
   transactionId?: string;
+  prescription?: FileList;
 }
+
+
 
 interface Props {
   userRef: string;
@@ -60,6 +65,8 @@ const CheckOutForm: React.FC<Props> = ({
   const selectedPayment = watch("paymentMethod");
   const selectedMobileBank = watch("mobileBankingProvider");
 
+
+
   const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCity = e.target.value.toLowerCase();
     const hasFreeShipping: boolean =
@@ -76,10 +83,18 @@ const CheckOutForm: React.FC<Props> = ({
   const discountValue = Number(products?.data?.couponDiscount) || 0;
   const payableAmount = Subtotal + (shipping || 0) - discountValue;
   console.log("payableAmount", payableAmount)
-  // ----------------- Submit Handler -----------------
+
+  // ----------------- Submit Handler ----------------
   const onSubmit = async (data: FormData) => {
     // No need to check for product discounts, coupon always applies on MRP
-    await confirmOrder(data);
+    const hasPrescription =
+      data.prescription && data.prescription.length > 0;
+
+    if (hasPrescription) {
+      await submitQuote(data);
+    } else {
+      await confirmOrder(data);
+    }
   };
 
   // ----------------- Apply Coupon -----------------
@@ -140,6 +155,88 @@ const CheckOutForm: React.FC<Props> = ({
     }
   };
 
+  // ----------------- Confirm Quote -----------------
+  const submitQuote = async (data: FormData) => {
+    try {
+
+      setIsSubmitting(true);
+
+      const formData = new FormData();
+      formData.append("userRef", userRef);
+      formData.append("subTotalPrice", String(Subtotal));
+      formData.append("shippingCost", String(shipping));
+      formData.append("customerName", data.customerName);
+      formData.append("customerPhone", String(data.customerPhone));
+      formData.append("customerAddress", data.customerAddress);
+      formData.append("customerThana", data.customerThana);
+      formData.append("customerCity", data.customerCity);
+
+      if (data.customerEmail) {
+        formData.append("customerEmail", data.customerEmail);
+      }
+
+      if (data.prescription?.[0]) {
+        formData.append("prescription", data.prescription[0]);
+      }
+
+      const res = await fetch(`${apiBaseUrl}/quote`, {
+        method: "POST",
+        body: formData,
+      });
+
+      //  SweetAlert2 Success Message
+      Swal.fire({
+        icon: "success",
+        title: "Quote Submitted!",
+        html: `
+            <div class="bg-white border-2 border-green-100 rounded-lg p-4 my-4">
+              <div class="space-y-3">
+                <div class="flex justify-between items-center border-b pb-2">
+                  <span class="text-gray-500 text-sm">Customer</span>
+                  <span class="text-gray-700 font-medium">${data.customerName}</span>
+                </div>
+
+                <div class="flex justify-between items-center border-b pb-2">
+                  <span class="text-gray-500 text-sm">Phone</span>
+                  <span class="text-gray-700 font-medium">${data.customerPhone}</span>
+                </div>
+
+                <div class="flex justify-between items-center border-b pb-2">
+                  <span class="text-gray-500 text-sm">City</span>
+                  <span class="text-gray-700 font-medium">${data.customerCity}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-green-50 rounded-lg p-3 mt-3">
+              <p class="text-sm text-green-800">
+                📞 Our team will review your prescription and contact you soon.
+              </p>
+            </div>
+
+            <p class="text-xs text-gray-500 mt-3">
+              💡 Please keep your phone available for confirmation
+            </p>
+          `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#16a34a",
+        width: "450px",
+      });
+
+      // 1 second পরে shop page এ redirect
+      setTimeout(() => {
+        window.location.href = "/shop";
+      }, 1000);
+
+
+    } catch (e) {
+      toast.error("Failed");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+
   // ----------------- Confirm Order -----------------
   const confirmOrder = async (data: FormData) => {
     try {
@@ -153,7 +250,6 @@ const CheckOutForm: React.FC<Props> = ({
         shippingCost: shipping || 0,
         ...data,
       };
-      console.log(order.totalPrice);
 
       setIsSubmitting(true);
       const result = (await addOrder(order)) as {
@@ -299,6 +395,25 @@ const CheckOutForm: React.FC<Props> = ({
           </div>
         </div>
 
+        <div className="mt-6">
+          <h2 className="font-semibold text-gray-700">
+            Upload Prescription (Optional)
+          </h2>
+
+          <input
+            type="file"
+            accept="image/*"
+            {...register("prescription")}
+            className="w-full my-2 border border-black/20 p-1.5 rounded"
+          />
+
+          <p className="text-sm text-gray-500">
+            If you upload prescription, lens price will be added later after confirmation.
+          </p>
+        </div>
+
+
+
         {/*BreakDown */}
         <div className="text-center rounded lg:py-8 py-4 lg:my-8 my-4 bg-gray-100">
           <p className="">Your total payable amount is</p>
@@ -331,164 +446,168 @@ const CheckOutForm: React.FC<Props> = ({
 
         {/*payment Option */}
         <div>
-          <h1 className="font-bold py-3">Payment Options</h1>
-          <Controller
-            name="paymentMethod"
-            control={control}
-            rules={{ required: "Please select a payment method" }}
-            render={({ field }) => (
-              <>
-                <div className="flex gap-4">
-                  <label
-                    className={`flex items-center gap-2 cursor-pointer border  p-2 rounded-md hover:border-blue-400 duration-300 hover:shadow-blue-200 hover:scale-99  ${field.value === "cod"
-                      ? "border-blue-500"
-                      : "border-gray-300"
-                      }`}
-                  >
-                    <input
-                      type="radio"
-                      {...field}
-                      value="CashOnDelivery"
-                      checked={field.value === "CashOnDelivery"}
-                    />
-                    <Image
-                      className="h-8 w-full"
-                      height={100}
-                      width={100}
-                      src={cashOnDelivery}
-                      alt="COD"
-                    />
-                  </label>
-                  {/* Mobile Banking (bKash/Nagad) */}
-                  <label
-                    className={`flex items-center gap-2 cursor-pointer border p-2 rounded-md hover:border-blue-400 duration-500 hover:shadow-blue-200 hover:scale-99 ${field.value === "MobileBanking"
-                      ? "border-blue-500"
-                      : "border-gray-300"
-                      }`}
-                  >
-                    <input
-                      type="radio"
-                      {...field}
-                      value="MobileBanking"
-                      checked={field.value === "MobileBanking"}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        setShowMobileBanking(true);
-                      }}
-                    />
-                    <Image
-                      className="h-8 w-20"
-                      height={150}
-                      width={150}
-                      src={bikashNagad}
-                      alt="bKash Nagad"
-                    />
-                  </label>
-                </div>
-              </>
-            )}
-          />
-
-          {errors.paymentMethod && (
-            <p className="text-red-500 text-sm">
-              {String(errors.paymentMethod?.message)}
-            </p>
-          )}
-
-          {/* Mobile Banking Dropdown Section */}
-          {showMobileBanking && selectedPayment === "MobileBanking" && (
-            <div className="mt-4 p-4 border border-blue-200 rounded-md bg-gray-100 animate-fadeIn">
-              {/* Select Provider */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">
-                  Select Mobile Banking Provider
-                </label>
-                <select
-                  {...register("mobileBankingProvider", {
-                    required: showMobileBanking ? "Please select a provider" : false,
-                  })}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                >
-                  <option value="">Select Provider</option>
-                  <option value="bKash">bKash</option>
-                  <option value="Nagad">Nagad</option>
-                </select>
-                {errors.mobileBankingProvider && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {String(errors.mobileBankingProvider?.message)}
-                  </p>
+          {!watch("prescription")?.length && (
+            <div>
+              <h1 className="font-bold py-3">Payment Options</h1>
+              <Controller
+                name="paymentMethod"
+                control={control}
+                rules={{ required: "Please select a payment method" }}
+                render={({ field }) => (
+                  <>
+                    <div className="flex gap-4">
+                      <label
+                        className={`flex items-center gap-2 cursor-pointer border  p-2 rounded-md hover:border-blue-400 duration-300 hover:shadow-blue-200 hover:scale-99  ${field.value === "cod"
+                          ? "border-blue-500"
+                          : "border-gray-300"
+                          }`}
+                      >
+                        <input
+                          type="radio"
+                          {...field}
+                          value="CashOnDelivery"
+                          checked={field.value === "CashOnDelivery"}
+                        />
+                        <Image
+                          className="h-8 w-full"
+                          height={100}
+                          width={100}
+                          src={cashOnDelivery}
+                          alt="COD"
+                        />
+                      </label>
+                      {/* Mobile Banking (bKash/Nagad) */}
+                      <label
+                        className={`flex items-center gap-2 cursor-pointer border p-2 rounded-md hover:border-blue-400 duration-500 hover:shadow-blue-200 hover:scale-99 ${field.value === "MobileBanking"
+                          ? "border-blue-500"
+                          : "border-gray-300"
+                          }`}
+                      >
+                        <input
+                          type="radio"
+                          {...field}
+                          value="MobileBanking"
+                          checked={field.value === "MobileBanking"}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            setShowMobileBanking(true);
+                          }}
+                        />
+                        <Image
+                          className="h-8 w-20"
+                          height={150}
+                          width={150}
+                          src={bikashNagad}
+                          alt="bKash Nagad"
+                        />
+                      </label>
+                    </div>
+                  </>
                 )}
-              </div>
+              />
 
-              {/* Show fields when provider is selected */}
-              {selectedMobileBank && (
-                <div className="space-y-4 animate-fadeIn">
-                  {/* Mobile Number */}
-                  <div>
+              {errors.paymentMethod && (
+                <p className="text-red-500 text-sm">
+                  {String(errors.paymentMethod?.message)}
+                </p>
+              )}
+
+              {/* Mobile Banking Dropdown Section */}
+              {showMobileBanking && selectedPayment === "MobileBanking" && (
+                <div className="mt-4 p-4 border border-blue-200 rounded-md bg-gray-100 animate-fadeIn">
+                  {/* Select Provider */}
+                  <div className="mb-4">
                     <label className="block text-sm font-medium mb-2">
-                      Mobile Number
+                      Select Mobile Banking Provider
                     </label>
-                    <input
-                      type="tel"
-                      {...register("mobileNumber", {
-                        required: selectedMobileBank
-                          ? "Mobile number is required"
-                          : false,
-                        pattern: {
-                          value: /^01[3-9]\d{8}$/,
-                          message: "Please enter a valid Bangladesh mobile number",
-                        },
+                    <select
+                      {...register("mobileBankingProvider", {
+                        required: showMobileBanking ? "Please select a provider" : false,
                       })}
-                      placeholder="01XXXXXXXXX"
                       className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    {errors.mobileNumber && (
+                    >
+                      <option value="">Select Provider</option>
+                      <option value="bKash">bKash</option>
+                      <option value="Nagad">Nagad</option>
+                    </select>
+                    {errors.mobileBankingProvider && (
                       <p className="text-red-500 text-sm mt-1">
-                        {String(errors.mobileNumber?.message)}
-                      </p>
-                    )}
-                  </div>
-                  {/* Transaction ID */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Transaction ID
-                    </label>
-                    <input
-                      type="text"
-                      {...register("transactionId", {
-                        required: selectedMobileBank
-                          ? "Transaction ID is required"
-                          : false,
-                        minLength: {
-                          value: 8,
-                          message: "Transaction ID must be at least 8 characters",
-                        },
-                      })}
-                      placeholder="Enter transaction ID"
-                      className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    {errors.transactionId && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {String(errors.transactionId?.message)}
+                        {String(errors.mobileBankingProvider?.message)}
                       </p>
                     )}
                   </div>
 
-                  <div className="text-sm text-gray-600 bg-orange-50 p-3 rounded-md border border-orange-200">
-                    <p className="font-medium">Instructions:</p>
-                    <p>
-                      1. Send payment to: <strong>01XXXXXXXXX</strong>
-                    </p>
-                    <p>2. Enter your mobile number used for payment</p>
-                    <p>3. Enter the transaction ID you received</p>
-                  </div>
+                  {/* Show fields when provider is selected */}
+                  {selectedMobileBank && (
+                    <div className="space-y-4 animate-fadeIn">
+                      {/* Mobile Number */}
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          Mobile Number
+                        </label>
+                        <input
+                          type="tel"
+                          {...register("mobileNumber", {
+                            required: selectedMobileBank
+                              ? "Mobile number is required"
+                              : false,
+                            pattern: {
+                              value: /^01[3-9]\d{8}$/,
+                              message: "Please enter a valid Bangladesh mobile number",
+                            },
+                          })}
+                          placeholder="01XXXXXXXXX"
+                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+                        {errors.mobileNumber && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {String(errors.mobileNumber?.message)}
+                          </p>
+                        )}
+                      </div>
+                      {/* Transaction ID */}
+                      <div>
+                        <label className="block text-sm font-medium mb-2">
+                          Transaction ID
+                        </label>
+                        <input
+                          type="text"
+                          {...register("transactionId", {
+                            required: selectedMobileBank
+                              ? "Transaction ID is required"
+                              : false,
+                            minLength: {
+                              value: 8,
+                              message: "Transaction ID must be at least 8 characters",
+                            },
+                          })}
+                          placeholder="Enter transaction ID"
+                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+                        {errors.transactionId && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {String(errors.transactionId?.message)}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="text-sm text-gray-600 bg-orange-50 p-3 rounded-md border border-orange-200">
+                        <p className="font-medium">Instructions:</p>
+                        <p>
+                          1. Send payment to: <strong>01XXXXXXXXX</strong>
+                        </p>
+                        <p>2. Enter your mobile number used for payment</p>
+                        <p>3. Enter the transaction ID you received</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
 
           {/*Coupon Code */}
-          <h2 className="font-bold pt-5">Got any Coupon Code?</h2>
+          {/* <h2 className="font-bold pt-5">Got any Coupon Code?</h2>
           <div className="flex lg:flex-row flex-col pb-5  gap-4 w-full mt-2">
             <div className="xl:w-[40%] lg:w-[60%]">
               <input
@@ -504,7 +623,7 @@ const CheckOutForm: React.FC<Props> = ({
             >
               Add Coupon
             </div>
-          </div>
+          </div> */}
 
           {/* agree trams and condition */}
           <div className="flex gap-2">
@@ -591,7 +710,9 @@ const CheckOutForm: React.FC<Props> = ({
                 )}
               </>
             ) : (
-              "Confirm Order"
+              watch("prescription")?.length
+                ? "Submit for Quote"
+                : "Confirm Order"
             )}
           </button>
         </div>

@@ -58,7 +58,13 @@ const page = async () => {
                     href="/doctor"
                     className="px-8 py-3 border-2 border-foreground bg-primary  text-white font-medium rounded-lg hover:bg-foreground hover:text-background transition"
                   >
-                    Our Services
+                    Our Doctors
+                  </Link>
+                  <Link
+                    href="/shop"
+                    className="px-8 py-3 border-2 border-foreground bg-primary  text-white font-medium rounded-lg hover:bg-foreground hover:text-background transition"
+                  >
+                    Our Product
                   </Link>
                 </div>
               </div>

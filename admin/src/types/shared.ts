@@ -134,6 +134,7 @@ export type TOrder = {
   paymentMethod?: "CashOnDelivery" | "Online" | "MobileBanking";
   mobileBankingProvider?: string;
   mobileNumber?: string;
+  prescription: string;
   createdAt?: string;
   updatedAt?: string;
 };
