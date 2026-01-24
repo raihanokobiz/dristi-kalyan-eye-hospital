@@ -17,7 +17,7 @@ const Contact = async () => {
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
-      <div className="py-6 px-4">
+      <div className="py-6 px-4 2xl:px-0 mt-4 lg:mt-28">
         <div className="text-2xl lg:text-4xl text-center font-bold mt-14 lg:mt-0 mb-3 lg:mb-6 mt-20">
           Contact Us
         </div>

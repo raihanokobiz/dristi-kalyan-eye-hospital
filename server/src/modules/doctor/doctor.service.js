@@ -5,6 +5,7 @@ const { removeUploadFile } = require("../../middleware/upload/removeUploadFile.j
 const pagination = require("../../utils/pagination.js");
 
 class DoctorService {
+
     async createDoctor(payloadFiles, payload, session) {
         const { files } = payloadFiles;
         const {

@@ -68,7 +68,7 @@ const SignIn = () => {
   return (
     <div>
       {/* <NavBar userCartProducts={productsByUser?.data} /> */}
-      <div className="flex flex-col justify-center items-center py-20 mt-4 md:mt-6">
+      <div className="flex flex-col justify-center items-center py-20 mt-8 md:mt-12">
         <div className="w-[350px] lg:w-[600px]">
           <div className="border-b border-black/20 text-center pb-3 mb-5">
             <h2 className="text-3xl font-bold">Sign In</h2>

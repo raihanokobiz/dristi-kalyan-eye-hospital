@@ -272,6 +272,11 @@ class ProductService extends BaseService {
       "inventoryRef",
     ]);
   }
+
+  async getProductForHomePage(payload) {
+    return await this.#repository.getProductForHomePage();
+  }
+
   async getAllProductForHomePage(payload) {
     const { limit, viewType } = payload;
     if (!viewType) throw new NotFoundError("viewType is required");

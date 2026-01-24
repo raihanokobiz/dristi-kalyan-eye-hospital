@@ -409,6 +409,31 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({ products, userR
           />
         )}
       </div>
+
+      {/* View All Button */}
+      <div className="text-center mt-4 lg:mt-8 ">
+        <Link href="/shop">
+          <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
+            View All Product
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 inline-block ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 };

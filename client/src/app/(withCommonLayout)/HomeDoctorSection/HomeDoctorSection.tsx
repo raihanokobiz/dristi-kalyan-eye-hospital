@@ -40,9 +40,9 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
                     ))}
                 </div>
                 {/* View All Button */}
-                <div className="text-center">
+                <div className="text-center cursor-pointer">
                     <Link href="/doctor">
-                        <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                        <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
                             View All Doctors
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

@@ -11,6 +11,14 @@ export const getHomePageSubCategoryProducts = async (viewType?: string) => {
   return result;
 };
 
+
+export const getProductForHomePage = async () => {
+  const result: TResponse = await apiRequest({
+    endpoint: `/product/home-page`,
+  });
+  return result;
+};
+
 export const getAllProduct = async () => {
   const result: TResponse = await apiRequest({
     endpoint: `/product`,

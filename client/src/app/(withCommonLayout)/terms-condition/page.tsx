@@ -17,7 +17,7 @@ const TermCondition = async () => {
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
-      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-4 md:mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-2 lg:gap-4">
             <div className="text-2xl lg:text-4xl font-semibold text-[#262626] text-center mt-14 lg:mt-0">
@@ -51,9 +51,9 @@ const TermCondition = async () => {
                 Introduction
               </div>
               <div className="text-red-600">
-                The domain name www.dristi kalyan eye hospital.com (referred to as "Website") is
-                owned by "dristi kalyan eye hospital" a company incorporated under the Companies
-                Act, 1994(Act XVIII of 1994).
+                The domain name www.dristikalyaneyehospital.com (referred to as "Website") is
+                owned by "dristi kalyan eye hospital" a hospital incorporated under the Hospital
+                Act, 2026(Act XVIII of 2026).
               </div>
               <div>
                 By accessing this Site, you confirm your understanding of the

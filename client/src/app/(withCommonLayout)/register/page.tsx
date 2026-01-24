@@ -96,7 +96,7 @@ const Registration = () => {
   return (
     <>
       {/* <NavBar userCartProducts={productsByUser?.data} /> */}
-      <div className="flex flex-col justify-center items-center py-20 mt-2.5">
+      <div className="flex flex-col justify-center items-center py-20 mt-8 md:mt-12">
         <div className="w-[350px] lg:w-[600px]">
           <div className="border-b-1 border-black/20 text-center pb-3 mb-5">
             <h2 className="text-3xl font-bold">Registration</h2>

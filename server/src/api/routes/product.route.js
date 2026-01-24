@@ -13,6 +13,9 @@ ProductRoute.route("/")
   .get(controller.getAllProduct);
 
 
+ProductRoute.route("/home-page")
+  .get(controller.getProductForHomePage);
+
 ProductRoute.get("/search", controller.getSearchProduct);
 ProductRoute.get("/related-product/:id", controller.getRelatedProduct);
 ProductRoute.get("/view-type", controller.getAllProductForHomePage);

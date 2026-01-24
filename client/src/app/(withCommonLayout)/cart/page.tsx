@@ -164,7 +164,7 @@ const Cart = async () => {
                   </div>
 
                   {/* Subtotal */}
-                  
+
                   <div className=" flex justify-between border-t border-black/5 py-3 px-3">
                     <p className="font-bold text-[15px]">Subtotal</p>
                     <div className="flex  gap-2">
@@ -210,9 +210,9 @@ const Cart = async () => {
         <div className="bg-[#F6F6F6] text-gray-600 rounded text-center py-5 px-8 my-5">
           <span>
             * If you wish to make a bulk order, please call us at{" "}
-            <span className="font-bold text-black"> 01922-228733</span>
+            <span className="font-bold text-black"> 01922-228733 </span>
             or email at{" "}
-            <span className="font-bold text-black">anisggn@gmail.com</span> for more
+            <span className="font-bold text-black">careerhunter81@gmail.com</span> for more
             information.
           </span>
         </div>

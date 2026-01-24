@@ -16,7 +16,7 @@ const PrivacyPolicy = async () => {
   return (
     <>
       {/* <NavBar userCartProducts={products?.data} /> */}
-      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-4 md:mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-2 lg:gap-4">
             <h1 className="text-2xl lg:text-4xl font-semibold text-[#262626] text-center mt-14 lg:mt-0">
@@ -91,8 +91,8 @@ const PrivacyPolicy = async () => {
             <h2 className="text-xl font-semibold mt-4">How to Return</h2>
             <p className="policy-page-text">
               Contact Dhamrai Drisiti Kalyan Eye Hospital Customer Care at{" "}
-              <a href="mailto:anisggn@gmail.com" className="text-blue-600">
-                anisggn@gmail.com
+              <a href="mailto:careerhunter81@gmail.com" className="text-blue-600">
+                careerhunter81@gmail.com
               </a>{" "}
               within 72 hours after receiving your order.
             </p>
@@ -133,10 +133,10 @@ const PrivacyPolicy = async () => {
                 Refund processing time is 7–10 working days. If not received
                 within this time, please contact us at{" "}
                 <a
-                  href="mailto:anisggn@gmail.com"
+                  href="mailto:careerhunter81@gmail.com"
                   className="text-blue-600"
                 >
-                  anisggn@gmail.com
+                  careerhunter81@gmail.com
                 </a>
                 .
               </li>

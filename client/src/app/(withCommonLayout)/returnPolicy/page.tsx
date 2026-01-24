@@ -18,7 +18,7 @@ const ReturnPolicy = async () => {
   return (
     <>
       {/* <NavBar  userCartProducts ={ products?.data}/> */}
-      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="py-12 px-4 sm:px-6 lg:px-8 mt-4 md:mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="policy-container text-gray-800 leading-relaxed ">
             <h1 className="text-2xl lg:text-4xl font-semibold text-[#262626] text-center mt-14 lg:mt-0 mb-5">
@@ -76,8 +76,8 @@ const ReturnPolicy = async () => {
             <ol className="list-decimal ml-6 space-y-3">
               <li>
                 Contact Dhamrai Drisiti Kalyan Eye Hospital Customer Care at
-                <a href="mailto:anisggn@gmail.com" className="text-blue-600 underline ml-1">
-                  anisggn@gmail.com
+                <a href="mailto:careerhunter81@gmail.com" className="text-blue-600 underline ml-1">
+                  careerhunter81@gmail.com
                 </a>
                 within <strong>72 hours</strong> of receiving your order.
               </li>
@@ -100,8 +100,8 @@ const ReturnPolicy = async () => {
               <li>If online payment was made twice due to a technical issue, the duplicate payment will be refunded.</li>
               <li>
                 Refunds take <strong>7–10 working days</strong>. If not received within this timeframe, contact us at
-                <a href="mailto:anisggn@gmail.com" className="text-blue-600 underline ml-1">
-                  anisggn@gmail.com
+                <a href="mailto:careerhunter81@gmail.com" className="text-blue-600 underline ml-1">
+                  careerhunter81@gmail.com
                 </a>.
               </li>
             </ul>
