@@ -15,13 +15,12 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
         <div className="bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
             <Link href={`/doctor/${doctor._id}`} className="block">
                 {/* IMAGE */}
-                <div className="relative h-40 lg:h-52 w-full">
+                <div className="relative h-40 lg:h-60 w-full">
                     <Image
                         src={doctor?.image}
                         alt={doctor.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 25vw"
+                        className="object-fill group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.src = "/images/default-doctor.jpg";

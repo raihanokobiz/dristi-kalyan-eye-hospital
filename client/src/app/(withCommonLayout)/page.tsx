@@ -7,7 +7,7 @@ import React from "react";
 // import { getCampaign } from "@/services/campaign";
 // import Offer from "@/components/pages/landing_pages/offer/Offer";
 // import Text1 from "../../assets/texture/Text2.png";
-import { getAllDoctors } from "@/services/doctor/doctors";
+import { getAllDoctorsForHomePage } from "@/services/doctor/doctors";
 import { getAllService } from "@/services/service";
 
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
@@ -60,7 +60,7 @@ const page = async () => {
 
   const allProducts = data?.data || [];
   // Fetch doctors - ADD THIS LINE
-  const doctors = await getAllDoctors();
+  const doctors = await getAllDoctorsForHomePage();
 
   // Fetch services
   const services = await getAllService()

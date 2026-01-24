@@ -24,11 +24,16 @@ import { createFormAction } from "./actions";
 import { useRouter } from "next/navigation";
 import { uploadImageToCloudinary } from "@/services/cloudinary/cloudinary";
 import { Switch } from "antd";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import { resizeImage } from "@/utils/resizeImage";
 
 const defaultValues = {
   name: "",
   degree: "",
-  visitingTime: "",
+  visitingTimeStart: "",
+  visitingTimeEnd: "",
   consultationFee: 0,
   availableDays: [],
   phone: "",
@@ -64,14 +69,21 @@ export const CreateForm: React.FC = () => {
     try {
 
       // Image upload to Cloudinary
-      const imageFile = values.image[0];
-      const imageUploadResult = await uploadImageToCloudinary(imageFile, "doctors");
+      const rawImage = values.image[0];
+      const optimizedImage = await resizeImage(rawImage);
+
+      const imageUploadResult = await uploadImageToCloudinary(
+        optimizedImage,
+        "doctors"
+      );
+
+      const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
 
       // FormData preparation
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("degree", values.degree);
-      formData.append("visitingTime", values.visitingTime);
+      formData.append("visitingTime", visitingTime);
       formData.append("consultationFee", values.consultationFee.toString());
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
@@ -158,25 +170,52 @@ export const CreateForm: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 ">
                 {/* Visiting Time */}
-                <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1.5">
+                  {/* Start Time */}
                   <FormField
                     control={form.control}
-                    name="visitingTime"
+                    name="visitingTimeStart"
                     render={({ field }) => (
-                      <FormItem className="col-span-2">
-                        <FormLabel>Visiting Time <b className="text-red-500">*</b></FormLabel>
+                      <FormItem>
+                        <FormLabel>Start Time <b className="text-red-500">*</b></FormLabel>
                         <FormControl>
-                          <Input placeholder="10:00 AM - 2:00 PM" {...field} />
+                          <TimePicker
+                            onChange={field.onChange}
+                            value={field.value}
+                            disableClock
+                            format="h:mm a"
+                            clearIcon={null}
+                            className="w-full"
+                          />
                         </FormControl>
-                        <FormDescription className="text-red-400 text-xs min-h-4">
-                          {form.formState.errors.visitingTime?.message}
-                        </FormDescription>
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* End Time */}
+                  <FormField
+                    control={form.control}
+                    name="visitingTimeEnd"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>End Time <b className="text-red-500">*</b></FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            onChange={field.onChange}
+                            value={field.value}
+                            disableClock
+                            format="h:mm a"
+                            clearIcon={null}
+                            className="w-full"
+                          />
+                        </FormControl>
                       </FormItem>
                     )}
                   />
                 </div>
+
                 {/* Consultation Fee */}
                 <div>
                   <FormField

@@ -18,8 +18,8 @@ export const formSchema = z.object({
   degree: z
     .string(),
 
-  visitingTime: z
-    .string(),
+  visitingTimeStart: z.string().min(1, "Start time required"),
+  visitingTimeEnd: z.string().min(1, "End time required"),
 
   phone: z
     .string()

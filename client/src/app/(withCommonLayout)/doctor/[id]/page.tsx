@@ -180,10 +180,10 @@ const DoctorDetailsPage: React.FC = () => {
         <div className=" bg-gray-50 py-12 px-4 mt-20">
             <div className="max-w-5xl mx-auto">
                 <div className="bg-white rounded-md shadow-md overflow-hidden">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 p-4 lg:p-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8 p-4 lg:p-8">
                         {/* LEFT: Image */}
-                        <div className="flex  justify-center">
-                            <div className="relative w-full h-60 lg:h-96 rounded-md overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
+                        <div className="flex justify-center">
+                            <div className="relative w-full h-80 md:h-[350px] lg:h-[500px] rounded-md overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
                                 <Image
                                     src={doctor.image || "/placeholder.svg"}
                                     alt={doctor.name}
@@ -192,7 +192,7 @@ const DoctorDetailsPage: React.FC = () => {
                                     priority
                                 />
                                 {doctor.status && (
-                                    <div className="absolute top-4 right-4 inline-flex items-center gap-2 bg-white text-teal-600 px-4 py-2 rounded-full text-xs font-bold shadow-md">
+                                    <div className="absolute top-1 left-1 inline-flex items-center gap-2 bg-white text-teal-600 px-4 py-2 rounded-full text-xs font-bold shadow-md">
                                         <div className="w-2 h-2 bg-teal-600 rounded-full animate-pulse" />
                                         <span>Available</span>
                                     </div>

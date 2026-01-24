@@ -43,6 +43,18 @@ class DoctorService {
         return doctors;
     }
 
+    async getDoctorsForHomePage() {
+        const doctors = await DoctorSchema.find({ status: true })
+            .select(
+                "name degree image visitingTime consultationFee status"
+            )
+            .sort({ createdAt: -1 })
+            .limit(8);
+
+        return doctors;
+    }
+
+
     async getDoctorWithPagination(payload) {
         try {
             const doctors = await pagination(
