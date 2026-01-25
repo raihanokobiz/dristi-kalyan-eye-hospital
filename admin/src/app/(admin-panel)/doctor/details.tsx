@@ -37,11 +37,12 @@ import { UploadOutlined } from "@ant-design/icons";
 import { humanFileSize } from "@/utils/helpers";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
-import {
-  deleteImageFromCloudinary,
-  uploadImageToCloudinary,
-} from "@/services/cloudinary/cloudinary";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import { resizeImage } from "@/utils/resizeImage";
 import { TDoctor } from "./types";
+import { deleteImageFromCloudinary, uploadImageToCloudinary } from "@/services/cloudinary/cloudinary";
 
 interface Props {
   item: TDoctor;
@@ -80,13 +81,13 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
   );
 
 
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: item.name,
       degree: item.degree,
-      visitingTime: item.visitingTime,
+      visitingTimeStart: item.visitingTime?.split(" - ")[0] || "",
+      visitingTimeEnd: item.visitingTime?.split(" - ")[1] || "",
       phone: item.phone,
       email: item.email || "",
       availableDays: item.availableDays || [],
@@ -110,8 +111,8 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
 
   const onSubmitUpdate = async (values: z.infer<typeof formSchema>) => {
 
-
     setUpdating(true);
+    
     try {
 
       let imageUrl = item.image;
@@ -125,19 +126,24 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
         }
 
         // new image upload
+        const optimizedImage = await resizeImage(values.image[0]);
         const uploadResult = await uploadImageToCloudinary(
-          values.image[0],
+          optimizedImage,
           "doctors"
         );
         imageUrl = uploadResult.secure_url;
         imagePublicId = uploadResult.public_id;
       }
 
+
+      const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
+
+
       // FormData
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("degree", values.degree);
-      formData.append("visitingTime", values.visitingTime);
+      formData.append("visitingTime", visitingTime);
       formData.append("consultationFee", values.consultationFee.toString());
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
@@ -223,7 +229,6 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
               {[
                 ["name", "Doctor Name"],
                 ["degree", "Degree"],
-                ["visitingTime", "Visiting Time"],
                 ["phone", "Phone"],
                 ["email", "Email"],
               ].map(([name, label]) => (
@@ -244,6 +249,49 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                   )}
                 />
               ))}
+            </div>
+
+            {/* Visiting Times */}
+            <div className="col-span-2 grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="visitingTimeStart"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Start Time</FormLabel>
+                    <FormControl>
+                      <TimePicker
+                        onChange={field.onChange}
+                        value={field.value}
+                        disableClock
+                        format="h:mm a"
+                        clearIcon={null}
+                        className="w-full"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="visitingTimeEnd"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>End Time</FormLabel>
+                    <FormControl>
+                      <TimePicker
+                        onChange={field.onChange}
+                        value={field.value}
+                        disableClock
+                        format="h:mm a"
+                        clearIcon={null}
+                        className="w-full"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* AVAILABLE DAYS */}

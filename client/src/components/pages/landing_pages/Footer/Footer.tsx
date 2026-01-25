@@ -7,7 +7,7 @@ import React from "react";
 // } from "react-icons/fa";
 import Link from "next/link";
 import DownFooter from "../../DownFooter/DownFooter";
-import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
 
 interface FooterProps {
   userCartProducts: {

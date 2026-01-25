@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { Eye } from "lucide-react"
-import { Service } from "@/types/service"
 import Texture from "@/assets/texture/texture.webp"
 import { getAllService } from "@/services/service";
 import ServiceCard from "@/components/pages/service/ServiceCard";

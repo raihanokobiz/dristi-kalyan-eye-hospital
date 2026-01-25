@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Doctor, DoctorResponse } from "@/types/doctor";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
-import { FiClock, FiMapPin } from "react-icons/fi";
+import { FiClock } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 

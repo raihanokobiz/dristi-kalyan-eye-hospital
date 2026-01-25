@@ -25,8 +25,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
   const [addedToCart, setAddedToCart] = useState(false);
 
 
-  const [levelError, setLevelError] = useState(false);
-  const [colorError, setColorError] = useState(false);
+  // const [levelError, setLevelError] = useState(false);
+  // const [colorError, setColorError] = useState(false);
   const router = useRouter();
   const controls = useAnimation();
   const handleIncrement = () => {
@@ -66,7 +66,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         inventoryType === "colorLevelInventory") &&
       !selectedLevel
     ) {
-      setLevelError(true);
+      // setLevelError(true);
       return;
     }
 
@@ -75,7 +75,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         inventoryType === "colorInventory") &&
       !selectedColor
     ) {
-      setColorError(true);
+      // setColorError(true);
       return;
     }
     try {
@@ -104,8 +104,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
       await addToCart(product);
       // router.push("/cart");
       toast.success("Product added to cart!");
-      setLevelError(false);
-      setColorError(false);
+      // setLevelError(false);
+      // setColorError(false);
       controls.start({
         scale: 0.01,
         x: 1200,
@@ -138,7 +138,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         inventoryType === "colorLevelInventory") &&
       !selectedLevel
     ) {
-      setLevelError(true);
+      // setLevelError(true);
       return;
     }
 
@@ -147,7 +147,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         inventoryType === "colorInventory") &&
       !selectedColor
     ) {
-      setColorError(true);
+      // setColorError(true);
       return;
     }
 
@@ -175,7 +175,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
       await addToCart(productData);
       router.push("/checkout"); // 👈 checkout page
-    } catch (err) {
+    } catch {
       toast.error("Failed to process Buy Now");
     }
   };
@@ -237,7 +237,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                             setLevel(size.level);
                             setSelectedLevel(size._id);
                             setSelectedColor(null);
-                            setLevelError(false);
+                            // setLevelError(false);
                           }}
                           className={` p-2 h-[30px] border border-primary hover:text-primary duration-300 cursor-pointer rounded text-center flex items-center justify-center uppercase ${level === size.level
                             ? "bg-primary text-white"
@@ -248,11 +248,11 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                         </p>
                       ))}
                   </div>
-                  {levelError && (
+                  {/* {levelError && (
                     <p className="text-red-500 text-sm mt-1">
                       Please select a size.
                     </p>
-                  )}
+                  )} */}
                 </div>
               )}
           </div>

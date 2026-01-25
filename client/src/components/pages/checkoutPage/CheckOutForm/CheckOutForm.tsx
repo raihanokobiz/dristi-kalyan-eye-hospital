@@ -126,34 +126,34 @@ const CheckOutForm: React.FC<Props> = ({
   // }
 
   // }
-  const handleAddCoupon = () => {
-    const coupon = getValues("coupon")?.trim();
+  // const handleAddCoupon = () => {
+  //   const coupon = getValues("coupon")?.trim();
 
-    // Check: does ANY product have discount?
-    const hasProductDiscount = Number(products.data.productDiscount > 0);
+  //   // Check: does ANY product have discount?
+  //   const hasProductDiscount = Number(products.data.productDiscount > 0);
 
-    console.log(hasProductDiscount)
+  //   console.log(hasProductDiscount)
 
-    if (coupon) {
-      setCoupon(coupon);
+  //   if (coupon) {
+  //     setCoupon(coupon);
 
-      toast.success(
-        hasProductDiscount
-          ? "Coupon applied on Product  MRP Price"
-          : "Coupon applied",
-        {
-          theme: "colored",
-          autoClose: 5000,
-        }
-      );
-    } else {
-      setCoupon(null);
-      toast.info("No coupon applied.", {
-        theme: "colored",
-        autoClose: 5000,
-      });
-    }
-  };
+  //     toast.success(
+  //       hasProductDiscount
+  //         ? "Coupon applied on Product  MRP Price"
+  //         : "Coupon applied",
+  //       {
+  //         theme: "colored",
+  //         autoClose: 5000,
+  //       }
+  //     );
+  //   } else {
+  //     setCoupon(null);
+  //     toast.info("No coupon applied.", {
+  //       theme: "colored",
+  //       autoClose: 5000,
+  //     });
+  //   }
+  // };
 
   // ----------------- Confirm Quote -----------------
   const submitQuote = async (data: FormData) => {
@@ -179,10 +179,10 @@ const CheckOutForm: React.FC<Props> = ({
         formData.append("prescription", data.prescription[0]);
       }
 
-      const res = await fetch(`${apiBaseUrl}/quote`, {
-        method: "POST",
-        body: formData,
-      });
+      // const res = await fetch(`${apiBaseUrl}/quote`, {
+      //   method: "POST",
+      //   body: formData,
+      // });
 
       //  SweetAlert2 Success Message
       Swal.fire({
@@ -229,7 +229,7 @@ const CheckOutForm: React.FC<Props> = ({
       }, 1000);
 
 
-    } catch (e) {
+    } catch (error) {
       toast.error("Failed");
     } finally {
       setIsSubmitting(false);

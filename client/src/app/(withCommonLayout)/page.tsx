@@ -7,14 +7,14 @@ import React from "react";
 // import { getCampaign } from "@/services/campaign";
 // import Offer from "@/components/pages/landing_pages/offer/Offer";
 // import Text1 from "../../assets/texture/Text2.png";
-import { getAllDoctors, getAllDoctorsForHomePage } from "@/services/doctor/doctors";
-import { getAllService, getAllServiceForHome } from "@/services/service";
+import { getAllDoctorsForHomePage } from "@/services/doctor/doctors";
+import { getAllServiceForHome } from "@/services/service";
 
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
 // import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
 // import { getAllOffers } from "@/services/offer";
 // import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
-import { getAllProduct, getProductForHomePage } from "@/services/products";
+import { getProductForHomePage } from "@/services/products";
 import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
@@ -106,8 +106,6 @@ const page = async () => {
           {/* <Subscribe /> */}
 
         </div>
-
-        <HomeProductSection products={allProducts} />
 
       </div>
     </>

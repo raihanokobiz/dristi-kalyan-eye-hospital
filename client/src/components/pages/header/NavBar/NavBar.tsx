@@ -6,7 +6,7 @@ import logo from "@/assets/logo/logo.png";
 // import SearchForm from "../SearchForm/SearchForm";
 import Link from "next/link";
 import { BsCart2 } from "react-icons/bs";
-import { FiUser, FiPhone, FiMapPin, FiCalendar } from "react-icons/fi";
+import { FiUser, FiPhone, FiCalendar } from "react-icons/fi";
 import { RiCloseFill, RiMenuAddFill } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";

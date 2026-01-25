@@ -45,8 +45,8 @@ const ProductDialog: React.FC<Product> = ({
   const [selectedColor] = useState<string | null>(null);
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
-  const [levelError, setLevelError] = useState(false);
-  const [colorError, setColorError] = useState(false);
+  // const [levelError, setLevelError] = useState(false);
+  // const [colorError, setColorError] = useState(false);
   const controls = useAnimation();
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +74,7 @@ const ProductDialog: React.FC<Product> = ({
           inventoryType === "colorLevelInventory") &&
         !selectedLevel
       ) {
-        setLevelError(true);
+        // setLevelError(true);
         return;
       }
 
@@ -83,7 +83,7 @@ const ProductDialog: React.FC<Product> = ({
           inventoryType === "colorInventory") &&
         !selectedColor
       ) {
-        setColorError(true);
+        // setColorError(true);
         return;
       }
 
@@ -131,8 +131,8 @@ const ProductDialog: React.FC<Product> = ({
       });
       // setOpen(false);
       toast.success("Product added to cart!");
-      setLevelError(false);
-      setColorError(false);
+      // setLevelError(false);
+      // setColorError(false);
 
       // Reset image after animation
       setTimeout(() => {
