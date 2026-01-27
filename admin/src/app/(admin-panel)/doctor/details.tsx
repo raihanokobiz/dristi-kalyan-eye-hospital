@@ -93,6 +93,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
       availableDays: item.availableDays || [],
       image: [],
       consultationFee: item.consultationFee,
+      gender: item.gender || "male",
       status: item.status
     },
   });
@@ -112,13 +113,13 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
   const onSubmitUpdate = async (values: z.infer<typeof formSchema>) => {
 
     setUpdating(true);
-    
+
     try {
 
-      let imageUrl = item.image;
+      let imageUrl = item.image || "";
       let imagePublicId = item.imagePublicId || "";
 
-      // new image upload
+      // new image upload (optional)
       if (values.image && values.image.length > 0) {
         // old image delete
         if (item.imagePublicId) {
@@ -148,6 +149,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
+      formData.append("gender", values.gender);
       formData.append("status", values.status.toString());
       formData.append("image", imageUrl || "");
 
@@ -249,6 +251,31 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                   )}
                 />
               ))}
+            </div>
+
+            {/* Gender Field */}
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                      >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </FormControl>
+                    <FormDescription>
+                      {form.formState.errors.gender?.message}
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* Visiting Times */}

@@ -11,6 +11,7 @@ export type TDoctor = {
     email?: string;
     availableDays: ("monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday")[];
     consultationFee: number;
+    gender: "male" | "female";
     // status: "Active" | "Inactive";
     status: boolean;
 };
@@ -24,6 +25,7 @@ export type TDoctorForm = {
     email?: string;
     availableDays: (("monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"))[];
     consultationFee: number;
+    gender: "male" | "female";
     status: boolean;
 };
 

@@ -17,7 +17,7 @@ class DoctorService {
             consultationFee,
         } = payload;
 
-        // Validate required fields
+        // Validate required fields (image is optional)
         if (!name || !degree || !visitingTime || !phone || !availableDays || !consultationFee) {
             throw new Error("All required fields must be provided");
         }
@@ -50,7 +50,7 @@ class DoctorService {
                 "name degree image visitingTime consultationFee status"
             )
             .sort({ createdAt: -1 })
-            .limit(8);
+            .limit(4);
 
         return doctors;
     }

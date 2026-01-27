@@ -43,6 +43,7 @@ const defaultValues = {
 
 export const bannerTypes = [
   { name: "MAIN BANNER", key: "main_banner" },
+  { name: "ABOUT US BANNER", key: "about_us_banner" },
   // { name: "UPCOMING BANNER", key: "upcoming_banner" },
   // { name: "CATEGORY BANNER", key: "category_banner" },
   // { name: "BEST SALE BANNER", key: "best_sale_banner" },

@@ -38,4 +38,5 @@ module.exports = {
   CampaignSchema: require("./campaign/campaignSchema.js").CampaignSchema,
   DoctorSchema: require("./doctor/doctorSchema.js").DoctorSchema,
   ServiceSchema: require("./service/serviceSchema.js").ServiceSchema,
+  BlogSchema: require("./blog/blogSchema.js").BlogSchema,
 };

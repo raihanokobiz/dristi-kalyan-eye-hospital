@@ -15,6 +15,9 @@ export const formSchema = z.object({
     .optional()
     .default([]),
 
+  // Optional: You can add validation to ensure either image is provided or gender is specified for placeholder
+  // But since gender is required, placeholder will always work
+
   degree: z
     .string(),
 
@@ -27,6 +30,10 @@ export const formSchema = z.object({
     .refine((val) => val.length >= 10 && val.length <= 15, {
       message: "Phone number must be 10–15 digits",
     }),
+
+  gender: z.enum(["male", "female"], {
+    required_error: "Gender is required",
+  }),
 
   email: z
     .string()

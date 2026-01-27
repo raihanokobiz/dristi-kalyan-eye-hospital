@@ -150,33 +150,8 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
             </div>
           </div>
 
-          {/* Desktop Search Bar with Animated Placeholder */}
-          {/* <div className=" hidden lg:block flex-1 max-w-md relative">
-            <div className="relative">
-              <input
-                type="text"
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-300"
-                placeholder=""
-              />
-              <motion.div
-                key={placeholderIndex}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.5 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-              >
-                {placeholders[placeholderIndex]}
-              </motion.div>
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1.5 rounded-md hover:bg-primary transition-colors duration-300">
-                <IoSearchOutline className="text-lg" />
-              </button>
-            </div>
-          </div> */}
-
           {/* Nav Links Desktop */}
           <div className="hidden lg:flex items-center gap-6">
-
             <Link href="/about" className="text-gray-700 hover:text-primary text-sm font-semibold">
               About Us
             </Link>
@@ -189,6 +164,10 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
               Product
             </Link>
 
+            <Link href="/blogs" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Blogs
+            </Link>
+
             <Link href="/contact" className="text-gray-700 hover:text-primary text-sm font-semibold">
               Contact Us
             </Link>
@@ -197,19 +176,6 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
           {/* Right Side Icons */}
           <div className="flex items-center lg:gap-2.5 gap-1 ">
-            {/* Location Display - Desktop */}
-            {/* <div
-
-              className="  hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
-            >
-              <FiMapPin className="text-primary text-lg" />
-              <div className="flex flex-col">
-                <span className="text-xs text-gray-500">Location</span>
-                <span className="text-xs font-semibold text-gray-700">
-                  Dhamrai Drisiti Kalyan Eye Hospital
-                </span>
-              </div>
-            </div> */}
             {/* Contact Number */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
               <FiPhone className="text-primary text-lg" />

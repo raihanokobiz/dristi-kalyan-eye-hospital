@@ -20,6 +20,8 @@ import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
 import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
 import HomeProductSection from "@/components/pages/products/ProductCard/ProductCard";
+import OurAdvancedServices from "@/components/pages/landing_pages/OurAdvancedServices/OurAdvancedServices";
+import WhyChooseUsTwo from "@/components/pages/landing_pages/WhyChooseUsTwo/WhyChooseUsTwo";
 
 
 
@@ -73,38 +75,15 @@ const page = async () => {
       <div className="">
         <Banner banners={[]} />
         <div
-        // style={{
-        //   backgroundImage: `url(${Text1.src})`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
         >
+          <OurAdvancedServices />
+          {/* <WhyChooseUs /> */}
+          <WhyChooseUsTwo />
           <BenefitsSection />
           <HomeDoctorSection doctors={doctors} />
           <EyeServices services={services} />
-          <WhyChooseUs />
-          {/* <WhyChooseUs /> */}
-          {/* <Category /> */}
-          {/* <Offer offrs={offrs} /> */}
-          {/* <SubCategory /> */}
-          {/* <ChildCategory />   */}
         </div>
-
-        <div
-        // style={{
-        //   backgroundImage: `url(${Text1.src})`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
-        >
-          {/* <PopularItems products={popularProducts} /> */}
-
-          {/* <Campaign campaign={campaign[0]} /> */}
-
-          {/* <Subscribe /> */}
-
+        <div>
         </div>
 
       </div>

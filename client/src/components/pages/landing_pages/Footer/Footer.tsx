@@ -7,7 +7,7 @@ import React from "react";
 // } from "react-icons/fa";
 import Link from "next/link";
 import DownFooter from "../../DownFooter/DownFooter";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
 
 interface FooterProps {
   userCartProducts: {
@@ -20,6 +20,10 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
 
   const quickLink = [
     {
+      name: "About us",
+      link: "/about",
+    },
+    {
       name: "Doctor Appointment",
       link: "/doctor",
     },
@@ -28,8 +32,8 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
       link: "/shop",
     },
     {
-      name: "About us",
-      link: "/about",
+      name: "Blogs",
+      link: "/blogs",
     },
     {
       name: "Contact Us",
@@ -110,13 +114,22 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
             <div className="">
               <div className="flex lg:items-center gap-2 mt-4">
                 <a
-                  href="https://www.facebook.com/61579453017415"
+                  href="https://www.facebook.com/share/1G2GRAdbfA/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-2 py-2 bg-[#2563EB] rounded text-white border border-[#fff]/0 hover:scale-95 hover:border-[#fff] hover:border duration-300"
                   aria-label="Facebook"
                 >
                   <FaFacebookF />
+                </a>
+                <a
+                  href="https://www.youtube.com/@rapideasylife"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2 py-2 bg-red-500 rounded text-white border border-[#fff]/0 hover:scale-95 hover:border-[#fff] hover:border duration-300"
+                  aria-label="YouTube"
+                >
+                  <FaYoutube />
                 </a>
               </div>
             </div>

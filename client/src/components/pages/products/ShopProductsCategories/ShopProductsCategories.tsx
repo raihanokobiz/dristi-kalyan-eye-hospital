@@ -49,7 +49,7 @@ const ShopProductsCategories: React.FC<ShopProductsCategoriesProps> = ({ shopSid
     <div className="max-w-4xl relative mx-auto md:px-12 lg:px-16">
       <Swiper
         modules={[Navigation, Autoplay]}
-        spaceBetween={20}
+        spaceBetween={10}
         slidesPerView={2}
         autoplay={{
           delay: 2500,
@@ -90,7 +90,7 @@ const ShopProductsCategories: React.FC<ShopProductsCategoriesProps> = ({ shopSid
               <div className="pb-2 px-2 text-center -mt-2">
                 <p
                   className={`text-sm font-semibold transition-colors duration-300 capitalize
-            ${selectedCategories.includes(cat.slug)
+                  ${selectedCategories.includes(cat.slug)
                       ? "text-white"
                       : "text-gray-700 group-hover:text-white"
                     }`}
@@ -102,19 +102,6 @@ const ShopProductsCategories: React.FC<ShopProductsCategoriesProps> = ({ shopSid
           </SwiperSlide>
         ))}
       </Swiper>
-
-
-      {/* Navigation Buttons */}
-      {/* <button className="swiper-button-prev-shop absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white border-2 border-gray-200 hover:border-[#1e6a39] hover:bg-[#1e6a39] hover:text-white transition-all shadow-md cursor-pointer ">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button className="swiper-button-next-shop absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white border-2 border-gray-200 hover:border-[#1e6a39] hover:bg-[#1e6a39] hover:text-white transition-all shadow-md cursor-pointer">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button> */}
     </div>
   );
 };

@@ -38,7 +38,7 @@ const BenefitsSection = () => {
                 {/* Section Header */}
                 <div className="text-center mb-12 sm:mb-16">
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-700 mb-4">
-                        Benefits with Dhamrai Dristi Kalyan Eye Hospital
+                        Committed to Healthy Vision for Every Community
                     </h2>
                     <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
                         We are committed to providing advanced eye care services with

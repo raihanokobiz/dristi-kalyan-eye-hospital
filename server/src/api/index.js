@@ -30,6 +30,7 @@ const { Router } = require("express");
 const CampaignRoute = require("./routes/campaign.route.js");
 const BookingRoute = require("./routes/booking.route");
 const QuoteRoute = require("./routes/quote.route.js");
+const BlogRouter = require("./routes/blog.route.js");
 const rootRouter = Router();
 
 
@@ -67,5 +68,6 @@ rootRouter.use("/campaign", CampaignRoute);
 rootRouter.use("/doctor", DoctorRouter);
 rootRouter.use("/service", ServiceRouter);
 rootRouter.use("/quote", QuoteRoute);
+rootRouter.use("/blogs", BlogRouter);
 
 module.exports = rootRouter;

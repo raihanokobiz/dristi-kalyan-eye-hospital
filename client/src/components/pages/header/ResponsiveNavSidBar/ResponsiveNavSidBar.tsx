@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { getShopSidebar } from "@/services/shopSidebar";
 import ShopPageSidebar from "./ShopPageSidebar";
 import AllPageSidebar from "./AllPageSidebar";
+import Link from "next/link";
 
 type ResponsiveNavSidBarProps = {
   onClose: () => void;
@@ -47,8 +48,47 @@ const ResponsiveNavSidBar: React.FC<ResponsiveNavSidBarProps> = ({
         transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
         className="w-[70%] lg:w-[20%] bg-white h-screen fixed top-[60px] left-0 z-30"
       >
-        <h2 className="md:px-10 px-4 py-4 text-xl font-medium inline-flex relative mt-10">
-          Categories
+
+        {/* Mobile Navigation Links */}
+        <div className="px-4 md:px-10 mb-6 mt-14">
+          <nav className="flex flex-col gap-3">
+            <Link
+              href="/about"
+              onClick={onClose}
+              className="text-gray-700 text-sm font-semibold hover:text-primary"
+            >
+              About Us
+            </Link>
+
+            <Link
+              href="/doctor"
+              onClick={onClose}
+              className="text-gray-700 text-sm font-semibold hover:text-primary"
+            >
+              Doctor Appointment
+            </Link>
+
+            <Link
+              href="/shop"
+              onClick={onClose}
+              className="text-gray-700 text-sm font-semibold hover:text-primary"
+            >
+              Product
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={onClose}
+              className="text-gray-700 text-sm font-semibold hover:text-primary"
+            >
+              Contact Us
+            </Link>
+          </nav>
+        </div>
+
+
+        <h2 className="md:px-10 px-4 py-4 text-xl font-medium inline-flex relative ">
+          Product Categories
           <span className="absolute md:left-10 left-5 bottom-3 w-10 h-0.5 bg-[#231E1F]"></span>
         </h2>
 

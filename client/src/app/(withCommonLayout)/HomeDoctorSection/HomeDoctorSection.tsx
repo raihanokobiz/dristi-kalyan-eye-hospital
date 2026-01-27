@@ -9,7 +9,7 @@ interface HomeDoctorSectionProps {
 
 const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
     // Show only first 6 doctors
-    const displayDoctors = doctors.slice(0, 8);
+    const displayDoctors = doctors.slice(0, 4);
 
     if (displayDoctors.length === 0) {
         return null;

@@ -19,6 +19,7 @@ const Bannerschema = new Schema(
         "SHOP BANNER",
         "PROMO BANNER",
         "UPCOMING BANNER",
+        "ABOUT US BANNER",
       ],
       default: "MAIN BANNER",
     },

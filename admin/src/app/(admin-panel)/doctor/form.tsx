@@ -38,6 +38,7 @@ const defaultValues = {
   availableDays: [],
   phone: "",
   email: "",
+  gender: "male" as "male" | "female",
   status: true,
   image: [],
 };
@@ -68,14 +69,21 @@ export const CreateForm: React.FC = () => {
     setLoading(true);
     try {
 
-      // Image upload to Cloudinary
-      const rawImage = values.image[0];
-      const optimizedImage = await resizeImage(rawImage);
+      let imageUrl = "";
+      let imagePublicId = "";
 
-      const imageUploadResult = await uploadImageToCloudinary(
-        optimizedImage,
-        "doctors"
-      );
+      // Image upload to Cloudinary (optional)
+      if (values.image && values.image.length > 0) {
+        const rawImage = values.image[0];
+        const optimizedImage = await resizeImage(rawImage);
+
+        const imageUploadResult = await uploadImageToCloudinary(
+          optimizedImage,
+          "doctors"
+        );
+        imageUrl = imageUploadResult.secure_url;
+        imagePublicId = imageUploadResult.public_id;
+      }
 
       const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
 
@@ -88,9 +96,10 @@ export const CreateForm: React.FC = () => {
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
+      formData.append("gender", values.gender);
       formData.append("status", values.status.toString());
-      formData.append("image", imageUploadResult.secure_url);
-      formData.append("imagePublicId", imageUploadResult.public_id);
+      if (imageUrl) formData.append("image", imageUrl);
+      if (imagePublicId) formData.append("imagePublicId", imagePublicId);
 
 
       await createFormAction(formData);
@@ -169,6 +178,30 @@ export const CreateForm: React.FC = () => {
                     )}
                   />
                 </div>
+                {/* Gender */}
+                <div>
+                  <FormField
+                    control={form.control}
+                    name="gender"
+                    render={({ field }) => (
+                      <FormItem className="col-span-2">
+                        <FormLabel>Gender <b className="text-red-500">*</b></FormLabel>
+                        <FormControl>
+                          <select
+                            {...field}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                          >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                        </FormControl>
+                        <FormDescription className="text-red-400 text-xs min-h-4">
+                          {form.formState.errors.gender?.message}
+                        </FormDescription>
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 ">
                 {/* Visiting Time */}
@@ -179,7 +212,7 @@ export const CreateForm: React.FC = () => {
                     name="visitingTimeStart"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Start Time <b className="text-red-500">*</b></FormLabel>
+                        <FormLabel> Visiting Start Time <b className="text-red-500">*</b></FormLabel>
                         <FormControl>
                           <TimePicker
                             onChange={field.onChange}
@@ -200,7 +233,7 @@ export const CreateForm: React.FC = () => {
                     name="visitingTimeEnd"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>End Time <b className="text-red-500">*</b></FormLabel>
+                        <FormLabel>Visiting End Time <b className="text-red-500">*</b></FormLabel>
                         <FormControl>
                           <TimePicker
                             onChange={field.onChange}
@@ -355,7 +388,7 @@ export const CreateForm: React.FC = () => {
                 render={() => (
                   <FormItem className="flex-1">
                     <FormLabel>
-                      Image <b className="text-red-500">*</b>
+                      Image
                     </FormLabel>
                     <Upload
                       listType="picture-card"

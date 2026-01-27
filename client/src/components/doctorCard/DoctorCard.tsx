@@ -4,6 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { DotIcon, Clock } from "lucide-react";
 import { Doctor } from "@/types/doctor";
+import { apiBaseUrl } from "@/config/config";
+import Placeholder_Female from "../../assets/doctor/placeholder_female.webp"
+import Placeholder_Male from "../../assets/doctor/placeholder_male.webp"
 
 interface DoctorCardProps {
     doctor: Doctor;
@@ -17,16 +20,15 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 {/* IMAGE */}
                 <div className="relative h-40 lg:h-[270px] w-full">
                     <Image
-                        src={doctor?.image}
+                        src={doctor?.image ? (doctor.image.startsWith('http') ? doctor.image : apiBaseUrl + doctor.image) : (doctor.gender === "female" ? Placeholder_Female : Placeholder_Male)}
                         alt={doctor.name}
                         fill
                         className="object-fill group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = "/images/default-doctor.jpg";
+                            target.src = doctor.gender === "female" ? Placeholder_Female.src : Placeholder_Male.src;
                         }}
                     />
-
                     {/* STATUS BADGE */}
                     {doctor.status && (
                         <div className="absolute top-1 left-1 lg:top-3 lg:left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">

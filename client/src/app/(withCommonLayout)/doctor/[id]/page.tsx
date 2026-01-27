@@ -7,6 +7,9 @@ import { FaArrowRight, FaTimes } from "react-icons/fa";
 import { FiClock } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { apiBaseUrl } from "@/config/config";
+import Placeholder_Female from "../../../../assets/doctor/placeholder_female.webp";
+import Placeholder_Male from "../../../../assets/doctor/placeholder_male.webp";
 
 const DoctorDetailsPage: React.FC = () => {
     const params = useParams();
@@ -185,7 +188,7 @@ const DoctorDetailsPage: React.FC = () => {
                         <div className="flex justify-center">
                             <div className="relative w-full h-80 md:h-[350px] lg:h-[500px] rounded-md overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0">
                                 <Image
-                                    src={doctor.image || "/placeholder.svg"}
+                                    src={doctor.image ? (doctor.image.startsWith('http') ? doctor.image : apiBaseUrl + doctor.image) : (doctor.gender === "female" ? Placeholder_Female : Placeholder_Male)}
                                     alt={doctor.name}
                                     fill
                                     className="object-cover hover:scale-105 transition-transform duration-500"
