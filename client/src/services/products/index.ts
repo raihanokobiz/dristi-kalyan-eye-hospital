@@ -1,4 +1,5 @@
 "use server";
+
 import { apiBaseUrl } from "@/config/config";
 import { apiRequest } from "@/lib/apiRequest";
 import { TResponse } from "@/types";
@@ -6,6 +7,14 @@ import { TResponse } from "@/types";
 export const getHomePageSubCategoryProducts = async (viewType?: string) => {
   const result: TResponse = await apiRequest({
     endpoint: `/product/view-type?viewType=${viewType}`,
+  });
+  return result;
+};
+
+
+export const getProductForHomePage = async () => {
+  const result: TResponse = await apiRequest({
+    endpoint: `/product/home-page`,
   });
   return result;
 };

@@ -32,6 +32,12 @@ class ServiceService {
         return await ServiceSchema.find({});
     }
 
+    // Get All Services
+    async getAllServiceForHome(limit = 8) {
+        return await ServiceSchema.find({}).limit(limit).sort({ createdAt: -1 });
+
+    }
+
     // Get Services with Pagination
     async getServiceWithPagination(payload) {
         try {

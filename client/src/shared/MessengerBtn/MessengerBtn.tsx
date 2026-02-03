@@ -33,10 +33,10 @@ const MessengerBtn = () => {
         <div className="absolute -top-32 right-0 mt-2 flex flex-col space-y-2">
           {/* WhatsApp Button */}
           <a
-            href="https://wa.me/+8801922-228733"
+            href="https://wa.me/8801922228733"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 text-white w-12 h-12 mx-auto flex justify-center items-center rounded-full shadow-md hover:scale-110  transition duration-300"
+            className="bg-green-500 text-white w-12 h-12 mx-auto flex justify-center items-center rounded-full shadow-md hover:scale-110 transition duration-300"
           >
             <FaWhatsapp className="text-2xl" />
           </a>
@@ -44,7 +44,7 @@ const MessengerBtn = () => {
           {/* Messenger Button */}
           <a
             // to="https://m.me/107585752267101"
-            href="https://www.facebook.com/share/16seK1S2dm/"
+            href="https://www.facebook.com/61579453017415"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-blue-500 text-white w-12 h-12 mx-auto flex justify-center items-center rounded-full shadow-md hover:scale-110 hover:bg-opacity-80 transition duration-300"

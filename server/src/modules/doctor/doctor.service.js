@@ -5,6 +5,7 @@ const { removeUploadFile } = require("../../middleware/upload/removeUploadFile.j
 const pagination = require("../../utils/pagination.js");
 
 class DoctorService {
+
     async createDoctor(payloadFiles, payload, session) {
         const { files } = payloadFiles;
         const {
@@ -16,7 +17,7 @@ class DoctorService {
             consultationFee,
         } = payload;
 
-        // Validate required fields
+        // Validate required fields (image is optional)
         if (!name || !degree || !visitingTime || !phone || !availableDays || !consultationFee) {
             throw new Error("All required fields must be provided");
         }
@@ -42,6 +43,18 @@ class DoctorService {
         const doctors = await DoctorSchema.find({});
         return doctors;
     }
+
+    async getDoctorsForHomePage() {
+        const doctors = await DoctorSchema.find({ status: true })
+            .select(
+                "name degree image visitingTime consultationFee status"
+            )
+            .sort({ createdAt: -1 })
+            .limit(4);
+
+        return doctors;
+    }
+
 
     async getDoctorWithPagination(payload) {
         try {

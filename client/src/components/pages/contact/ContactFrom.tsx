@@ -82,8 +82,8 @@ const ContactFrom = () => {
                   field === "email"
                     ? "email"
                     : field === "phone"
-                    ? "tel"
-                    : "text"
+                      ? "tel"
+                      : "text"
                 }
                 id={field}
                 value={formData[field]}
@@ -115,7 +115,7 @@ const ContactFrom = () => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#1E3E96] text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 w-full lg:w-auto cursor-pointer"
+          className="bg-primary text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full lg:w-auto cursor-pointer"
         >
           {loading ? "Sending..." : "Send"}
         </button>

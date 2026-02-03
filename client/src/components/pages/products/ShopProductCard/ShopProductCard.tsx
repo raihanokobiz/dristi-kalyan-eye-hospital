@@ -8,7 +8,6 @@ import { TProduct } from "@/types";
 import { motion, useAnimation } from "framer-motion";
 import Lottie from "lottie-react";
 import cardImageLoading from "@/assets/animation/card-loading.json";
-import { TbWeight } from "react-icons/tb";
 
 interface Product {
   product: TProduct;
@@ -18,7 +17,6 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
   const {
     name,
     price,
-    // mrpPrice,
     thumbnailImage,
     backViewImage,
     inventoryRef,
@@ -32,6 +30,7 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
     back: false,
     front: false,
   });
+
   const hasDiscount = product.discount > 0;
 
   const handleHoverStart = () => {
@@ -44,24 +43,25 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
 
   return (
     <div
-      className="rounded overflow-hidden shadow transition group p-2 md:p-4"
+      className="rounded overflow-hidden shadow transition group p-2 md:p-4 flex flex-col h-full"
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
     >
-      <div className="relative w-full h-32 sm:h-52 md:h-48  lg:h-52 overflow-hidden">
+      {/* Image Section */}
+      <div className="relative w-full h-32 sm:h-52 md:h-48 lg:h-52 overflow-hidden">
         <Link href={`product/${slug}`}>
           <div className="relative w-full h-full">
-            {/* Lottie loader until both images loaded */}
+            {/* Loader */}
             {thumbnailImage && backViewImage
               ? (!imageLoaded.back || !imageLoaded.front) && (
-                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-10">
+                <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
                   <div className="w-24 h-24">
                     <Lottie animationData={cardImageLoading} loop autoplay />
                   </div>
                 </div>
               )
               : !imageLoaded.front && (
-                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-10">
+                <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
                   <div className="w-24 h-24">
                     <Lottie animationData={cardImageLoading} loop autoplay />
                   </div>
@@ -70,78 +70,70 @@ const ShopProductCard: React.FC<Product> = ({ product }) => {
 
             {thumbnailImage && backViewImage ? (
               <motion.div
-                className="absolute top-0 left-0 w-full h-full"
+                className="absolute inset-0"
                 initial={{ x: 0, opacity: 1 }}
                 animate={controls}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={apiBaseUrl + thumbnailImage}
-                    alt={`${name} thumbnailImage`}
-                    fill
-                    onLoad={() =>
-                      setImageLoaded((prev) => ({ ...prev, front: true }))
-                    }
-                    className="object-fill "
-                  />
-                </div>
-              </motion.div>
-            ) : (
-              <div className="relative w-full h-full">
-                {" "}
                 <Image
                   src={apiBaseUrl + thumbnailImage}
-                  alt={`${name} thumbnailImage`}
+                  alt={`${name} thumbnail`}
                   fill
                   onLoad={() =>
                     setImageLoaded((prev) => ({ ...prev, front: true }))
                   }
-                  className=" object-fill"
+                  className="object-fill"
                 />
-              </div>
+              </motion.div>
+            ) : (
+              <Image
+                src={apiBaseUrl + thumbnailImage}
+                alt={`${name} thumbnail`}
+                fill
+                onLoad={() =>
+                  setImageLoaded((prev) => ({ ...prev, front: true }))
+                }
+                className="object-fill"
+              />
             )}
           </div>
         </Link>
-
       </div>
 
-      <div className="flex flex-col justify-between">
+      {/* Content Section */}
+      <div className="flex flex-col flex-1 mt-4">
         <Link href={`product/${slug}`}>
-          <div className="pb-4 flex flex-col grow">
-            <h3 className="font-semibold text-gray-800 mb-3 line-clamp-1 md:line-clamp-2 text-sm md:text-lg leading-tight">
-              {product.name}
+          {/* Fixed height info section */}
+          <div className="flex flex-col">
+            <h3 className=" text-gray-800 mb-2 line-clamp-1 text-sm md:text-lg leading-tight">
+              {name}
             </h3>
-            <div className="flex justify-between gap-4">
-              <p className="text-sm font-medium md:font-semibold lg:font-bold text-gray-900  flex items-center">
-                <TbWeight className="text-sm md:text-xl" />
-                {product?.inventoryRef?.[0]?.level}
+
+            <div className="flex justify-between items-center gap-4 mt-1">
+              <p className="text-sm md:text-base font-semibold text-gray-900">
+                ৳{price}
               </p>
-              <div className="flex items-center gap-1 md:gap-2 flex-wrap">
-                <span className=" text-xs md:text-base font-medium md:font-semibold lg:font-bold text-gray-900 ">
-                  ৳{product.price}
+
+              {hasDiscount && (
+                <span className="text-xs text-gray-500 line-through">
+                  ৳{product.mrpPrice}
                 </span>
-                {hasDiscount && (
-                  <>
-                    <span className="text-[12px] text-gray-600 line-through ">
-                      ৳{product.mrpPrice}
-                    </span>
-                  </>
-                )}
-              </div>
+              )}
             </div>
           </div>
-          <div>
-            <ProductDialog
-              name={name}
-              price={price}
-              productRef={_id}
-              thumbnailImage={thumbnailImage}
-              inventoryRef={inventoryRef}
-              inventoryType={inventoryType}
-            />
-          </div>
         </Link>
+
+        {/* Button always at bottom */}
+        <div className="mt-3">
+          <ProductDialog
+            name={name}
+            price={price}
+            productRef={_id}
+            thumbnailImage={thumbnailImage}
+            inventoryRef={inventoryRef}
+            inventoryType={inventoryType}
+          />
+        </div>
       </div>
     </div>
   );

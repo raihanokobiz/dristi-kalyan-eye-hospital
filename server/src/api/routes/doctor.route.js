@@ -7,17 +7,20 @@ const DoctorRoute = Router();
 
 DoctorRoute.route("/")
     .post(
-
         upload.any(),
         controller.createDoctor
     )
     .get(
-
         controller.getAllDoctor
     );
 
-DoctorRoute.get("/pagination", controller.getDoctorWithPagination);
+DoctorRoute.get(
+    "/homepage",
+    controller.getDoctorsForHomePage
+);
 
+
+DoctorRoute.get("/pagination", controller.getDoctorWithPagination);
 
 DoctorRoute.get("/available-day/:day", controller.getDoctorsByAvailableDay);
 

@@ -4,6 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { DotIcon, Clock } from "lucide-react";
 import { Doctor } from "@/types/doctor";
+import { apiBaseUrl } from "@/config/config";
+import Placeholder_Female from "../../assets/doctor/placeholder_female.webp"
+import Placeholder_Male from "../../assets/doctor/placeholder_male.webp"
 
 interface DoctorCardProps {
     doctor: Doctor;
@@ -11,28 +14,25 @@ interface DoctorCardProps {
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
-
     return (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+        <div className="bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
             <Link href={`/doctor/${doctor._id}`} className="block">
                 {/* IMAGE */}
-                <div className="relative h-52 w-full">
+                <div className="relative h-40 lg:h-[270px] w-full">
                     <Image
-                        src={doctor.image || "/images/default-doctor.jpg"}
+                        src={doctor?.image ? (doctor.image.startsWith('http') ? doctor.image : apiBaseUrl + doctor.image) : (doctor.gender === "female" ? Placeholder_Female : Placeholder_Male)}
                         alt={doctor.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 25vw"
+                        className="object-fill group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = "/images/default-doctor.jpg";
+                            target.src = doctor.gender === "female" ? Placeholder_Female.src : Placeholder_Male.src;
                         }}
                     />
-
                     {/* STATUS BADGE */}
                     {doctor.status && (
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">
-                            <DotIcon className="text-green-500" />
+                        <div className="absolute top-1 left-1 lg:top-3 lg:left-3 bg-white/95 backdrop-blur rounded-full px-3 py-1 flex items-center gap-1 shadow-sm">
+                            <DotIcon className=" hidden lg:block text-green-500" />
                             <span className="text-xs font-semibold text-green-600">
                                 Available
                             </span>
@@ -48,7 +48,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                     </h3>
 
                     {/* DEGREE / SPECIALTY */}
-                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                    <p className=" hidden lg:block text-sm text-gray-500 mt-1 line-clamp-2">
                         {doctor.degree}
                     </p>
 
@@ -66,13 +66,13 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                     {/* CTA */}
                     <div className="flex items-center justify-between">
                         {/* Fee (optional, uncomment if needed) */}
-                        {doctor.consultationFee && (
+                        {/* {doctor.consultationFee && (
                             <span className="text-sm font-semibold text-gray-800">
                                 ৳{doctor.consultationFee}
                             </span>
-                        )}
+                        )} */}
 
-                        <span className="ml-auto inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-400 text-white text-sm font-medium hover:bg-primary/90 transition">
+                        <span className=" w-full ml-auto inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition">
                             View Details
                         </span>
                     </div>

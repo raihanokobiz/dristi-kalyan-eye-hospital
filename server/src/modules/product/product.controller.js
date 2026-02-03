@@ -71,9 +71,19 @@ class ProductController {
     res.status(resDoc.statusCode).json(resDoc);
   });
 
+  getProductForHomePage = catchError(async (req, res) => {
+    const productResult = await ProductService.getProductForHomePage({
+      limit: 8,
+    });
+
+    const resDoc = responseHandler(200, "Get Home Page Products", productResult);
+    res.status(resDoc.statusCode).json(resDoc);
+  });
+
+
   getAllProductForHomePage = catchError(async (req, res) => {
     const payload = {
-      limit: req.query.limit,
+      limit: 2,
       viewType: req.query.viewType,
     };
     const productResult = await ProductService.getAllProductForHomePage(

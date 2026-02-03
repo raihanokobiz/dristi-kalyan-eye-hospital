@@ -38,6 +38,12 @@ class ServiceController {
         res.status(resDoc.statusCode).json(resDoc);
     });
 
+    getAllServiceForHome = catchError(async (req, res) => {
+        const serviceResult = await ServiceService.getAllServiceForHome();
+        const resDoc = responseHandler(200, "Get all services", serviceResult);
+        res.status(resDoc.statusCode).json(resDoc);
+    });
+
     getServiceWithPagination = catchError(async (req, res) => {
         const payload = {
             page: req.query.page,

@@ -20,13 +20,9 @@ import { upperCase } from "lodash";
 import { confirmation } from "@/components/modals/confirm-modal";
 
 export const orderStatuses = [
-  { key: "InOrder", name: "In Order" },
-  { key: "Hold", name: "Hold" },
   { key: "Cancelled", name: "Cancelled" },
-  { key: "PartialDelivered", name: "Partial Delivered" },
   { key: "Delivered", name: "Delivered" },
-  { key: "DeliveredPending", name: "Delivered Pending" },
-  { key: "OrderPlaced", name: "Order Placed" },
+  { key: "Pending", name: "Pending" },
 ];
 
 export const columns: ColumnDef<TOrder>[] = [
@@ -43,7 +39,7 @@ export const columns: ColumnDef<TOrder>[] = [
     cell: ({ row }) => {
       const { products } = row.original;
       return (
-        <div className="w-40 flex flex-col gap-3">
+        <div className="w-64 flex flex-col gap-3">
           {products?.map((item, index) => (
             <div key={index} className="p-3 border rounded-md">
               <p>{item?.productRef?.name} </p>
@@ -77,24 +73,6 @@ export const columns: ColumnDef<TOrder>[] = [
         <div className="min-w-[120px]">
           {row.original.subTotalPrice &&
             makeBDPrice(row.original.subTotalPrice)}
-        </div>
-      );
-    },
-  },
-  {
-    header: "Coupon Code",
-    cell: ({ row }) => {
-      return <div>{row.original.couponRef?.code || "N/A"}</div>;
-    },
-  },
-  {
-    header: "Coupon Discount",
-    accessorKey: "couponDiscount",
-    cell: ({ row }) => {
-      return (
-        <div>
-          {row.original.couponDiscount &&
-            makeBDPrice(row.original.couponDiscount)}
         </div>
       );
     },

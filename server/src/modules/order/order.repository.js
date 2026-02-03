@@ -120,7 +120,7 @@ class OrderRepository extends BaseRepository {
           shippingCost,
           couponDiscount: totalCouponDiscount,
           productDiscount: productDiscountTotal,
-          status: "OrderPlaced",
+          status: "Pending",
           ...query,
           couponRef: appliedCoupon?._id || null,
           customerName,
@@ -249,7 +249,7 @@ class OrderRepository extends BaseRepository {
 
   async getOrderReport(startDate, endDate) {
     const statuses = [
-      "OrderPlaced",
+      "Pending",
       "DeliveredPending",
       "Delivered",
       "Cancelled",

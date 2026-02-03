@@ -14,11 +14,14 @@ export const doctorColumns: ColumnDef<TDoctor>[] = [
     header: "Image",
     accessorKey: "image",
     cell: ({ row }) => {
-      const imageUrl = row.original.image;
+      const imageUrl = row.original.image
+        ? row.original.image
+        : (row.original.gender === "female" ? "/doctor/placeholder_female.webp" : "/doctor/placeholder_male.webp");
+
       return (
         <div className="w-20 h-20 relative">
           <Image
-            src={imageUrl || "/placeholder.png"}
+            src={imageUrl}
             alt={row.original.name}
             fill
             className="object-cover rounded-lg"

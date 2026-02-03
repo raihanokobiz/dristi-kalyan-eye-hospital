@@ -24,15 +24,21 @@ import { createFormAction } from "./actions";
 import { useRouter } from "next/navigation";
 import { uploadImageToCloudinary } from "@/services/cloudinary/cloudinary";
 import { Switch } from "antd";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import { resizeImage } from "@/utils/resizeImage";
 
 const defaultValues = {
   name: "",
   degree: "",
-  visitingTime: "",
-  consultationFee: "",
+  visitingTimeStart: "",
+  visitingTimeEnd: "",
+  consultationFee: 0,
   availableDays: [],
   phone: "",
   email: "",
+  gender: "male" as "male" | "female",
   status: true,
   image: [],
 };
@@ -63,22 +69,37 @@ export const CreateForm: React.FC = () => {
     setLoading(true);
     try {
 
-      // Image upload to Cloudinary
-      const imageFile = values.image[0];
-      const imageUploadResult = await uploadImageToCloudinary(imageFile, "doctors");
+      let imageUrl = "";
+      let imagePublicId = "";
+
+      // Image upload to Cloudinary (optional)
+      if (values.image && values.image.length > 0) {
+        const rawImage = values.image[0];
+        const optimizedImage = await resizeImage(rawImage);
+
+        const imageUploadResult = await uploadImageToCloudinary(
+          optimizedImage,
+          "doctors"
+        );
+        imageUrl = imageUploadResult.secure_url;
+        imagePublicId = imageUploadResult.public_id;
+      }
+
+      const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
 
       // FormData preparation
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("degree", values.degree);
-      formData.append("visitingTime", values.visitingTime);
-      formData.append("consultationFee", values.consultationFee);
+      formData.append("visitingTime", visitingTime);
+      formData.append("consultationFee", values.consultationFee.toString());
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
+      formData.append("gender", values.gender);
       formData.append("status", values.status.toString());
-      formData.append("image", imageUploadResult.secure_url);
-      formData.append("imagePublicId", imageUploadResult.public_id);
+      if (imageUrl) formData.append("image", imageUrl);
+      if (imagePublicId) formData.append("imagePublicId", imagePublicId);
 
 
       await createFormAction(formData);
@@ -108,7 +129,7 @@ export const CreateForm: React.FC = () => {
     "friday",
     "saturday",
     "sunday",
-  ];
+  ] as const
 
 
   return (
@@ -157,26 +178,77 @@ export const CreateForm: React.FC = () => {
                     )}
                   />
                 </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {/* Visiting Time */}
+                {/* Gender */}
                 <div>
                   <FormField
                     control={form.control}
-                    name="visitingTime"
+                    name="gender"
                     render={({ field }) => (
                       <FormItem className="col-span-2">
-                        <FormLabel>Visiting Time <b className="text-red-500">*</b></FormLabel>
+                        <FormLabel>Gender <b className="text-red-500">*</b></FormLabel>
                         <FormControl>
-                          <Input placeholder="10:00 AM - 2:00 PM" {...field} />
+                          <select
+                            {...field}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                          >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
                         </FormControl>
                         <FormDescription className="text-red-400 text-xs min-h-4">
-                          {form.formState.errors.visitingTime?.message}
+                          {form.formState.errors.gender?.message}
                         </FormDescription>
                       </FormItem>
                     )}
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 ">
+                {/* Visiting Time */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1.5">
+                  {/* Start Time */}
+                  <FormField
+                    control={form.control}
+                    name="visitingTimeStart"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel> Visiting Start Time <b className="text-red-500">*</b></FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            onChange={field.onChange}
+                            value={field.value}
+                            disableClock
+                            format="h:mm a"
+                            clearIcon={null}
+                            className="w-full"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* End Time */}
+                  <FormField
+                    control={form.control}
+                    name="visitingTimeEnd"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Visiting End Time <b className="text-red-500">*</b></FormLabel>
+                        <FormControl>
+                          <TimePicker
+                            onChange={field.onChange}
+                            value={field.value}
+                            disableClock
+                            format="h:mm a"
+                            clearIcon={null}
+                            className="w-full"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 {/* Consultation Fee */}
                 <div>
                   <FormField
@@ -316,7 +388,7 @@ export const CreateForm: React.FC = () => {
                 render={() => (
                   <FormItem className="flex-1">
                     <FormLabel>
-                      Image <b className="text-red-500">*</b>
+                      Image
                     </FormLabel>
                     <Upload
                       listType="picture-card"

@@ -17,10 +17,10 @@ const CartOverView: React.FC<Props> = ({ products, shipping }) => {
 
   const [showCartOverview, setShowCartOverview] = useState(false);
 
-// const productDiscount = products?.productDiscount;
+  // const productDiscount = products?.productDiscount;
 
 
- 
+
   return (
     <div className="top-20 sticky">
       <div
@@ -103,7 +103,7 @@ const CartOverView: React.FC<Props> = ({ products, shipping }) => {
               </div>
             </motion.div>
           )}
-          
+
       </AnimatePresence>
     </div>
   );

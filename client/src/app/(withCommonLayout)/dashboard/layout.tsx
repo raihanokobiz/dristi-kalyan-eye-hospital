@@ -68,7 +68,7 @@ export default function Layout({
             <Link href="/">
               <Image
                 src={logo}
-                alt="ANF Meat  | Best E-commerce platform in BD"
+                alt="Dhamrai Drisiti Kalyan Eye Hospital  | Best E-commerce platform in BD"
                 width={120}
                 height={60}
                 className="w-full h-full"
@@ -80,8 +80,8 @@ export default function Layout({
               <Link
                 href="/dashboard/profile"
                 className={`block px-4 py-2 rounded-lg ${pathname === "/dashboard/profile"
-                    ? "bg-blue-600 text-white"
-                    : "text-blue-600 hover:bg-blue-100"
+                  ? "bg-blue-600 text-white"
+                  : "text-blue-600 hover:bg-blue-100"
                   }`}
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -92,8 +92,8 @@ export default function Layout({
               <Link
                 href="/dashboard/orderHistory"
                 className={`block px-4 py-2 rounded-lg ${pathname === "/dashboard/orderHistory"
-                    ? "bg-blue-600 text-white"
-                    : "text-blue-600 hover:bg-blue-100"
+                  ? "bg-blue-600 text-white"
+                  : "text-blue-600 hover:bg-blue-100"
                   }`}
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -122,8 +122,8 @@ export default function Layout({
             <Link
               href="/dashboard/profile"
               className={`block px-4 py-2 rounded-lg ${pathname === "/dashboard/profile"
-                  ? "bg-blue-600 text-white"
-                  : "text-blue-600 hover:bg-blue-100"
+                ? "bg-blue-600 text-white"
+                : "text-blue-600 hover:bg-blue-100"
                 }`}
             >
               Profile
@@ -133,8 +133,8 @@ export default function Layout({
             <Link
               href="/dashboard/orderHistory"
               className={`block px-4 py-2 rounded-lg ${pathname === "/dashboard/orderHistory"
-                  ? "bg-blue-600 text-white"
-                  : "text-blue-600 hover:bg-blue-100"
+                ? "bg-blue-600 text-white"
+                : "text-blue-600 hover:bg-blue-100"
                 }`}
             >
               Order History

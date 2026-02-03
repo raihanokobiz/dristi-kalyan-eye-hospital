@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.dristi-kalyan-eye-hospital.com",
+        hostname: "https://dristi-kalyan-eye-hospital-r3t8.vercel.app",
         pathname: "/**",
       },
     ],

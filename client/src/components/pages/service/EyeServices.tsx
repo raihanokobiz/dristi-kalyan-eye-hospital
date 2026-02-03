@@ -5,10 +5,12 @@ import { Eye } from "lucide-react"
 import ServiceCard from "./ServiceCard"
 import { Service } from "@/types/service"
 import Texture from "@/assets/texture/texture.webp"
+import Link from "next/link"
+
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -89,6 +91,30 @@ export function EyeServices({ services }: EyeServicesProps) {
                                 <p>No services available at the moment.</p>
                             </div>
                         )}
+                    </div>
+
+                    {/* View All Button */}
+                    <div className="text-center cursor-pointer mt-5 lg:mt-8">
+                        <Link href="/services">
+                            <button className="bg-white text-gray-700 font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
+                                View All Services
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 inline-block ml-2"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                    />
+                                </svg>
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

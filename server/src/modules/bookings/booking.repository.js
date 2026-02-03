@@ -5,18 +5,35 @@ class BookingRepository extends BaseRepository {
   #model;
 
   constructor(model) {
-    super(model);          
-    this.#model = model;   
+    super(model);
+    this.#model = model;
   }
 
   async addBooking(payload, session) {
     const newBooking = await this.#model.create([payload], { session });
     return newBooking;
   };
-  async getAllBookings(){
+
+  async getAllBookings() {
     const bookings = await this.#model.find({});
     return bookings;
   }
+
+
+  async updateBookingStatus(id, status) {
+    const updatedBooking = await this.#model.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    return updatedBooking;
+  }
+
+  async deleteBooking(id) {
+    const deleted = await this.#model.findByIdAndDelete(id);
+    return deleted;
+  }
+
 }
 
 module.exports = new BookingRepository(BookingSchema);

@@ -5,7 +5,7 @@ import MainCheckOut from "@/components/pages/checkoutPage/MainCheckOut/MainCheck
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ANF Meat | Checkout",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | Checkout",
   description: "Best E-commerce platform in BD",
 };
 
@@ -22,7 +22,7 @@ const Checkout = async () => {
 
 
   return (
-    <div className="max-w-6xl mx-auto" >
+    <div className="max-w-6xl mx-auto px-4" >
       {/* <NavBar userCartProducts={products?.data} /> */}
       <MainCheckOut />
     </div>

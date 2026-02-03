@@ -112,13 +112,13 @@ const Orderschema = new Schema(
       type: String,
       enum: [
         "OrderPlaced",
-        "DeliveredPending",
+        "Pending",
         "Delivered",
         "Cancelled",
         "Hold",
         "InReview",
       ],
-      default: "OrderPlaced",
+      default: "Pending",
     },
     paymentStatus: {
       type: String,

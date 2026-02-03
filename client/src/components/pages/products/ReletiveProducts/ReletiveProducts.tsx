@@ -11,8 +11,6 @@ interface Products {
 
 const ReletiveProducts: React.FC<Products> = ({ relativeProducts }) => {
 
-  console.log(relativeProducts, "ok");
-
 
   return (
     <div className="w-full mb-4 md:mb-6 lg:mb-8">

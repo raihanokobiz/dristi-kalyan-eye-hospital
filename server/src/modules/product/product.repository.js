@@ -24,6 +24,20 @@ class ProductRepository extends BaseRepository {
     return newProduct;
   }
 
+  async getProductForHomePage(limit = 8) {
+    return await this.#model
+      .find()
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .populate([
+        { path: "categoryRef" },
+        { path: "subCategoryRef" },
+        { path: "brandRef" },
+        { path: "inventoryRef" },
+      ]);
+  }
+
+
   async updateProduct(id, payload) {
     const updatedProduct = await this.#model.findByIdAndUpdate(id, payload);
     if (!updatedProduct) {

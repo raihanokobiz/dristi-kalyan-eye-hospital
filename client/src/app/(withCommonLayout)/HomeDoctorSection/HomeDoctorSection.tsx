@@ -9,18 +9,18 @@ interface HomeDoctorSectionProps {
 
 const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
     // Show only first 6 doctors
-    const displayDoctors = doctors.slice(0, 8);
+    const displayDoctors = doctors.slice(0, 4);
 
     if (displayDoctors.length === 0) {
         return null;
-        
+
     }
 
     return (
         <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-5">
             <div className="max-w-7xl mx-auto ">
                 {/* Section Header */}
-                <div className="text-center lg:mb-8">
+                <div className="text-center mb-5 lg:mb-8">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <Stethoscope className="h-8 w-8 text-primary" />
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -40,9 +40,9 @@ const HomeDoctorSection: React.FC<HomeDoctorSectionProps> = ({ doctors }) => {
                     ))}
                 </div>
                 {/* View All Button */}
-                <div className="text-center">
+                <div className="text-center cursor-pointer">
                     <Link href="/doctor">
-                        <button className="bg-primary hover:bg-primary/90  font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                        <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
                             View All Doctors
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

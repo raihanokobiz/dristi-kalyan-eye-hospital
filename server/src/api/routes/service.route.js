@@ -9,6 +9,9 @@ ServiceRoute.route("/")
     .post(upload.any(), controller.createService)
     .get(controller.getAllService);
 
+ServiceRoute.route("/home-page-services")
+    .get(controller.getAllServiceForHome);
+
 ServiceRoute.get("/pagination", controller.getServiceWithPagination);
 
 ServiceRoute.get("/slug/:slug", controller.getSingleServiceBySlug);

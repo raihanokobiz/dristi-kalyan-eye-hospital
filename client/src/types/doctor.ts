@@ -9,6 +9,7 @@ export interface Doctor {
     visitingTime: string;
     consultationFee: number;
     availableDays: string[];
+    gender: "male" | "female";
     status: boolean;
     createdAt: string;
     updatedAt: string;

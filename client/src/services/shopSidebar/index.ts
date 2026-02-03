@@ -1,4 +1,5 @@
 "use server";
+
 import { apiBaseUrl } from "@/config/config";
 
 export const getShopSidebar = async () => {

@@ -37,41 +37,63 @@ import { UploadOutlined } from "@ant-design/icons";
 import { humanFileSize } from "@/utils/helpers";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
-import {
-  deleteImageFromCloudinary,
-  uploadImageToCloudinary,
-} from "@/services/cloudinary/cloudinary";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import { resizeImage } from "@/utils/resizeImage";
 import { TDoctor } from "./types";
+import { deleteImageFromCloudinary, uploadImageToCloudinary } from "@/services/cloudinary/cloudinary";
 
 interface Props {
   item: TDoctor;
 }
+
+type DoctorFormValues = z.infer<typeof formSchema>;
+
 
 export const DetailsSheet: React.FC<Props> = ({ item }) => {
   const { toast } = useToast();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>([
-    {
-      uid: "-1",
-      name: String(item.image).split("/").pop() || "",
-      status: "done",
-      url: item.image,
-    },
-  ]);
+  // const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>([
+  //   {
+  //     uid: "-1",
+  //     name: String(item.image).split("/").pop() || "",
+  //     status: "done",
+  //     url: item.image,
+  //   },
+  // ]);
+
+  const imageUrl = item.image;
+
+  const [imageFileList, setImageFileList] = useState<UploadFile<any>[]>(
+    imageUrl
+      ? [
+        {
+          uid: "-1",
+          name: imageUrl.split("/").pop() || "image",
+          status: "done",
+          url: imageUrl,
+        },
+      ]
+      : []
+  );
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: item.name,
       degree: item.degree,
-      visitingTime: item.visitingTime,
+      visitingTimeStart: item.visitingTime?.split(" - ")[0] || "",
+      visitingTimeEnd: item.visitingTime?.split(" - ")[1] || "",
       phone: item.phone,
       email: item.email || "",
       availableDays: item.availableDays || [],
       image: [],
       consultationFee: item.consultationFee,
+      gender: item.gender || "male",
       status: item.status
     },
   });
@@ -90,14 +112,14 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
 
   const onSubmitUpdate = async (values: z.infer<typeof formSchema>) => {
 
-
     setUpdating(true);
+
     try {
 
-      let imageUrl = item.image;
+      let imageUrl = item.image || "";
       let imagePublicId = item.imagePublicId || "";
 
-      // new image upload
+      // new image upload (optional)
       if (values.image && values.image.length > 0) {
         // old image delete
         if (item.imagePublicId) {
@@ -105,25 +127,32 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
         }
 
         // new image upload
+        const optimizedImage = await resizeImage(values.image[0]);
         const uploadResult = await uploadImageToCloudinary(
-          values.image[0],
+          optimizedImage,
           "doctors"
         );
         imageUrl = uploadResult.secure_url;
         imagePublicId = uploadResult.public_id;
       }
 
+
+      const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
+
+
       // FormData
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("degree", values.degree);
-      formData.append("visitingTime", values.visitingTime);
+      formData.append("visitingTime", visitingTime);
       formData.append("consultationFee", values.consultationFee.toString());
       formData.append("availableDays", JSON.stringify(values.availableDays));
       formData.append("phone", values.phone);
       formData.append("email", values.email || "");
+      formData.append("gender", values.gender);
       formData.append("status", values.status.toString());
-      formData.append("image", imageUrl);
+      formData.append("image", imageUrl || "");
+
       formData.append("imagePublicId", imagePublicId);
 
       await updateFormAction(String(item._id), formData);
@@ -202,7 +231,6 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
               {[
                 ["name", "Doctor Name"],
                 ["degree", "Degree"],
-                ["visitingTime", "Visiting Time"],
                 ["phone", "Phone"],
                 ["email", "Email"],
               ].map(([name, label]) => (
@@ -210,19 +238,87 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                   key={name}
                   control={form.control}
                   name={name as any}
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem className="col-span-2">
                       <FormLabel>{label}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
                       <FormDescription>
-                        {form.formState.errors[name as any]?.message}
+                        {fieldState.error?.message}
                       </FormDescription>
                     </FormItem>
                   )}
                 />
               ))}
+            </div>
+
+            {/* Gender Field */}
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                      >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </FormControl>
+                    <FormDescription>
+                      {form.formState.errors.gender?.message}
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Visiting Times */}
+            <div className="col-span-2 grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="visitingTimeStart"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Start Time</FormLabel>
+                    <FormControl>
+                      <TimePicker
+                        onChange={field.onChange}
+                        value={field.value}
+                        disableClock
+                        format="h:mm a"
+                        clearIcon={null}
+                        className="w-full"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="visitingTimeEnd"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>End Time</FormLabel>
+                    <FormControl>
+                      <TimePicker
+                        onChange={field.onChange}
+                        value={field.value}
+                        disableClock
+                        format="h:mm a"
+                        clearIcon={null}
+                        className="w-full"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* AVAILABLE DAYS */}
@@ -245,7 +341,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
                       <label key={day} className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          checked={field.value.includes(day)}
+                          checked={field.value.includes(day as TDoctor['availableDays'][number])}
                           onChange={(e) =>
                             field.onChange(
                               e.target.checked

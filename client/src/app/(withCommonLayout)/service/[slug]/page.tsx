@@ -4,13 +4,14 @@ import { getServiceBySlug } from '@/services/service'
 import { notFound } from 'next/navigation'
 
 interface ServiceDetailPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    }
+    }>
 }
 
-export default async function page({ params }: ServiceDetailPageProps) {
-    const service = await getServiceBySlug(params.slug);
+export default async function Page({ params }: ServiceDetailPageProps) {
+    const { slug } = await params;
+    const service = await getServiceBySlug(slug);
 
     if (!service) {
         notFound();

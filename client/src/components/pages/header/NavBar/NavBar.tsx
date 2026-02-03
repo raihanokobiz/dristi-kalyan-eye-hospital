@@ -6,7 +6,7 @@ import logo from "@/assets/logo/logo.png";
 // import SearchForm from "../SearchForm/SearchForm";
 import Link from "next/link";
 import { BsCart2 } from "react-icons/bs";
-import { FiUser, FiPhone, FiMapPin, FiCalendar } from "react-icons/fi";
+import { FiUser, FiPhone, FiCalendar } from "react-icons/fi";
 import { RiCloseFill, RiMenuAddFill } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
@@ -57,7 +57,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [placeholders.length]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -124,7 +124,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
   return (
     <>
       {/* Main Navbar - Sticky */}
-      <div className="py-2 fixed w-full z-40 top-0 bg-white px-4 md:px-6 shadow-sm backdrop-blur-lg">
+      <div className="py-4 md:py-5 fixed w-full z-40 top-0 bg-white px-4 md:px-6 shadow-sm backdrop-blur-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center justify-between  gap-4">
@@ -138,59 +138,34 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                 <RiMenuAddFill className="text-2xl" />
               )}
             </div>
-            <div className="md:w-[80px] w-[50px]">
+            <div className=" relative w-[90px] md:w-[90px]  h-[60px]">
               <Link href="/">
                 <Image
                   src={logo || null}
                   alt="Eye Hospital"
-                  width={150}
-                  height={60}
+                  fill
                   className="w-full h-full"
                 />
               </Link>
             </div>
           </div>
 
-          {/* Desktop Search Bar with Animated Placeholder */}
-          {/* <div className=" hidden lg:block flex-1 max-w-md relative">
-            <div className="relative">
-              <input
-                type="text"
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-300"
-                placeholder=""
-              />
-              <motion.div
-                key={placeholderIndex}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.5 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-              >
-                {placeholders[placeholderIndex]}
-              </motion.div>
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1.5 rounded-md hover:bg-primary transition-colors duration-300">
-                <IoSearchOutline className="text-lg" />
-              </button>
-            </div>
-          </div> */}
-
           {/* Nav Links Desktop */}
           <div className="hidden lg:flex items-center gap-6">
-            <Link href="/" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Home
+            <Link href="/about" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              About Us
             </Link>
 
             <Link href="/doctor" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Doctor
+              Doctor Appointment
             </Link>
 
-            <Link href="/coshma" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              Coshma
+            <Link href="/shop" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Product
             </Link>
 
-            <Link href="/about-us" className="text-gray-700 hover:text-primary text-sm font-semibold">
-              About Us
+            <Link href="/blogs" className="text-gray-700 hover:text-primary text-sm font-semibold">
+              Blogs
             </Link>
 
             <Link href="/contact" className="text-gray-700 hover:text-primary text-sm font-semibold">
@@ -201,19 +176,6 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
           {/* Right Side Icons */}
           <div className="flex items-center lg:gap-2.5 gap-1 ">
-            {/* Location Display - Desktop */}
-            <div
-
-              className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
-            >
-              <FiMapPin className="text-primary text-lg" />
-              <div className="flex flex-col">
-                <span className="text-xs text-gray-500">Location</span>
-                <span className="text-xs font-semibold text-gray-700">
-                  Dhamrai Drisiti Kalyan Eye Hospital
-                </span>
-              </div>
-            </div>
             {/* Contact Number */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
               <FiPhone className="text-primary text-lg" />
@@ -225,12 +187,8 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
             {/* appointment button */}
             <Link
-              href="/appointment"
-              className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full 
-  bg-blue-400 text-white 
-  hover:bg-primary hover:text-white 
-  transition-colors duration-300 
-  border border-primary/30"
+              href="/doctor"
+              className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-white hover:bg-primary hover:text-white transition-colors duration-300 border border-primary/30"
             >
               <FiCalendar className="text-lg" />
               <span className="text-sm font-semibold">

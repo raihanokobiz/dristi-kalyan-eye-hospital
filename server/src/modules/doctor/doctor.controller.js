@@ -8,6 +8,7 @@ class DoctorController {
         const payloadFiles = {
             files: req.files,
         };
+
         const payload = {
             name: req.body.name,
             degree: req.body.degree,
@@ -16,10 +17,12 @@ class DoctorController {
             email: req.body.email,
             availableDays: req.body.availableDays,
             consultationFee: req.body.consultationFee,
+            gender: req.body.gender,
             status: req.body.status,
             image: req.body.image,
             imagePublicId: req.body.imagePublicId,
         };
+
         const doctorResult = await DoctorService.createDoctor(
             payloadFiles,
             payload,
@@ -38,6 +41,19 @@ class DoctorController {
         const resDoc = responseHandler(200, "Get all doctors", doctorResult);
         res.status(resDoc.statusCode).json(resDoc);
     });
+
+    getDoctorsForHomePage = catchError(async (_req, res) => {
+        const doctors = await DoctorService.getDoctorsForHomePage();
+
+        const resDoc = responseHandler(
+            200,
+            "Homepage doctors retrieved successfully",
+            doctors
+        );
+
+        res.status(resDoc.statusCode).json(resDoc);
+    });
+
 
     getDoctorWithPagination = catchError(async (req, res) => {
         let payload = {
@@ -71,6 +87,7 @@ class DoctorController {
             email: req.body.email,
             availableDays: req.body.availableDays,
             consultationFee: req.body.consultationFee,
+            gender: req.body.gender,
             status: req.body.status,
             image: req.body.image,
             imagePublicId: req.body.imagePublicId,

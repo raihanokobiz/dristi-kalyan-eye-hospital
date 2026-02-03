@@ -1,215 +1,111 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShoppingCart, X, Plus, Minus, Check } from "lucide-react";
+import { ShoppingCart, X, Plus, Minus, Check, Eye } from "lucide-react";
 import Image from "next/image";
 import { apiBaseUrl } from "@/config/config";
-import Link from "next/link";
 import { toast } from "react-toastify";
 import { addToCart } from "@/services/cart";
-// import { TbWeight } from 'react-icons/tb';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { TbWeight } from "react-icons/tb";
-
-interface InventoryItem {
-  _id?: string;
-  level?: string;
-  size?: string;
-  name?: string;
-  quantity?: number;
-}
-
-interface TProduct {
-  _id: string;
-  name: string;
-  slug: string;
-  thumbnailImage: string;
-  backViewImage?: string;
-  images: string[];
-  price: number;
-  mrpPrice: number;
-  discount: number;
-  discountType: string;
-  discountAmount: number;
-  description: string;
-  inventoryType: string;
-  inventoryRef: InventoryItem[];
-  mainInventory: number;
-  productId: string;
-  sizeChartImage?: string;
-  videoUrl?: string;
-  subCategoryRef?: any;
-  freeShipping: boolean;
-}
+import { InventoryItem, TProductWithInventory } from "./types";
+import Link from "next/link";
+import ProductDialog from "../ProductDialog/ProductDialog";
 
 interface HomeProductSectionProps {
-  products: TProduct[];
+  products: TProductWithInventory[];
   userRef?: string;
 }
 
-// Product Card Component onViewDetails
+// Product Card Component with new design
 const ProductCard: React.FC<{
-  product: TProduct;
-  onQuickAdd: (product: TProduct) => void;
-  onViewDetails?: (product: TProduct) => void;
-}> = ({ product, onQuickAdd }) => {
-  const [imageError, setImageError] = useState(false);
+  product: TProductWithInventory;
+  onQuickAdd: (product: TProductWithInventory) => void;
+}> = ({ product }) => {
+  // const [imageError, setImageError] = useState(false);
   const hasDiscount = product.discount > 0;
-  const isStockOut = product.mainInventory <= 0;
+  // const isStockOut = product.mainInventory <= 0;
 
-  // Get the first image from the images array, fallback to thumbnailImage
   const displayImage =
     product.images && product.images.length > 0
       ? product.images[0]
       : product.thumbnailImage;
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
-
-  const handleQuickAddClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!isStockOut) {
-      onQuickAdd(product);
-    }
-  };
-
-  // const handleViewDetailsClick = (e: React.MouseEvent) => {
+  // const handleQuickAddClick = (e: React.MouseEvent) => {
   //   e.preventDefault();
   //   e.stopPropagation();
-  //   onViewDetails(product);
+  //   if (!isStockOut) {
+  //     onQuickAdd(product);
+  //   }
   // };
 
   return (
-    <div className="w-full p-2 md:p-4 bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group border border-gray-100 flex flex-col max-h-80">
-      <div className="relative overflow-hidden h-40 sm:h-52 md:h-48  lg:h-52 ">
-        <Link
-          href={`/product/${product.slug}`}
-          className="absolute inset-0 z-0"
-        >
-          {imageError ? (
-            <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <div className="text-center">
-                <ShoppingCart
-                  size={48}
-                  className="mx-auto text-gray-400 mb-2"
-                />
-                <p className="text-sm text-gray-500">{product.name}</p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <Image
-                src={apiBaseUrl + displayImage}
-                alt={product.name}
-                fill
-                onError={handleImageError}
-                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-          )}
-        </Link>
+    <div className="rounded overflow-hidden shadow transition group p-2 md:p-4 flex flex-col h-full bg-white hover:shadow-lg">
+      {/* Image Section */}
+      <Link href={`/product/${product.slug}`}>
+        <div className="relative w-full h-32 sm:h-52 md:h-48 lg:h-52 overflow-hidden">
+          <Image
+            src={displayImage ? (displayImage.startsWith('http') ? displayImage : apiBaseUrl + displayImage) : "/placeholder.svg"}
+            alt={product.name}
+            fill
+            className="object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </Link>
 
-        {/* Stock Out Ribbon */}
-        {/* {isStockOut && (
-          <div className="absolute top-0 left-0 w-20 h-20 overflow-hidden pointer-events-none z-20">
-            <div className="bg-[#FF6C0C] text-white font-bold text-[10px] px-8 py-1  shadow-lg rotate-45 transform  text-center ">
-              STOCK OUT
-            </div>
-          </div>
-        )} */}
+      {/* Content Section */}
+      <div className="flex flex-col flex-1 mt-4">
+        <Link href={`/product/${product.slug}`}>
+          {/* Fixed height info section */}
+          <div className="flex flex-col">
+            <h3 className=" text-gray-800 mb-2 text-sm md:text-lg leading-tight hover:text-primary transition-colors line-clamp-1">
+              {product.name}
+            </h3>
+            <div className="flex justify-start mt-1">
+              <div className="flex justify-between items-center gap-4">
+                <p className="text-sm md:text-base font-semibold text-gray-900">
+                  ৳{product.price}
+                </p>
 
-        {isStockOut && (
-          <div className="absolute top-0 left-0 w-20 h-20 overflow-hidden z-20">
-            <div className="absolute top-4 -left-7 w-32 bg-gradient-to-r from-yellow-600 to-red-700 text-white text-center font-bold text-[10px] py-1 shadow-md transform -rotate-45">
-              STOCK OUT
-            </div>
-          </div>
-        )}
-
-        {hasDiscount && !isStockOut && (
-          <div className="absolute top-2 left-2 bg-linear-to-r from-red-500 to-red-600 text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-lg z-10">
-            {product.discountType === "percentage"
-              ? `${product.discount}% OFF`
-              : `৳${product.discountAmount} OFF`}
-          </div>
-        )}
-
-        {product.freeShipping && !isStockOut && (
-          <div className="absolute top-2 right-2 bg-linear-to-r from-green-500 to-green-600 text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-lg z-10">
-            Free Ship
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col">
-        <h3 className=" font-semibold text-gray-800 mb-3 line-clamp-1 md:line-clamp-2 text-sm md:text-lg leading-tight">
-          {product.name}
-        </h3>
-        <div >
-          <div className="flex justify-between">
-            <p className='text-sm font-medium md:font-semibold lg:font-bold text-gray-900  flex items-center'>
-              <TbWeight className='text-sm md:text-xl' />
-              {product?.inventoryRef?.[0]?.level}
-            </p>
-            <div className="flex items-center gap-1 md:gap-2 flex-wrap">
-              <span className=" text-xs md:text-base font-medium md:font-semibold lg:font-bold text-gray-900">
-                ৳{product.price}
-              </span>
-              {hasDiscount && (
-                <>
-                  <span className="text-[12px] text-gray-600 line-through ">
+                {hasDiscount && product.mrpPrice > product.price && (
+                  <span className="text-xs text-gray-500 line-through">
                     ৳{product.mrpPrice}
                   </span>
-                </>
-              )}
+                )}
+              </div>
             </div>
           </div>
-          <div className=" block mt-3 w-full">
-            <button
-              onClick={handleQuickAddClick}
-              disabled={isStockOut}
-              className={`w-full px-3 py-1.5 rounded-sm transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold text-xs shadow-md transform cursor-pointer ${isStockOut
-                ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                : "bg-primary text-white hover:from-[#E55A00] hover:to-[#CC4F00] hover:shadow-lg hover:-translate-y-0.5"
-                }`}
-            >
-              {isStockOut ? (
-                <>
-                  <X size={16} strokeWidth={2.5} />
-                  স্টক আউট
-                </>
-              ) : (
-                <>
-                  <ShoppingCart size={16} strokeWidth={2.5} />
-                  কার্টে যোগ করুন
-                </>
-              )}
-            </button>
-          </div>
+        </Link>
+
+
+        {/* Button always at bottom */}
+        <div className="mt-3">
+          <ProductDialog
+            name={product.name}
+            price={product.price}
+            productRef={product._id}
+            thumbnailImage={product.thumbnailImage}
+            inventoryRef={product.inventoryRef}
+            inventoryType={product.inventoryType}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-
-// Modal Component 
+// Modal Component (unchanged)
 export const AddToCartModal: React.FC<{
-  product: TProduct | null;
+  product: TProductWithInventory | null;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (quantity: number, inventoryRef?: string) => void;
   isLoading: boolean;
 }> = ({ product, isOpen, onClose, onConfirm, isLoading }) => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedInventory, setSelectedInventory] = useState<
-    string | undefined
-  >(undefined);
+  const [selectedInventory, setSelectedInventory] = useState<string | undefined>(undefined);
 
   if (!isOpen || !product) return null;
 
@@ -230,21 +126,21 @@ export const AddToCartModal: React.FC<{
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 cursor-pointer "
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
         className="bg-white rounded-lg shadow-2xl animate-scale-in overflow-hidden max-w-md w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-primary p-4 flex items-center justify-between sticky top-0 z-10 cursor-pointer">
+        <div className="bg-primary p-4 flex items-center justify-between sticky top-0 z-10">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
             <ShoppingCart size={24} />
             Add to Cart
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/20 rounded-full transition-colors cursor-pointer"
+            className="p-2 hover:bg-white/20 rounded-full transition-colors"
           >
             <X size={24} className="text-white" />
           </button>
@@ -254,10 +150,10 @@ export const AddToCartModal: React.FC<{
           <div className="flex gap-3 mb-4 bg-gray-50 p-3 rounded-lg">
             <div className="w-24 h-24 shrink-0 bg-white rounded-lg overflow-hidden shadow-md relative">
               <Image
-                src={apiBaseUrl + modalImage}
+                src={modalImage ? (modalImage.startsWith('http') ? modalImage : apiBaseUrl + modalImage) : "/placeholder.svg"}
                 alt={product.name}
                 fill
-                className="w-full h-full object-cover"
+                className="object-cover"
               />
             </div>
             <div className="flex-1">
@@ -268,18 +164,12 @@ export const AddToCartModal: React.FC<{
                 ID: {product.productId}
               </p>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xl font-bold text-primary">
-                  ৳{product.price}
-                </span>
+                <span className="text-xl font-bold text-primary">৳{product.price}</span>
                 {hasDiscount && (
                   <>
-                    <span className="text-sm line-through text-gray-400">
-                      ৳{product.mrpPrice}
-                    </span>
+                    <span className="text-sm line-through text-gray-400">৳{product.mrpPrice}</span>
                     <span className="bg-red-100 text-primary px-2 py-0.5 rounded-full text-xs font-bold">
-                      {product.discountType === "percent"
-                        ? `${product.discount}% OFF`
-                        : `৳${product.discountAmount} OFF`}
+                      {product.discountType === "percent" ? `${product.discount}% OFF` : `৳${product.discountAmount} OFF`}
                     </span>
                   </>
                 )}
@@ -291,15 +181,14 @@ export const AddToCartModal: React.FC<{
             <div className="mb-4">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {product.inventoryType === "levelInventory"
-                  ? "ওজন নির্বাচন করুন"
+                  ? "Select weight"
                   : product.inventoryType === "colorInventory"
-                    ? "কালার নির্বাচন করুন"
-                    : "সাইজ ও কালার নির্বাচন করুন"}
+                    ? "Select color"
+                    : "Select size and color"}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {product.inventoryRef.map((item: InventoryItem) => {
                   const isOutOfStock = (item.quantity ?? 0) <= 0;
-
                   let displayValue = "Option";
 
                   if (product.inventoryType === "levelInventory") {
@@ -315,29 +204,17 @@ export const AddToCartModal: React.FC<{
                   return (
                     <button
                       key={item._id}
-                      onClick={() =>
-                        !isOutOfStock && setSelectedInventory(item._id)
-                      }
+                      onClick={() => !isOutOfStock && setSelectedInventory(item._id)}
                       disabled={isOutOfStock}
-                      className={`p-2 rounded-lg border-2 transition-all text-xs font-semibold cursor-pointer ${selectedInventory === item._id
+                      className={`p-2 rounded-lg border-2 transition-all text-xs font-semibold ${selectedInventory === item._id
                         ? "border-primary bg-orange-50 text-primary"
                         : isOutOfStock
                           ? "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed line-through"
-                          : "border-gray-200 hover:borderp-rimary hover:bg-orange-50 text-gray-700"
+                          : "border-gray-200 hover:border-primary hover:bg-orange-50 text-gray-700"
                         }`}
                     >
                       <div className="flex flex-col items-center">
-                        <span className="font-bold uppercase  ">
-                          {displayValue}
-                        </span>
-                        {/* {item.quantity !== undefined && (
-                          <span
-                            className={`text-xs mt-0.5 ${isOutOfStock ? "text-primary" : "text-gray-500"
-                              }`}
-                          >
-                            {isOutOfStock ? "Stock Out" : `${item.quantity} টি`}
-                          </span>
-                        )} */}
+                        <span className="font-bold uppercase">{displayValue}</span>
                       </div>
                     </button>
                   );
@@ -347,47 +224,35 @@ export const AddToCartModal: React.FC<{
           )}
 
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Quantity
-            </label>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Quantity</label>
             <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="p-2 cursor-pointer bg-white hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm border border-gray-200"
+                className="p-2 bg-white hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm border border-gray-200"
                 disabled={quantity <= 1}
               >
                 <Minus size={18} strokeWidth={2.5} />
               </button>
-              <span className="text-2xl font-bold text-gray-800 w-12 text-center">
-                {quantity}
-              </span>
+              <span className="text-2xl font-bold text-gray-800 w-12 text-center">{quantity}</span>
               <button
-                onClick={() =>
-                  setQuantity(Math.min(product.mainInventory, quantity + 1))
-                }
-                className="p-2 cursor-pointer bg-white hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm border border-gray-200"
+                onClick={() => setQuantity(Math.min(product.mainInventory, quantity + 1))}
+                className="p-2 bg-white hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm border border-gray-200"
                 disabled={quantity >= product.mainInventory}
               >
                 <Plus size={18} strokeWidth={2.5} />
               </button>
               <div className="ml-auto text-right">
                 <p className="text-xs text-gray-500">Available</p>
-                <p className="text-sm font-bold text-green-600">
-                  {product.mainInventory} units
-                </p>
+                <p className="text-sm font-bold text-green-600">{product.mainInventory} units</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-linear-to-br from-gray-50 to-gray-100 rounded-lg p-4 mb-4 border border-gray-200">
-            <h4 className="font-bold text-gray-700 mb-3 text-sm uppercase tracking-wide">
-              Order Summary
-            </h4>
+          <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
+            <h4 className="font-bold text-gray-700 mb-3 text-sm uppercase tracking-wide">Order Summary</h4>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">
-                  Subtotal ({quantity} items)
-                </span>
+                <span className="text-gray-600">Subtotal ({quantity} items)</span>
                 <span className="font-bold text-gray-900">৳{totalPrice}</span>
               </div>
               {hasDiscount && (
@@ -421,7 +286,7 @@ export const AddToCartModal: React.FC<{
           <button
             onClick={() => onConfirm(quantity, selectedInventory || undefined)}
             disabled={isLoading || (hasInventoryOptions && !selectedInventory)}
-            className="w-full cursor-pointer bg-linear-to-r from-green-500 to-green-600 text-white py-3 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 font-bold text-base flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
+            className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-all duration-300 font-bold text-base flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
           >
             {isLoading ? (
               <>
@@ -438,13 +303,7 @@ export const AddToCartModal: React.FC<{
 
           {hasInventoryOptions && !selectedInventory && (
             <p className="text-center text-sm text-primary mt-3 font-semibold">
-              অনুগ্রহ করে{" "}
-              {product.inventoryType === "levelInventory"
-                ? "সাইজ"
-                : product.inventoryType === "colorInventory"
-                  ? "কালার"
-                  : "সাইজ/কালার"}{" "}
-              নির্বাচন করুন
+              Please select {product.inventoryType === "levelInventory" ? "size" : product.inventoryType === "colorInventory" ? "color" : "size/color"}
             </p>
           )}
         </div>
@@ -470,15 +329,12 @@ export const AddToCartModal: React.FC<{
 };
 
 // Main Component
-const HomeProductSection: React.FC<HomeProductSectionProps> = ({
-  products,
-  userRef,
-}) => {
-  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
+const HomeProductSection: React.FC<HomeProductSectionProps> = ({ products, userRef }) => {
+  const [selectedProduct, setSelectedProduct] = useState<TProductWithInventory | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleQuickAdd = (product: TProduct) => {
+  const handleQuickAdd = (product: TProductWithInventory) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
@@ -497,7 +353,6 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({
       };
 
       await addToCart(cartData);
-
       setIsModalOpen(false);
       toast.success("Product added to cart successfully!");
     } catch (error) {
@@ -511,37 +366,74 @@ const HomeProductSection: React.FC<HomeProductSectionProps> = ({
   const displayProducts = products?.slice(0, 8) || [];
 
   return (
-    <div className="relative w-full px-4 md:px-0">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-28 bg-green-600 z-0"></div>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={16}
-        slidesPerView={2}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-          1280: { slidesPerView: 4 },
-        }}
-      >
-        {displayProducts.map((product) => (
-          <SwiperSlide key={product._id} className="w-full" >
-            <ProductCard product={product} onQuickAdd={handleQuickAdd} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="relative py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto text-center space-y-4 mb-12">
+        <h2 className="text-3xl font-bold tracking-tight text-[#444] uppercase">
+          Our <span className="text-primary">Product</span>
+        </h2>
+        <p className="text-muted-foreground">We Have Wide Range Of Glasses And Lenses</p>
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px bg-[#ddd] w-12" />
+          <Eye className="w-4 h-4 text-primary" />
+          <div className="h-px bg-[#ddd] w-12" />
+        </div>
+      </div>
 
-      {/* AddToCartModal */}
-      {selectedProduct && (
-        <AddToCartModal
-          product={selectedProduct}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onConfirm={handleConfirmCart}
-          isLoading={isLoading}
-        />
-      )}
+      <div className="max-w-7xl mx-auto">
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={16}
+          slidesPerView={2}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+            1280: { slidesPerView: 4 },
+          }}
+        >
+          {displayProducts.map((product) => (
+            <SwiperSlide key={product._id} className="w-full">
+              <ProductCard product={product} onQuickAdd={handleQuickAdd} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {selectedProduct && (
+          <AddToCartModal
+            product={selectedProduct}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onConfirm={handleConfirmCart}
+            isLoading={isLoading}
+          />
+        )}
+      </div>
+
+      {/* View All Button */}
+      <div className="text-center mt-4 lg:mt-8 ">
+        <Link href="/shop">
+          <button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
+            View All Product
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 inline-block ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 };

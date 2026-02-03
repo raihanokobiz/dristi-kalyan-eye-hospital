@@ -9,9 +9,6 @@ export const addOrder = async (order: {
   inventoryRef?: string | null;
 }) => {
 
-  console.log(order, "ok");
-  
-
   const res = await apiRequest({
     endpoint: "/order",
     method: "POST",

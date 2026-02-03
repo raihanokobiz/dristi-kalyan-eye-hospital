@@ -25,7 +25,8 @@ import {
   Store,
   Stethoscope,
   User,
-  BookImageIcon
+  BookImageIcon,
+  FileText
 } from "lucide-react";
 
 export function getMenuList(pathname: string): Group[] {
@@ -53,29 +54,36 @@ export function getMenuList(pathname: string): Group[] {
           submenus: [],
         },
         {
+          href: "/quote-list",
+          label: "Quotets",
+          active: pathname.includes("/quote-list"),
+          icon: FileText,
+          submenus: [],
+        },
+        {
           href: "/doctor",
-          label: "Doctor",
+          label: " Our Doctor",
           active: pathname.includes("/doctor"),
           icon: User,
           submenus: [],
         },
-          {
+        {
           href: "/booking",
-          label: "Booking",
+          label: "Appointments",
           active: pathname.includes("/booking"),
-          icon:BookImageIcon ,
+          icon: BookImageIcon,
           submenus: [],
         },
         {
           href: "/service",
-          label: "Service",
+          label: "Pathology Services",
           active: pathname.includes("/service"),
           icon: Stethoscope,
           submenus: [],
         },
         {
           href: "/category",
-          label: "Category",
+          label: "Product Category",
           active: pathname.includes("/category"),
           icon: Shapes,
           submenus: [
@@ -91,13 +99,13 @@ export function getMenuList(pathname: string): Group[] {
             },
           ],
         },
-        {
-          href: "/offer",
-          label: "Offer",
-          active: pathname.includes("/offer"),
-          icon: Tag,
-          submenus: [],
-        },
+        // {
+        //   href: "/offer",
+        //   label: "Offer",
+        //   active: pathname.includes("/offer"),
+        //   icon: Tag,
+        //   submenus: [],
+        // },
         {
           href: "/products",
           label: "Products",
@@ -105,20 +113,20 @@ export function getMenuList(pathname: string): Group[] {
           icon: Package2,
           submenus: [],
         },
-        {
-          href: "/coupon",
-          label: "Coupon",
-          active: pathname.includes("/coupon"),
-          icon: TicketPercent,
-          submenus: [],
-        },
-        {
-          href: "/campaign",
-          label: "Campaign",
-          active: pathname.includes("/campaign"),
-          icon: FlameKindling,
-          submenus: [],
-        },
+        // {
+        //   href: "/coupon",
+        //   label: "Coupon",
+        //   active: pathname.includes("/coupon"),
+        //   icon: TicketPercent,
+        //   submenus: [],
+        // },
+        // {
+        //   href: "/campaign",
+        //   label: "Campaign",
+        //   active: pathname.includes("/campaign"),
+        //   icon: FlameKindling,
+        //   submenus: [],
+        // },
       ],
     },
     {
@@ -132,16 +140,16 @@ export function getMenuList(pathname: string): Group[] {
           submenus: [],
         },
         {
-          href: "/product-review",
-          label: "Product Review",
-          active: pathname.includes("/product-review"),
-          icon: Star,
+          href: "/blogs",
+          label: "Blogs",
+          active: pathname.includes("/blogs"),
+          icon: Images,
           submenus: [],
         },
         {
-          href: "/subscribe",
-          label: "Subscribe Email",
-          active: pathname.includes("/subscribe"),
+          href: "/product-review",
+          label: "Product Review",
+          active: pathname.includes("/product-review"),
           icon: Star,
           submenus: [],
         },

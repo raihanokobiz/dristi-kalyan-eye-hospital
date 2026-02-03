@@ -1,29 +1,27 @@
 import Banner from "@/components/pages/landing_pages/Banner/Banner";
-import Category from "@/components/pages/landing_pages/Category/Category";
+// import Category from "@/components/pages/landing_pages/Category/Category";
 // import SubCategory from "@/components/pages/landing_pages/SubCategory/SubCategory";
 import React from "react";
-import HomeProductSection from "@/components/pages/landing_pages/HomeProductSection/HomeProductSection";
 // import { getAllChildCategorys } from "@/services/childCategorys";
-import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
-import { getCampaign } from "@/services/campaign";
-import Offer from "@/components/pages/landing_pages/offer/Offer";
+// import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
+// import { getCampaign } from "@/services/campaign";
+// import Offer from "@/components/pages/landing_pages/offer/Offer";
 // import Text1 from "../../assets/texture/Text2.png";
-import { getAllDoctors } from "@/services/doctor/doctors";
-import { getAllService } from "@/services/service";
+import { getAllDoctorsForHomePage } from "@/services/doctor/doctors";
+import { getAllServiceForHome } from "@/services/service";
 
 // import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
 // import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
-import { getAllOffers } from "@/services/offer";
-import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
-import { getAllProduct } from "@/services/products";
-import {
-  Flame,
-  Trophy,
-} from "lucide-react";
+// import { getAllOffers } from "@/services/offer";
+// import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
+import { getProductForHomePage } from "@/services/products";
 import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
 import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
+import HomeProductSection from "@/components/pages/products/ProductCard/ProductCard";
+import OurAdvancedServices from "@/components/pages/landing_pages/OurAdvancedServices/OurAdvancedServices";
+import WhyChooseUsTwo from "@/components/pages/landing_pages/WhyChooseUsTwo/WhyChooseUsTwo";
 
 
 
@@ -50,9 +48,9 @@ const page = async () => {
 
   // Temporarily comment out getCampaign if it's causing issues
   // const { data: campaign } = await getCampaign();
-  const campaign = null; // Temporary fix
+  // const campaign = null; // Temporary fix
 
-  const offrs = await getAllOffers();
+  // const offrs = await getAllOffers();
 
   // const user = await getUser();
   // const userId = user?.id;
@@ -60,14 +58,15 @@ const page = async () => {
   // const products = await getCartProducts(userId, coupon);
   // ksdfj
 
-  const data = await getAllProduct();
+  const data = await getProductForHomePage();
 
   const allProducts = data?.data || [];
   // Fetch doctors - ADD THIS LINE
-  const doctors = await getAllDoctors();
+  const doctors = await getAllDoctorsForHomePage();
 
   // Fetch services
-  const services = await getAllService()
+  const services = await getAllServiceForHome()
+
 
 
   return (
@@ -76,41 +75,16 @@ const page = async () => {
       <div className="">
         <Banner banners={[]} />
         <div
-        // style={{
-        //   backgroundImage: `url(${Text1.src})`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
         >
+          <OurAdvancedServices />
+          {/* <WhyChooseUs /> */}
+          <WhyChooseUsTwo />
           <BenefitsSection />
           <HomeDoctorSection doctors={doctors} />
           <EyeServices services={services} />
-          <WhyChooseUs />
-          {/* <WhyChooseUs /> */}
-          {/* <Category /> */}
-          {/* <Offer offrs={offrs} /> */}
-          {/* <SubCategory /> */}
-          {/* <ChildCategory />   */}
         </div>
-
-        <div
-        // style={{
-        //   backgroundImage: `url(${Text1.src})`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
-        >
-          {/* <PopularItems products={popularProducts} /> */}
-
-          {/* <Campaign campaign={campaign[0]} /> */}
-
-          {/* <Subscribe /> */}
-
+        <div>
         </div>
-
-        {/* <HomeProductSection /> */}
 
       </div>
     </>

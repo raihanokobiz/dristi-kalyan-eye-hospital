@@ -11,7 +11,7 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ANF Meat | All Product",
+  title: "Dhamrai Drisiti Kalyan Eye Hospital | All Product",
   description: "Best E-commerce platform in BD",
 };
 
@@ -56,7 +56,10 @@ export default async function ShopPage({
   return (
     <>
       {/* <NavBar userCartProducts={cartProducts?.data} /> */}
-      <div className="max-w-6xl mx-auto Container mt-20">
+      <div className="bg-primary h-40 md:h-64 mt-[100px] flex items-center justify-center text-center">
+        <h1 className="text-white text-2xl md:text-2xl lg:text-5xl font-semibold ">Eye Care Products & Optical Collection</h1>
+      </div>
+      <div className="max-w-7xl mx-auto Container ">
         <div className="w-full mb-8">
           <ShopProductsCategories shopSideBar={shopSideBar} />
         </div>
