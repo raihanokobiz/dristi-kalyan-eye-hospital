@@ -18,7 +18,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 {/* IMAGE */}
                 <div className="relative h-52 w-full">
                     <Image
-                        src={imageUrl}
+                        src={doctor.image || "/images/default-doctor.jpg"}
                         alt={doctor.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
