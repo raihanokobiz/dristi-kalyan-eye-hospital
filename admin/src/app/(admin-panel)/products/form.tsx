@@ -35,8 +35,7 @@ import { TCategory, TChildCategory, TSubCategory } from "@/types/shared";
 import { getAllCategory } from "@/services/category";
 import { getAllSubCategory } from "@/services/sub-category";
 import { getAllChildCategory } from "@/services/child-category";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import ReactQuill from "@/components/RichTextEditor";
 import { useRouter } from "next/navigation";
 
 const defaultValues = {

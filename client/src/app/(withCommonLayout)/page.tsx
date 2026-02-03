@@ -1,66 +1,22 @@
 import Banner from "@/components/pages/landing_pages/Banner/Banner";
-// import Category from "@/components/pages/landing_pages/Category/Category";
-// import SubCategory from "@/components/pages/landing_pages/SubCategory/SubCategory";
+
 import React from "react";
-// import { getAllChildCategorys } from "@/services/childCategorys";
-// import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
-// import { getCampaign } from "@/services/campaign";
-// import Offer from "@/components/pages/landing_pages/offer/Offer";
-// import Text1 from "../../assets/texture/Text2.png";
+
 import { getAllDoctorsForHomePage } from "@/services/doctor/doctors";
 import { getAllServiceForHome } from "@/services/service";
-
-// import { Testimonial } from "@/components/pages/landing_pages/Testimonial/Testimonial";
-// import { Subscribe } from "@/components/pages/landing_pages/Subscribe/Subscribe";
-// import { getAllOffers } from "@/services/offer";
-// import { PopularItems } from "@/components/pages/landing_pages/PopularItems/PopularItems";
-import { getProductForHomePage } from "@/services/products";
+// import { getProductForHomePage } from "@/services/products";
 import BenefitsSection from "@/services/benefit/BenefitsSection";
 import HomeDoctorSection from "./HomeDoctorSection/HomeDoctorSection";
 import { EyeServices } from "@/components/pages/service/EyeServices";
-import { WhyChooseUs } from "@/components/pages/landing_pages/WhyChooseUs/WhyChooseUs";
-import HomeProductSection from "@/components/pages/products/ProductCard/ProductCard";
 import OurAdvancedServices from "@/components/pages/landing_pages/OurAdvancedServices/OurAdvancedServices";
 import WhyChooseUsTwo from "@/components/pages/landing_pages/WhyChooseUsTwo/WhyChooseUsTwo";
 
-
-
-// import { getCartProducts } from "@/services/cart";
-// import NavBar from "@/components/pages/header/NavBar/NavBar";
-
-// import { getUser } from "@/services/auth";
-
 const page = async () => {
-  // const topRes = await getHomePageSubCategoryProducts("top");
-  // const middleRes = await getHomePageSubCategoryProducts("middle");
-  // const lowerMiddleRes = await getHomePageSubCategoryProducts("lowerMiddle");
-  // const buttomRes = await getHomePageSubCategoryProducts("buttom");
+  
 
-  // const topChildCategoriesList = await getAllChildCategorys("top");
+  // const data = await getProductForHomePage();
 
-  // const middleChildCategoriesList = await getAllChildCategorys("middle");
-  // const lowerMiddleChildCategoriesList = await getAllChildCategorys(
-  //   "lowerMiddle"
-  // );
-  // const buttomChildCategoriesList = await getAllChildCategorys("buttom");
-
-  // ------for campaign----
-
-  // Temporarily comment out getCampaign if it's causing issues
-  // const { data: campaign } = await getCampaign();
-  // const campaign = null; // Temporary fix
-
-  // const offrs = await getAllOffers();
-
-  // const user = await getUser();
-  // const userId = user?.id;
-  // const coupon = "";
-  // const products = await getCartProducts(userId, coupon);
-  // ksdfj
-
-  const data = await getProductForHomePage();
-
-  const allProducts = data?.data || [];
+  // const allProducts = data?.data || [];
   // Fetch doctors - ADD THIS LINE
   const doctors = await getAllDoctorsForHomePage();
 

@@ -30,7 +30,7 @@ export default async function page({ searchParams }: Props) {
     <ContentLayout title="Blogs">
       <CreateBlogForm />
       <BlogTable
-        data={data.result.map((item) => item)}
+        data={data.result.map((item:any     ) => item)}
         pagination={{
           page: parseInt(page),
           limit: parseInt(limit),

@@ -35,30 +35,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
   const [showSideMenu, setShowSideMenu] = useState(false);
   // const [ setCategories] = useState<any[]>([]);
   const [usersId, setUsersId] = useState<TUser | null>(null);
-  const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  // location
-  const [selectedLocation, setSelectedLocation] = useState({ city: "", area: "" })
-  // const [showLocationModal, setShowLocationModal] = useState(false)
-
-  // const pathname = usePathname();
-  // const isShopPage = pathname === "/shop";
-
-  // Animated placeholder texts
-  const placeholders = [
-    "Search for products...",
-    "Find your perfect item...",
-    "What are you looking for?",
-    "Discover amazing deals...",
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPlaceholderIndex((prev) => (prev + 1) % placeholders.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [placeholders.length]);
-
+ 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -96,30 +73,29 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
 
 
 
-
   // Load location from localStorage
-  useEffect(() => {
-    const city = localStorage.getItem('selectedCity') || ""
-    const area = localStorage.getItem('selectedArea') || ""
-    setSelectedLocation({ city, area })
-  }, [])
+  // useEffect(() => {
+  //   const city = localStorage.getItem('selectedCity') || ""
+  //   const area = localStorage.getItem('selectedArea') || ""
+  //   setSelectedLocation({ city, area })
+  // }, [])
 
-  // Listen for location changes
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const city = localStorage.getItem('selectedCity') || ""
-      const area = localStorage.getItem('selectedArea') || ""
-      setSelectedLocation({ city, area })
-    }
+  // // Listen for location changes
+  // useEffect(() => {
+  //   const handleStorageChange = () => {
+  //     const city = localStorage.getItem('selectedCity') || ""
+  //     const area = localStorage.getItem('selectedArea') || ""
+  //     setSelectedLocation({ city, area })
+  //   }
 
-    window.addEventListener('storage', handleStorageChange)
-    window.addEventListener('locationChanged', handleStorageChange)
+  //   window.addEventListener('storage', handleStorageChange)
+  //   window.addEventListener('locationChanged', handleStorageChange)
 
-    return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      window.removeEventListener('locationChanged', handleStorageChange)
-    }
-  }, [])
+  //   return () => {
+  //     window.removeEventListener('storage', handleStorageChange)
+  //     window.removeEventListener('locationChanged', handleStorageChange)
+  //   }
+  // }, [])
 
   return (
     <>
@@ -138,7 +114,7 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
                 <RiMenuAddFill className="text-2xl" />
               )}
             </div>
-            <div className=" relative w-[90px] md:w-[90px]  h-[60px]">
+            <div className=" relative w-22.5 md:w-22.5  h-15">
               <Link href="/">
                 <Image
                   src={logo || null}
@@ -236,60 +212,6 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
           </div>
         </div>
       </div>
-
-      {/* Secondary Navbar - Categories (Smaller) */}
-      {/* <div className="hidden lg:block w-full  bg-primary text-white sticky top-[80px] z-30 shadow-sm backdrop-blur-lg">
-        <div className="lg:px-[220px] px-4 py-2">
-          <div className="flex items-center justify-center gap-6">
-            {categories?.map((category, index) => (
-              <div
-                onMouseEnter={() => setActiveCategory(category.id || category.name)}
-                onMouseLeave={() => setActiveCategory(null)}
-                key={index}
-                className="relative group"
-              >
-                <Link href={`/shop?category=${category.id || category.slug}`}>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="text-sm font-medium text-gray-0 hover:text-primary tracking-wide
-                     duration-300 cursor-pointer whitespace-nowrap py-1.5 px-3 rounded-md group-hover:bg-white transition-all"
-                  >
-                    {category.name || category.title}
-                  </motion.div>
-                </Link>
-
-                {category.subCategories &&
-                  category.subCategories.length > 0 &&
-                  activeCategory === (category.id || category.name) && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-full left-0 mt-2 bg-white shadow-xl rounded-lg p-3 min-w-[200px] z-50 border border-gray-200"
-                    >
-                      <div className="flex flex-col gap-0.5">
-                        {category.subCategories.map((subCat: any, subIndex: number) => (
-                          <Link
-                            key={subIndex}
-                            href={`/shop?category=${category.id || category.slug}&subcategory=${subCat.id || subCat.slug}`}
-                          >
-                            <motion.div
-                              whileHover={{ x: 5 }}
-                              className="text-sm text-gray-600 hover:text-primary hover:bg-orange-50 p-2 rounded-md transition-all duration-200"
-                            >
-                              {subCat.name || subCat.title}
-                            </motion.div>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
 
       <AnimatePresence>
         {showSearch && (

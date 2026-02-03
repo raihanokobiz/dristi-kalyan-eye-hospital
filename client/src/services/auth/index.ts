@@ -56,13 +56,6 @@ export const logout = async () => {
   return { success: true, message: "Logged out successfully" };
 };
 
-// export const getUser = async () => {
-//   const cookieStore = cookies();
-//   const cookie = (await cookieStore).get("user");
-//   const user: TUser | null = cookie?.value ? JSON.parse(cookie.value) : null;
-//   return user;
-// };
-
 export const setCorrelation = async () => {
   const cookieStore = cookies();
 
