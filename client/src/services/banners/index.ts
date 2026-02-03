@@ -3,14 +3,8 @@
 import { apiBaseUrl } from "@/config/config";
 
 export const getAllBanners = async () => {
-  const res = await fetch(`${apiBaseUrl}/banners`);
-
-  return res.json();
-};
-
-export const getBannersByType = async (type: string) => {
-  const res = await fetch(`${apiBaseUrl}/banners?type=${type}`, {
-    cache: "no-store",
+  const res = await fetch(`${apiBaseUrl}/banners`, {
+    next: { revalidate: 300 }, // Revalidate every 5 minutes
   });
 
   if (!res.ok) {
@@ -20,12 +14,16 @@ export const getBannersByType = async (type: string) => {
   return res.json();
 };
 
-// export const getSingleBannerBySlug = async (slug: string) => {
-//   const res = await fetch(`${apiBaseUrl}/banners/${slug}`);
+export const getBannersByType = async (type: string) => {
+  const res = await fetch(`${apiBaseUrl}/banners?type=${type}`, {
+    next: { revalidate: 300 }, // Revalidate every 5 minutes
+  });
 
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch banners");
-//   }
+  if (!res.ok) {
+    throw new Error("Failed to fetch banners");
+  }
 
-//   return res.json();
-// };
+  return res.json();
+};
+
+

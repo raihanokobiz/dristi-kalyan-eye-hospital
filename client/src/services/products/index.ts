@@ -61,7 +61,10 @@ export const getAllProductsForShop = async (
 
   const url = `${apiBaseUrl}/product/pagination?${searchParams.toString()}`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    next: { revalidate: 180 }, // Revalidate every 3 minutes
+  });
+  
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
@@ -70,7 +73,9 @@ export const getAllProductsForShop = async (
 };
 
 export const getSingleProductBySlug = async (_id: string) => {
-  const res = await fetch(`${apiBaseUrl}/product/${_id}`);
+  const res = await fetch(`${apiBaseUrl}/product/${_id}`, {
+    next: { revalidate: 300 }, // Revalidate every 5 minutes
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch product");
@@ -80,7 +85,13 @@ export const getSingleProductBySlug = async (_id: string) => {
 };
 
 export const getRelativeProducts = async (productId: { productId: string }) => {
-  const res = await fetch(`${apiBaseUrl}/product/related-product/${productId}`);
+  const res = await fetch(`${apiBaseUrl}/product/related-product/${productId}`, {
+    next: { revalidate: 300 }, // Revalidate every 5 minutes
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch relative products");
+  }
 
   return res.json();
 };

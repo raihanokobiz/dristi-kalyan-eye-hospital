@@ -4,12 +4,6 @@ import { apiBaseUrl } from "@/config/config";
 import { apiRequest } from "@/lib/apiRequest";
 import { revalidatePath } from "next/cache";
 
-// export const getCartProducts = async (userId: { userId: string }) => {
-//   // const res = await fetch(`${apiBaseUrl}/cart/all`);
-//   const res = await fetch(`${apiBaseUrl}/cart?userId=${userId}`);
-
-//   return res.json();
-// };
 
 export const getCartProducts = async (
   userId: string | undefined,

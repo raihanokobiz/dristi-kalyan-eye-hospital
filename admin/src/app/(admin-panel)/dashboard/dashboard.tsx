@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
+
   CardDescription,
   CardHeader,
   CardTitle,
@@ -11,16 +10,11 @@ import { Label } from "@radix-ui/react-label";
 import {
   Boxes,
   ClipboardCheck,
-  Download,
+
   ScrollText,
   ShoppingBag,
-  Users,
-  UsersRound,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { useReactToPrint } from "react-to-print";
-import { useStore } from "zustand";
-import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useRouter } from "next/navigation";
 import { makeBDPrice } from "@/utils/helpers";
 import { DashboardMetrics } from "@/types/shared";
@@ -44,7 +38,7 @@ export default function AdminDashboard() {
     totalStock: 0,
     totalStockValue: 0,
   });
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     getDashboardMetrics(selectRadialsChart).then((data) => {

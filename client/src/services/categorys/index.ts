@@ -7,13 +7,3 @@ export const getAllCategorys = async () => {
 
   return res.json();
 };
-
-// export const getSingleCategoryBySlug = async (slug: string) => {
-//   const res = await fetch(`${apiBaseUrl}/category/${slug}`);
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch category");
-//   }
-
-//   return res.json();
-// };
