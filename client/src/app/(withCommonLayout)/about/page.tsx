@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Eye, Heart, Users, Clock, Phone, MapPin, Award, Shield,
-  Scan, Activity, Scissors, Gauge, Glasses, Monitor,
+  Scan, Scissors, Gauge, Glasses, Monitor,
   Baby, Focus, EyeOff, Droplets, AlertCircle, DollarSign
 } from 'lucide-react';
 import Image from 'next/image';
@@ -74,13 +74,13 @@ export default function EyeHospital() {
     },
   ];
 
-  const benefits = [
-    "Children learn faster and more effectively",
-    "Working professionals become more productive",
-    "Elderly people remain independent",
-    "The risk of accidents is reduced",
-    "Families and communities stay safe and secure",
-  ];
+  // const benefits = [
+  //   "Children learn faster and more effectively",
+  //   "Working professionals become more productive",
+  //   "Elderly people remain independent",
+  //   "The risk of accidents is reduced",
+  //   "Families and communities stay safe and secure",
+  // ];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-12 md:mt-14">
@@ -91,38 +91,7 @@ export default function EyeHospital() {
           className="w-full h-full shadow-sm object-fill"
         />
       </div>
-      {/* Hero Banner */}
-      {/* <div className="relative h-[500px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/80 z-10"></div>
-        <img
-          src="https://images.unsplash.com/photo-1551601651-bc60f254d532?w=1200&q=80"
-          alt="Eye Hospital"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 z-20 flex items-center justify-center text-white">
-          <div className="text-center px-4 max-w-5xl">
-            <div className="inline-flex items-center gap-2 mb-6 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
-              <Eye className="w-6 h-6" />
-              <span className="text-lg font-semibold">Founded January 1, 2026</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Dhamrai Drishti Kalyan<br />Eye Hospital
-            </h1>
-            <p className="text-2xl md:text-3xl font-light mb-8">
-              Restoring Vision, Transforming Lives
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <a href="#services" className="px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-lg">
-                Our Services
-              </a>
-              <a href="#contact" className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-all">
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
+    
       <div className="max-w-7xl mx-auto">
         {/* Mission Statement */}
         <section className="py-12 md:py-16">
@@ -157,10 +126,10 @@ export default function EyeHospital() {
             <div className="relative order-1 md:order-2">
               <div className="absolute -top-6 -left-6 w-48 h-48 bg-teal-100 rounded-3xl -z-10"></div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-cyan-100 rounded-3xl -z-10"></div>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80"
                 alt="Eye Care"
-                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover relative z-10"
+                className="rounded-3xl shadow-2xl w-full h-125 object-cover relative z-10"
               />
             </div>
           </div>
@@ -213,7 +182,7 @@ export default function EyeHospital() {
             })}
           </div>
 
-          <div className="bg-gradient-to-br from-teal-50 via-white to-cyan-50 border-2 border-primary/20 p-8 md:p-12 rounded-3xl text-center max-w-5xl mx-auto shadow-xl">
+          <div className="bg-linear-to-br from-teal-50 via-white to-cyan-50 border-2 border-primary/20 p-8 md:p-12 rounded-3xl text-center max-w-5xl mx-auto shadow-xl">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 shadow-lg">
               <Shield className="w-9 h-9 text-white" />
             </div>
@@ -240,7 +209,7 @@ export default function EyeHospital() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Chairman */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative w-full h-[400px] mb-4 rounded-lg overflow-hidden">
+              <div className="relative w-full h-100 mb-4 rounded-lg overflow-hidden">
                 <Image
                   src={Director}
                   alt="Nahar Akter Doly - Chairman"
@@ -262,7 +231,7 @@ export default function EyeHospital() {
 
             {/* Managing Director */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative w-full h-[400px] mb-4 rounded-lg overflow-hidden">
+              <div className="relative w-full h-100 mb-4 rounded-lg overflow-hidden">
                 <Image
                   src={CEO}
                   alt="Mohammad Mosharrof Hossain - Managing Director & CEO"
@@ -285,7 +254,7 @@ export default function EyeHospital() {
 
             {/* Executive Director */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative w-full h-[400px] mb-4 rounded-lg overflow-hidden">
+              <div className="relative w-full h-100 mb-4 rounded-lg overflow-hidden">
                 <Image
                   src={ExecutiveDirector}
                   alt="Alhaz Md. Ali Azam Khan - Executive Director"

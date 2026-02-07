@@ -421,6 +421,18 @@ export type TProduct = {
   __v: number;
 };
 
+export interface TBlog {
+  _id?: string;
+  image?: string;
+  title: string;
+  slug: string;
+  author: string;
+  details: string;
+  tags: string[];
+  status: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
 export interface TBulkOrder {
   _id?: string;
   name: string;

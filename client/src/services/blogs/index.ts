@@ -3,7 +3,7 @@ import { apiBaseUrl } from "@/config/config";
 
 export const getAllBlogs = async () => {
   const res = await fetch(`${apiBaseUrl}/blogs`, {
-    cache: "no-store",
+    next: { revalidate: 600 }, // Revalidate every 10 minutes
   });
 
   if (!res.ok) {
@@ -15,7 +15,7 @@ export const getAllBlogs = async () => {
 
 export const getSingleBlogBySlug = async (slug: string) => {
   const res = await fetch(`${apiBaseUrl}/blogs/slug/${slug}`, {
-    cache: "no-store",
+    next: { revalidate: 600 }, // Revalidate every 10 minutes
   });
 
   if (!res.ok) {

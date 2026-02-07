@@ -18,7 +18,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
         <div className="bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
             <Link href={`/doctor/${doctor._id}`} className="block">
                 {/* IMAGE */}
-                <div className="relative h-40 lg:h-[270px] w-full">
+                <div className="relative h-40 lg:h-67.5 w-full">
                     <Image
                         src={doctor?.image ? (doctor.image.startsWith('http') ? doctor.image : apiBaseUrl + doctor.image) : (doctor.gender === "female" ? Placeholder_Female : Placeholder_Male)}
                         alt={doctor.name}

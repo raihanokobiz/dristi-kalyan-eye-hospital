@@ -25,7 +25,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 // import { deleteblogAction, updateFormAction } from "./actions";
-import { TBlog } from "@/types/shared";
+
 import { confirmation } from "@/components/modals/confirm-modal";
 
 import {
@@ -38,9 +38,10 @@ import { Upload, UploadFile } from "antd";
 import { fileUrlGenerator, humanFileSize, makeFormData } from "@/utils/helpers";
 import { UploadOutlined } from "@ant-design/icons";
 import Image from "next/image";
-import ReactQuill from "react-quill";
+import ReactQuill from "@/components/RichTextEditor";
 import { deleteBlogAction, updateFormAction } from "./actions";
 import { getBlogFormSchema } from "./form-schema";
+import { TBlog } from "@/types/shared";
 
 interface Props {
   blog: TBlog;

@@ -31,11 +31,10 @@ import { z } from "zod";
 import { deleteAction, updateFormAction } from "./actions";
 import { confirmation } from "@/components/modals/confirm-modal";
 import { formSchema } from "./form-schema";
-import { BASE_URL } from "@/config/config";
 import { Upload, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { humanFileSize } from "@/utils/helpers";
-import Image from "next/image";
+
 import { Label } from "@/components/ui/label";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
@@ -48,7 +47,7 @@ interface Props {
   item: TDoctor;
 }
 
-type DoctorFormValues = z.infer<typeof formSchema>;
+// type DoctorFormValues = z.infer<typeof formSchema>;
 
 
 export const DetailsSheet: React.FC<Props> = ({ item }) => {
@@ -136,9 +135,7 @@ export const DetailsSheet: React.FC<Props> = ({ item }) => {
         imagePublicId = uploadResult.public_id;
       }
 
-
       const visitingTime = `${values.visitingTimeStart} - ${values.visitingTimeEnd}`;
-
 
       // FormData
       const formData = new FormData();

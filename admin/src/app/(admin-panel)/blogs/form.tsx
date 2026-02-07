@@ -31,10 +31,7 @@ import { createFormAction } from "./actions";
 import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Label } from "@/components/ui/label";
-
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-
+import ReactQuill from "@/components/RichTextEditor";
 import { Select } from "antd";
 import { getBlogFormSchema } from "./form-schema";
 const defaultValues = {

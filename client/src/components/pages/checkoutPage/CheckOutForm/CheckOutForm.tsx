@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import orderGift from "@/assets/gift/animation.gif";
 import { useRef, useState } from "react";
-import { apiBaseUrl } from "@/config/config";
+// import { apiBaseUrl } from "@/config/config";
 import Swal from "sweetalert2";
 
 interface FormData {
@@ -53,13 +53,12 @@ const CheckOutForm: React.FC<Props> = ({
   products,
   shipping,
   setShipping,
-  setCoupon,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [startCar, setStartCar] = useState(false);
   const [finalY, setFinalY] = useState(10);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const { register, handleSubmit, control, watch, formState: { errors }, getValues, } = useForm<FormData>();
+  const { register, handleSubmit, control, watch, formState: { errors } } = useForm<FormData>();
   const router = useRouter();
   const [showMobileBanking, setShowMobileBanking] = useState(false);
   const selectedPayment = watch("paymentMethod");
@@ -97,63 +96,6 @@ const CheckOutForm: React.FC<Props> = ({
     }
   };
 
-  // ----------------- Apply Coupon -----------------
-  // const handleAddCoupon = () => {
-  //   const coupon = getValues("coupon");
-
-  // if(products.discount !== null){
-  //     if (coupon && coupon.trim() !== "") {
-  //     setCoupon(coupon.trim());
-  //     toast.success("Coupon applied on MRP Price", {
-  //       theme: "colored",
-  //       autoClose: 5000,
-  //     });
-  //   } else {
-  //     setCoupon(null);
-  //     toast.info("No coupon applied.", { theme: "colored", autoClose: 5000 });
-  //   }
-  // }else{
-  //  if (coupon && coupon.trim() !== "") {
-  //     setCoupon(coupon.trim());
-  //     toast.success("Coupon applied ", {
-  //       theme: "colored",
-  //       autoClose: 5000,
-  //     });
-  //   } else {
-  //     setCoupon(null);
-  //     toast.info("No coupon applied.", { theme: "colored", autoClose: 5000 });
-  //   }
-  // }
-
-  // }
-  // const handleAddCoupon = () => {
-  //   const coupon = getValues("coupon")?.trim();
-
-  //   // Check: does ANY product have discount?
-  //   const hasProductDiscount = Number(products.data.productDiscount > 0);
-
-  //   console.log(hasProductDiscount)
-
-  //   if (coupon) {
-  //     setCoupon(coupon);
-
-  //     toast.success(
-  //       hasProductDiscount
-  //         ? "Coupon applied on Product  MRP Price"
-  //         : "Coupon applied",
-  //       {
-  //         theme: "colored",
-  //         autoClose: 5000,
-  //       }
-  //     );
-  //   } else {
-  //     setCoupon(null);
-  //     toast.info("No coupon applied.", {
-  //       theme: "colored",
-  //       autoClose: 5000,
-  //     });
-  //   }
-  // };
 
   // ----------------- Confirm Quote -----------------
   const submitQuote = async (data: FormData) => {
@@ -179,11 +121,7 @@ const CheckOutForm: React.FC<Props> = ({
         formData.append("prescription", data.prescription[0]);
       }
 
-      // const res = await fetch(`${apiBaseUrl}/quote`, {
-      //   method: "POST",
-      //   body: formData,
-      // });
-
+    
       //  SweetAlert2 Success Message
       Swal.fire({
         icon: "success",
@@ -230,6 +168,7 @@ const CheckOutForm: React.FC<Props> = ({
 
 
     } catch (error) {
+      console.error("Quote submission error:", error);
       toast.error("Failed");
     } finally {
       setIsSubmitting(false);
@@ -605,26 +544,6 @@ const CheckOutForm: React.FC<Props> = ({
               )}
             </div>
           )}
-
-          {/*Coupon Code */}
-          {/* <h2 className="font-bold pt-5">Got any Coupon Code?</h2>
-          <div className="flex lg:flex-row flex-col pb-5  gap-4 w-full mt-2">
-            <div className="xl:w-[40%] lg:w-[60%]">
-              <input
-                type="text"
-                placeholder="Enter Coupon Code Here"
-                className="border border-black/20 p-1.5 rounded focus:border-black focus:outline-none w-full"
-                {...register("coupon")}
-              />
-            </div>
-            <div
-              onClick={() => handleAddCoupon()}
-              className="bg-primary py-2 px-10 text-white 2xl:w-[30%] xl:w-[40%] lg:w-[50%] rounded cursor-pointer text-center w-full"
-            >
-              Add Coupon
-            </div>
-          </div> */}
-
           {/* agree trams and condition */}
           <div className="flex gap-2">
             <input

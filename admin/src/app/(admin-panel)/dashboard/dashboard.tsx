@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
+
   CardDescription,
   CardHeader,
   CardTitle,
@@ -11,16 +10,11 @@ import { Label } from "@radix-ui/react-label";
 import {
   Boxes,
   ClipboardCheck,
-  Download,
+
   ScrollText,
   ShoppingBag,
-  Users,
-  UsersRound,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { useReactToPrint } from "react-to-print";
-import { useStore } from "zustand";
-import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useRouter } from "next/navigation";
 import { makeBDPrice } from "@/utils/helpers";
 import { DashboardMetrics } from "@/types/shared";
@@ -38,6 +32,7 @@ interface AdminDashboardProps {
 export default function AdminDashboard({ counts: initialCounts }: AdminDashboardProps) {
   const [selectRadialsChart, setSelectRadialsChart] = useState("this-month");
   const [selectChartLabel, setSelectChartLabel] = useState("This Month");
+<<<<<<< HEAD
   const [counts, setCounts] = useState<DashboardMetrics>(
     initialCounts ?? {
       totalOrders: 0,
@@ -47,6 +42,15 @@ export default function AdminDashboard({ counts: initialCounts }: AdminDashboard
     }
   );
   const router = useRouter();
+=======
+  const [counts, setCounts] = useState({
+    totalOrders: 0,
+    totalSales: 0,
+    totalStock: 0,
+    totalStockValue: 0,
+  });
+  // const router = useRouter();
+>>>>>>> 23631fe43608f9a27e60a0d19c3946c0eb1adae1
 
   useEffect(() => {
     async function fetchMetrics() {
