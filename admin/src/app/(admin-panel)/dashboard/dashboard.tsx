@@ -28,28 +28,40 @@ import { DashboardMetrics } from "@/types/shared";
 // import { getOrderReportsByDuration } from "@/services/reports";
 
 import SelectDuration from "@/components/selectDuration/SelectDuration";
-import { getDashboardMetrics } from "@/services/dashboard";
+import { BASE_URL } from "@/config/config";
 import BarChart from "@/components/widget/chart/barchart";
 
 interface AdminDashboardProps {
   counts: DashboardMetrics;
 }
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ counts: initialCounts }: AdminDashboardProps) {
   const [selectRadialsChart, setSelectRadialsChart] = useState("this-month");
   const [selectChartLabel, setSelectChartLabel] = useState("This Month");
-  const [counts, setCounts] = useState({
-    totalOrders: 0,
-    totalSales: 0,
-    totalStock: 0,
-    totalStockValue: 0,
-  });
+  const [counts, setCounts] = useState<DashboardMetrics>(
+    initialCounts ?? {
+      totalOrders: 0,
+      totalSales: 0,
+      totalStock: 0,
+      totalStockValue: 0,
+    }
+  );
   const router = useRouter();
 
   useEffect(() => {
-    getDashboardMetrics(selectRadialsChart).then((data) => {
-      setCounts(data.data);
-    });
+    async function fetchMetrics() {
+      try {
+        const res = await fetch(`${BASE_URL}/report/dashboard-metrics?duration=${selectRadialsChart}`);
+        if (!res.ok) throw new Error(`Fetch error ${res.status}`);
+        const data = await res.json();
+        setCounts(data.data);
+      } catch (err) {
+        // keep existing counts on error; consider showing toast or logger
+        console.error("Failed to fetch dashboard metrics:", err);
+      }
+    }
+
+    fetchMetrics();
   }, [selectRadialsChart]);
 
   console.log(counts)

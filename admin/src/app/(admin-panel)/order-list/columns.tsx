@@ -217,6 +217,53 @@ export const columns: ColumnDef<TOrder>[] = [
     },
   },
   {
+    header: "Send To Courier",
+    cell: ({ row }) => {
+      const [loading, setLoading] = React.useState(false);
+      const { toast } = useToast();
+
+      const courierData: SteadfastOrderPayload = {
+        invoice: row.original.orderId,
+        recipient_name: row.original.customerName || "",
+        recipient_phone: row.original.customerPhone || "",
+        recipient_address: row.original.customerAddress || "",
+        cod_amount: row.original.totalPrice || "",
+        note: row.original.note,
+      };
+
+
+      const handleClick = async () => {
+        setLoading(true);
+        try {
+          const response = await createSteadfastOrder(courierData);
+
+          if (response) {
+            toast({
+              title: "Success",
+              description: "Order submitted to courier",
+            });
+          }
+        } catch (error: any) {
+          toast({
+            title: "Error!",
+            variant: "destructive",
+            description: error.message,
+          });
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      return (
+        <div>
+          <Button loading={loading} onClick={handleClick}>
+            Steadfast
+          </Button>
+        </div>
+      );
+    },
+  },
+  {
     header: "Invoice",
     cell: ({ row }) => {
       const orderData = row.original;

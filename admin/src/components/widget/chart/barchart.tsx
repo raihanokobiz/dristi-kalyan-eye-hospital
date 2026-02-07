@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 
 import { OrderReport } from "@/types/shared";
-import { getOrderReportsByDuration } from "@/services/reports";
+import { BASE_URL } from "@/config/config";
 
 interface BarChartProps {
   selectChartDuration: string;
@@ -18,7 +18,9 @@ const BarChart: React.FC<BarChartProps> = ({ selectChartDuration }:BarChartProps
     const fetchReport = async () => {
       setLoading(true);
       try {
-        const response = await getOrderReportsByDuration({ duration: selectChartDuration });
+        const res = await fetch(`${BASE_URL}/report/order?duration=${selectChartDuration}`);
+        if (!res.ok) throw new Error(`Fetch error ${res.status}`);
+        const response = await res.json();
         setData(
           (response?.data as unknown as OrderReport[]).map((item) => ({
             status: item.status || "Unknown",
